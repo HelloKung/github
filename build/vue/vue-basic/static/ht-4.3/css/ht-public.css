@@ -1,0 +1,97 @@
+.main {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 10px;
+    right: 10px;
+}
+
+.main-ht-left-10 {
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: 10px;
+    right: 0px;
+}
+ 
+.main-ht {
+    margin: 0px;
+    padding: 0px;
+    top: 110px;
+    bottom: 0px;
+    left: 25px;
+    right: 25px;
+    position: absolute;
+}
+
+.input-group-addon-ext {
+	color: #ffffff;
+	background: #5BC0DE;
+	width: 80px !important;
+}
+select {
+	width: 115px !important;
+}
+
+.select_for_pagetable {
+	width: 75px !important;
+}
+
+input {
+	width: 115px;
+}
+
+.input-group-addon-ext-but {
+	color: #ffffff;
+	background: #337AB7;
+}
+
+.bottom-border {
+    border-bottom: 1px solid #DDD;
+}
+.padding-bottom-10
+{
+    padding-bottom: 10px;
+}
+.padding-top-10
+{
+    padding-top: 10px;
+}
+.padding-bottom-20
+{
+    padding-bottom: 20px;
+}
+.breadcrumb{
+    background: #FFFFFF;
+    font: 13px 微软雅黑, sans-serif;
+    height: 15px;
+}
+
+.breadcrumb > li + li:before {
+    color: #CCCCCC;
+    content: "/";
+    padding: 0 5px;
+}
+.table-ht {
+	
+}
+.table-ht thead th{
+	font: 14px 微软雅黑, sans-serif;
+	color:#FFFFFF;
+	background:#337AB7;
+	border: 1px solid rgb(255, 255, 255);
+	
+}
+.table-ht tbody tr{
+	font: 12px 微软雅黑,sans-serif;
+	color:#000000;
+	
+}
+
+  .ol-logo-only{
+       display:none;
+   }

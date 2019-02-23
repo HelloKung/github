@@ -1,0 +1,148 @@
+.ht-widget-dialog {
+  font-size: 14px;
+  font-family: 'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+  visibility: hidden;
+  position: absolute;
+}
+.ht-widget-dialog.dialog-show {
+  visibility: visible;
+}
+.ht-widget-dialog.dialog-show .dialog-container {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+}
+.ht-widget-dialog.dialog-show .dialog-overlay {
+  opacity: 1;
+}
+.ht-widget-dialog .dialog-overlay {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(235, 235, 235, 0.7);
+  z-index: 10000;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  opacity: 0;
+}
+.ht-widget-dialog .dialog-container {
+  position: fixed;
+  z-index: 10001;
+  /*white-space: nowrap;*/
+  background: white;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 10px 0px;
+  -webkit-transition: -webkit-transform 0.2s, opacity 0.2s, visibility 0.2s;
+  -webkit-transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+  transition: -webkit-transform 0.2s, opacity 0.2s, visibility 0.2s;
+  transition: transform 0.2s, opacity 0.2s, visibility 0.2s;
+  -webkit-transform: scale(0.7);
+  transform: scale(0.7);
+  opacity: 0;
+}
+.ht-widget-dialog .dialog-container .dialog-title-control {
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: inline-block;
+  cursor: pointer;
+  vertical-align: top;
+  margin-right: 2px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.ht-widget-dialog .dialog-container .dialog-container-title {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  position: relative;
+  cursor: default;
+  background: #1abc9c;
+  color: white;
+  padding: 0 20px;
+  font-size: 18px;
+  text-align: center;
+}
+.ht-widget-dialog .dialog-container .dialog-container-title .dialog-title-controls {
+  position: absolute;
+  left: 0;
+  right: 2px;
+  top: 0;
+  bottom: 0;
+  text-align: right;
+  border-bottom: 1px solid #DDDDDD !important;
+  
+}
+.ht-widget-dialog .dialog-container .dialog-container-title .dialog-title-control-close {
+   background-color: #FFFFFF;
+}
+.ht-widget-dialog .dialog-container .dialog-container-title .dialog-title-control-maximize {
+  background-color: #FFFFFF;
+}
+.ht-widget-dialog .dialog-container .dialog-container-title .dialog-title-control-minimize {
+  background-color: #FFFFFF;
+}
+.ht-widget-dialog .dialog-container .dialog-content {
+  padding: 0px;
+  position: relative;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+.ht-widget-dialog .dialog-container .dialog-container-buttons {
+  padding: 5px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+.ht-widget-dialog .dialog-container .dialog-container-buttons .dialog-button {
+  padding: 3px 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  text-align: center;
+  display: inline-block;
+  background: #EAEAEA;
+  line-height: 1.4em;
+  min-width: 4em;
+}
+.ht-widget-dialog .dialog-container .dialog-container-buttons .dialog-button:hover {
+  background: #1abc9c;
+}
+.ht-widget-dialog .dialog-container .dialog-container-buttons .dialog-button:last-child {
+  margin-right: 0;
+}
+
+/*.dialog-title-control-close {
+     background-image: url(close.png) !important;
+ }
+ .dialog-title-control-close:hover {
+     background-image: url(close_hover.png) !important;
+ } */
+
+ .dialog-container {
+     font-size: 12px !important;
+     border: 1px solid rgb(255, 255, 255);
+     background: rgb(255, 255, 255) !important;
+     border-radius:20px;
+ }
+ .dialog-container-title {
+     background: rgb(255, 255, 255) !important;
+     color: rgb(0, 0, 0) !important;
+     font-size: 14px !important;
+     margin-top: 3px;
+ }
+ .dialog-container-buttons {
+     background: rgb(205, 217, 232);
+ }
+ .dialog-button {
+     background: rgb(153,187,232) !important;
+     border: 1px solid rgb(142, 164, 193);
+     color: rgb(21, 66, 139) !important;
+     font-size: 12px !important;
+     padding: 3px 5px;
+     margin-right: 5px;
+     cursor: pointer;
+     text-align: center;
+     display: inline-block;
+ }
+ .dialog-button:hover {
+     background: rgb(254, 254, 254) !important;
+ }
