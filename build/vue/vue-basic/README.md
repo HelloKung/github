@@ -2,6 +2,12 @@
 
 > 
 
+<p align="center">
+  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/build/vue/vue-basic/src/assets/img/screenshot/screenshot1.png">
+</p>
+
+
+
 ## Build Setup
 
 ``` bash
