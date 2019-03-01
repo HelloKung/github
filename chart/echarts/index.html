@@ -5,8 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <script src="./lib/echarts.js"></script>
+    <script src="./lib/echarts-liquidfill.min.js"></script>
+    <script src="./lib/jquery.min.js"></script>
+    
 </head>
 <body>
+    <div id="container" style="width:800px; height: 500px; margin:auto;"></div>
+    <script>
     
+         let chart = echarts.init($("#container")[0]);
+         
+         let option = {
+
+                backgroundColor: '#1b2735',
+                title: {
+                    text: 'CPU使用率',
+                    textStyle: {
+                        fontWeight: 'normal',
+                        fontSize: 25,
+                        color: 'rgb(97, 142, 205)'
+                    }
+                },
+                series: [{
+                    type: 'liquidFill',
+                    radius: '80%',
+                    data: [0.25,0.5,0.75],
+                    backgroundStyle: {
+                        borderWidth: 5,
+                        borderColor: 'rgb(255,0,255,0.9)',
+                        color: 'rgb(255,0,255,0.01)'
+                    },
+                    label: {
+                        normal: {
+                            formatter: 0.25 * 100 + '%',
+                            textStyle: {
+                                fontSize: 50
+                            }
+                        }
+                    }
+                }]
+
+
+
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
 </body>
 </html>

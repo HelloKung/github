@@ -92,6 +92,13 @@
 			let objects = [];
             let targets = { table: [], sphere: [], helix: [], grid: [] };
 
+            let splitx = 10;  ///横向分割个数
+			let splity = 4;   ///纵向分割个数
+			
+			let imgx = 500;
+			let imgy = 312;
+
+
             init();
 			animate();
 
@@ -110,17 +117,7 @@
     
                     elem.className = "element";
 
-                    elem.style.backgroundPosition = `-${i*50}px -${j*78}px`
-
-                    // elem.addEventListener("click",()=>{
-
-                    //     elem.style.transform +=" rotatey(180deg)"
-
-
-                    // }) 
-
-
-                    //document.getElementById( 'container' ).appendChild(elem);
+                    elem.style.backgroundPosition = `-${i*imgx/splitx}px -${j*imgy/splity}px`
 
                     var object = new THREE.CSS3DObject( elem );
 					object.position.x = Math.random() * 4000 - 2000;
@@ -140,6 +137,70 @@
 					targets.table.push( object );
 
                 } 
+
+
+                // sphere
+
+				var vector = new THREE.Vector3();
+
+				for(let i = 0 ;i < splitx ; i++)
+                for(let j = 0 ;j < splity ; j++){
+
+					var phi = Math.acos( - 1 + ( 2 * (i+1)*j ) / (splitx*splity) );
+					var theta = Math.sqrt( (splitx*splity) * Math.PI ) * phi;
+
+					var object = new THREE.Object3D();
+
+					object.position.setFromSphericalCoords( 800, phi, theta );
+
+					vector.copy( object.position ).multiplyScalar( 2 );
+
+					object.lookAt( vector );
+
+					targets.sphere.push( object );
+
+				}
+
+				// helix
+
+				var vector = new THREE.Vector3();
+
+				for(let i = 0 ;i < splitx ; i++)
+                for(let j = 0 ;j < splity ; j++){
+
+					var theta = (i+1)*j * 0.175 + Math.PI;
+					var y = - ( (i+1)*j * 8 ) + 450;
+
+					var object = new THREE.Object3D();
+
+					object.position.setFromCylindricalCoords( 900, theta, y );
+
+					vector.x = object.position.x * 2;
+					vector.y = object.position.y;
+					vector.z = object.position.z * 2;
+
+					object.lookAt( vector );
+
+					targets.helix.push( object );
+
+				}
+
+				// grid
+
+				for(let i = 0 ;i < splitx ; i++)
+                for(let j = 0 ;j < splity ; j++){
+
+					var object = new THREE.Object3D();
+
+					object.position.x = ( ( (i+1)*j % 5 ) * 400 ) - 800;
+					object.position.y = ( - ( Math.floor( (i+1)*j / 5 ) % 5 ) * 400 ) + 800;
+					object.position.z = ( Math.floor( (i+1)*j / 25 ) ) * 1000 - 2000;
+
+					targets.grid.push( object );
+
+				}
+
+
 
 
                 //
@@ -162,6 +223,29 @@
 					transform( targets.table, 2000 );
 
 				}, false );
+
+				var button = document.getElementById( 'sphere' );
+				button.addEventListener( 'click', function () {
+
+					transform( targets.sphere, 2000 );
+
+				}, false );
+
+				var button = document.getElementById( 'helix' );
+				button.addEventListener( 'click', function () {
+
+					transform( targets.helix, 2000 );
+
+				}, false );
+
+				var button = document.getElementById( 'grid' );
+				button.addEventListener( 'click', function () {
+
+					transform( targets.grid, 2000 );
+
+				}, false );
+
+				transform( targets.table, 2000 );
 
                 window.addEventListener( 'resize', onWindowResize, false );
 

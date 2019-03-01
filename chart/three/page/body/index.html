@@ -44,12 +44,13 @@
             loader.load("scene.gltf",function(gltf){
                 gltf.scene.scale.set(0.03,0.03,0.03);
                 gltf.scene.position.set(0,0,0);
-                // let obj =  gltf.scene;
                 
-                // let meshHelper = new THREE.SkeletonHelper(obj);
-                // scene.add(meshHelper);
 
                 scene.add(gltf.scene);
+            
+                let mixer = new THREE.AnimationMixer(gltf.scene);
+           
+                console.log("mixer",mixer) 
             });
             //把眼睛看到的大千世界绘制到html页面去
             renderer = new THREE.WebGLRenderer({
