@@ -26,7 +26,7 @@
 
 <script>
 
-import header from './header'
+import header from './header/index.vue'
 import sider  from './sider'
 
 

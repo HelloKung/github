@@ -12,40 +12,145 @@
     
 </head>
 <body>
-    <div id="container" style="width:800px; height: 500px; margin:auto;"></div>
+    <img src="./asset/img/chart1.png" width="400px; height:300px;display:inline-block;">
+    <div id="container" style="width:500px; height: 300px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
     <script>
     
          let chart = echarts.init($("#container")[0]);
          
          let option = {
+                title:[{
+                   
+                     text:"任务节点",
+                     textStyle:{
+                         color:"#aaa",
+                         fontSize:13,
+                         fontFamily:"微软雅黑"
+                     },
+                     subtext:"{a|8} /{b|20}",
+                     subtextStyle:{
+                         color:"#000",
+                         fontSize:14,
+                         rich:{
+                            a:{
+                                color:"#5aabff",
+                                fontSize:24,
+                                fontWeight:400,
+                                padding:[2,0,0,0],
+                            },
+                            b:{
+                                fontSize:13,
+                                padding:[-4,0,0,0],
+                            }
+                        }
+                     },
+                     x:"center",
+                     y:"30%",
+                     
 
-                backgroundColor: '#1b2735',
-                title: {
-                    text: 'CPU使用率',
-                    textStyle: {
-                        fontWeight: 'normal',
-                        fontSize: 25,
-                        color: 'rgb(97, 142, 205)'
-                    }
+                }],
+                angleAxis:{
+                    show:false
+                },
+                radiusAxis:{
+                     data:["zw1","zw2","zw3"],
+                     type:'category',
+                     show:false
+                },
+                polar:{
+                     radius:"65%"
                 },
                 series: [{
                     type: 'liquidFill',
-                    radius: '80%',
-                    data: [0.25,0.5,0.75],
+                    color:["#bae2fe","#5aabff"],
+                    data: [0.35,0.35],
+                    outline: {
+                        show:false
+                    },
                     backgroundStyle: {
-                        borderWidth: 5,
-                        borderColor: 'rgb(255,0,255,0.9)',
-                        color: 'rgb(255,0,255,0.01)'
+                        color:"#fff"
                     },
                     label: {
-                        normal: {
-                            formatter: 0.25 * 100 + '%',
-                            textStyle: {
-                                fontSize: 50
-                            }
-                        }
+                    
+                        show:false,
+                        
+                         
+                    },
+                    itemStyle:{
+                        shadowBlur:0
                     }
-                }]
+                },{
+                    type:"bar",
+                    coordinateSystem: 'polar',
+                    data:[0,0,1],
+                    barWidth:4,
+                    itemStyle:{
+         
+                        color: new echarts.graphic.LinearGradient(1, 0, 0, 1, [{
+                                offset: 0,
+                                color: '#00B2EE'
+                            }, {
+                                offset: 1,
+                                color: '#1af6ff'
+                            }])
+                    }
+                },{
+                    type:"pie",
+                    radius:["59%","63%"],
+                    hoverAnimation:false,
+                    startAngle:115,
+                    data:[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0].map( (item,index) => {
+                        
+                        let color=["#6fdfc8","#6cd9cf","#69d3da","#67cde3","#63c5f0","#61bff7","#5fbafd"]
+
+                        let value=0;
+
+                        if(index%2==0) value=10;
+                        if(index%2==1) value=1; 
+
+                        if(index<14&&index%2==0)  color = color[index/2];
+                               
+                          else if(index%2==1) color = "#fff";
+                                  
+                                   else color = "#eee";
+                                   
+
+                        
+                        item = {
+                            value:value,
+                            itemStyle:{
+                                color:color,
+                                shadowColor:color,
+                                shadowBlur:index<14&&index%2==0?8:0,
+                            }
+
+                        }
+
+
+                        return item;
+                    }),
+
+                    label:{
+                        show:false
+                    } 
+                },
+                // {
+
+                //     type:"funnel",
+                    
+                //     maxSize:"30%",
+                //     minSize:"5%",
+                //     barWidth:10,
+                //    // min:30,
+                //     data:[{
+                //         value:60,name:"funnel1",
+                //     },{
+                //         value:59,name:"funnel2",
+                //     }]
+
+
+                // }
+                ]
 
 
 
