@@ -6,7 +6,12 @@ const config = [{
          id:"platform",
          title:"平台一",
          icon:"icon-office"
-    }]   
+    },{
+
+        id:"icon",
+        title:"图标库",
+        icon:"icon-gift"
+   }]   
 
 },{
 

@@ -1,5 +1,4 @@
 <template>
-    <div>
-        表格页面
-    </div>
+   <div>
+   </div>    
 </template>
