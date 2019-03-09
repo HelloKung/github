@@ -27,7 +27,7 @@
 <script>
 
 import header from './header/index.vue'
-import sider  from './sider'
+import sider  from './sider/index.vue'
 
 
   export default {

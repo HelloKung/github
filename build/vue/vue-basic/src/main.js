@@ -12,7 +12,7 @@ import vcharts from 'v-charts'
 import ElementUI from 'element-ui'
 Vue.use(ElementUI)
 
-Vue.use(vcharts);
+import '@/styles/index.css'
 
 import axios from 'axios'
 Vue.prototype.$http = axios

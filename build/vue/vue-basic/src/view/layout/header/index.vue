@@ -2,7 +2,7 @@
    
    
   <el-menu
-    default-active="1001"
+    :default-active="activeId"
     class="el-menu-demo"
     mode="horizontal"
     @select="handleSelect"
@@ -31,6 +31,7 @@
 <script>
 
 import headerConfig from "@/config/layout/headerConfig.js"
+import siderConfig from "@/config/layout/siderConfig.js"
 
   
   export default {
@@ -40,7 +41,7 @@ import headerConfig from "@/config/layout/headerConfig.js"
       return {
         
          menuConfig:{},
-
+         activeId:null
 
 
       };
@@ -52,14 +53,20 @@ import headerConfig from "@/config/layout/headerConfig.js"
     methods: {
     
       handleSelect(key, keyPath) {
+           
+           
+           let siderMenu = siderConfig.filter(item => item.firstMenuId == key)[0].siderMenu;
 
-      
+           this.$store.dispatch('setSiderMenu',{
+               siderMenu
+           });
+
       },
       renderMenu(){
 
           this.menuConfig = headerConfig.menu;
-          console.log(this.menuConfig);
-
+          this.activeId =  this.menuConfig[0].id;
+          this.handleSelect(this.activeId);
 
       }
     

@@ -2,18 +2,18 @@ const config = {
 
       menu:[{
 
-         id:"1001",
+         id:"platform",
          title:"我的平台",
          
       },{
 
-        id:"1002",
+        id:"practice",
         title:"我的练习",
         
 
      },{
 
-        id:"1003",
+        id:"github",
         title:"我的网站",
         href:"https://github.com/yitiaoxianyu0927/github"
      }]
