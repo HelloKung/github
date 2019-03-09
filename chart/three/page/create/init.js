@@ -35,7 +35,15 @@
     })
 
         
-    
+    let wall_c1_1 = createCuboid({
+           
+            size:{a:2.4,b:18,c:33},
+            position:{x:75,y:16.5,z:-2},
+            //rotate:{x:0,y:0,z:0},
+            border:true,
+            materials:{color:0x956e4d},
+            remove:true
+    })
     
 
     
@@ -58,8 +66,14 @@
         position:{x:57,y:16.5,z:46},
         //rotate:{x:0,y:0,z:0},
         border:true,
-        materials:{color:0x956e4d}
+        materials:{color:0x956e4d},
+        remove:true
     })
+
+        
+    
+
+
 
     ///层1墙4
     let wall_c1_4 = createCuboid({
@@ -71,6 +85,8 @@
         materials:{color:0x956e4d}
     })
 
+    
+
     ///层1墙5
     let wall_c1_5 = createCuboid({
             
@@ -80,6 +96,8 @@
         border:true,
         materials:{color:0x956e4d}
     })
+
+   
 
     let wall_c1_6 = createCuboid({
             
@@ -171,9 +189,24 @@
         materials:{color:0x956e4d}
     })
     
-    createWindow_t1();
     createDoor_t1(); 
 
+
+    let wall_c1_1_window = createWindow_t1(wall_c1_1,"x");
+
+    let wall_c1_3_window = createWindow_t2(wall_c1_3,"z");
+    
+    let wall_c1_5_window = createWindow_t2(wall_c1_5,"z");
+    
+    let wall_c1_7_window = createWindow_t1(wall_c1_7,"-x");
+
+    let wall_c1_8_window = createWindow_t2(wall_c1_8,"-z");
+
+    let wall_c1_9_window = createWindow_t3(wall_c1_9,"-z");
+    
+    let wall_c1_10_window = createWindow_t2(wall_c1_10,"-z");
+    
+ 
 
     scene.rotateX(Math.PI/6);  // Math.PI/6
     //scene.rotateY(Math.PI*3/2);

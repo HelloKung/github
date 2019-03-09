@@ -183,36 +183,49 @@ function setThreeBsp(modelA,modelB,remove){
 }
 
 
-function createWindow_t1(){
+function createWindow_t1(wall_out,direction){
 
-    ///层1墙1
-    let wall_c1_1 = createCuboid({
-           
-        size:{a:2.4,b:18,c:33},
-        position:{x:75,y:16.5,z:-2},
-        //rotate:{x:0,y:0,z:0},
-        border:true,
-        materials:{color:0x956e4d},
-        remove:true
-    })
+    let {x,y,z} = wall_out.position;
+  
+    let dx = 1,dy = 1,dz = 1; 
+  
+    let walldirection = {
 
+        "x":()=>dx=1,
+        "-x":()=>dx=-1,
+        "y":()=>dy=1,
+        "-y":()=>dy=-1,
+        "z":()=>dz=1,
+        "-z":()=>dz=1,
+        
+    }
+    
+
+    walldirection[direction]();
+  
+    //{x:75,y:16.5,z:-2}
     let wall_c1_1_in = createCuboid({
            
         size:{a:2.4,b:9,c:16},
-        position:{x:75,y:16.5,z:-2},
+        position:{x:x,y:y,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{color:0x956e4d},
         remove:true
     })
     
+  
+
+
     
-    let bsp = setThreeBsp(wall_c1_1,wall_c1_1_in);
+    let bsp = setThreeBsp(wall_out,wall_c1_1_in);
+
+    scene.add(bsp); 
 
     let window_up = createCuboid({
            
         size:{a:0.8,b:9,c:8.5},
-        position:{x:74.8,y:20.2,z:-2},
+        position:{x:x-0.2,y:y+3.7,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
@@ -224,7 +237,7 @@ function createWindow_t1(){
     let window_up_in = createCuboid({
            
         size:{a:0.8,b:6,c:6},
-        position:{x:74.8,y:20.2,z:-2},
+        position:{x:x-0.2,y:y+3.7,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
@@ -236,12 +249,12 @@ function createWindow_t1(){
     let window_up_glass = createCuboid({
            
         size:{a:0.2,b:6,c:6},
-        position:{x:74.5,y:20.2,z:-2},
+        position:{x:x-0.2,y:y+3.7,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
             color:0xffffff,
-            opacity:0.5,
+            opacity:0.3,
             transparent:true
         },
         remove:true
@@ -249,30 +262,39 @@ function createWindow_t1(){
 
     let window_up_bsp = setThreeBsp(window_up,window_up_in);
 
+    window_up_bsp.position.set(0,0,0);
+    window_up_glass.position.set(0,0,0);
+    
+
+
     let window_up_group = new THREE.Group();
 
         window_up_group.add( window_up_bsp );
         window_up_group.add( window_up_glass );
 
         scene.add( window_up_group );
+        
+        // window_up_group.position.set(74.8,20.2,-2);
 
+        //console.log(window_up_group); 
+        
 
     let window_down = createCuboid({
            
         size:{a:0.8,b:9,c:8.5},
-        position:{x:74.6,y:12.2,z:-2},
+        position:{x:x-0.4,y:y-4.3,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
            color:0xffffff
         },
-        remove:true
+        //remove:true
     })
 
     let window_down_in = createCuboid({
            
         size:{a:0.8,b:6,c:6},
-        position:{x:74.6,y:12.2,z:-2},
+        position:{x:x-0.4,y:y-4.3,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
@@ -284,12 +306,12 @@ function createWindow_t1(){
     let window_down_glass = createCuboid({
            
         size:{a:0.2,b:6,c:6},
-        position:{x:74.6,y:12.2,z:-2},
+        position:{x:x-0.4,y:y-4.3,z:z},
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
             color:0xffffff,
-            opacity:0.5,
+            opacity:0.3,
             transparent:true
         },
         remove:true
@@ -297,12 +319,25 @@ function createWindow_t1(){
 
     let window_down_bsp = setThreeBsp(window_down,window_down_in,true);
     
+    window_down_bsp.position.set(0,0,0);
+    window_down_glass.position.set(0,0,0);
+    
+    
     let window_down_group = new THREE.Group();
 
         window_down_group.add( window_down_bsp );
         window_down_group.add( window_down_glass );
 
         scene.add( window_down_group );
+    
+        //console.log("window_down_group",window_down_group);
+        //window_down_group.position.set(74.6,12.2,-2);    
+
+        //console.log(dx,dy,dz);
+
+        window_up_group.position.set(x-0.3+dx*0.1,y-0.3+4*dy,z);
+        window_down_group.position.set(x-0.3-dx*0.1,y-0.3-4*dy,z);  
+
 
     // console.log("window_down_group",window_down_group,window_up_group);
 
@@ -313,24 +348,24 @@ function createWindow_t1(){
         let timer;
 
       
-        if(window_down_group.position.y>=8){
+        if(window_down_group.position.y-12.2>=8){
 
           timer = setInterval(function(){
     
                 window_down_group.position.y-=0.05
                 
-                if(window_down_group.position.y<=0)
+                if(window_down_group.position.y-12.2<=0)
                 
                 clearInterval(timer)
             })
 
-        }else if(window_down_group.position.y<=0){
+        }else if(window_down_group.position.y-12.2<=0){
 
             timer = setInterval(function(){
     
                 window_down_group.position.y+=0.05
                 
-                if(window_down_group.position.y>=8)
+                if(window_down_group.position.y-12.2>=8)
                 
                 clearInterval(timer)
             })
@@ -343,24 +378,24 @@ function createWindow_t1(){
         let timer;
 
         clearInterval(timer);
-        if(window_down_group.position.y>=8){
+        if(window_down_group.position.y-12.2>=8){
 
           timer = setInterval(function(){
     
                 window_down_group.position.y-=0.05
                 
-                if(window_down_group.position.y<=0)
+                if(window_down_group.position.y-12.2<=0)
                 
                 clearInterval(timer)
             })
 
-        }else if(window_down_group.position.y<=0){
+        }else if(window_down_group.position.y-12.2<=0){
 
             timer = setInterval(function(){
     
                 window_down_group.position.y+=0.05
                 
-                if(window_down_group.position.y>=8)
+                if(window_down_group.position.y-12.2>=8)
                 
                 clearInterval(timer)
 
@@ -383,9 +418,9 @@ function createDoor_t1(){
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
-            color:0x956e4d,
-            remove:true
-        }
+            color:0x956e4d
+        },
+        remove:true
 
     })
 
@@ -396,9 +431,9 @@ function createDoor_t1(){
         //rotate:{x:0,y:0,z:0},
         border:true,
         materials:{
-            color:0xffffff,
-            remove:true 
-        }
+            color:0xffffff
+        },
+        remove:true 
 
     })
 
@@ -412,8 +447,8 @@ function createDoor_t1(){
         border:true,
         materials:{
             color:0x7b1f12,
-            remove:true
-        }
+        },
+        remove:true
 
     })
 
@@ -425,10 +460,10 @@ function createDoor_t1(){
         border:false,
         materials:{
             color:0x7b1f12,
-            remove:true,
             transparent : true,
 			opacity : 0
-        }
+        },
+        remove:true,
 
     })
 
@@ -451,8 +486,8 @@ function createDoor_t1(){
         border:true,
         materials:{
             color:0x7b1f12,
-            remove:true
-        }
+        },
+        remove:true
     })
 
     let door_right_hide = createCuboid({
@@ -463,10 +498,10 @@ function createDoor_t1(){
         border:false,
         materials:{
             color:0x7b1f12,
-            remove:true,
             transparent : true,
 			opacity : 0
-        }
+        },
+        remove:true,
 
     })
 
@@ -498,3 +533,234 @@ function createDoor_t1(){
 
 
 }
+
+
+
+function createWindow_t2(wall_out,direction){
+
+
+     let {x,y,z} = wall_out.position;
+     
+     let size = wall_out.geometry.parameters;
+
+     let wa = 18, wc = 16;
+
+     let wall_in = createCuboid({
+
+        size:{a:wa,b:2.4,c:wc},
+        position:{x:x,y:y,z:z},
+        border:true,
+        materials:{color:0xffffff},
+        
+     })
+
+     let wall = setThreeBsp(wall_out,wall_in);
+     
+     
+
+     let fwidth = 1 * 2; //边框宽度 *2
+
+     let fx=0,fy=0,fz=0;
+
+     let fposition = {
+
+         "x":()=>fx+=1.45,
+         "-x":()=>fx-=1.45,
+         "y":()=>fy+=1.45,
+         "-y":()=>fy-=1.45,
+         "z":()=>fz+=1.45,
+         "-z":()=>fz-=1.45,
+         
+     }
+     
+     fposition[direction]();
+      
+     
+
+     let frame_out = createCuboid({
+
+        size:{a:wa+fwidth,b:0.5,c:wc+fwidth},
+        position:{x:x+fx,y:y+fy,z:z+fz},
+        border:true,
+        materials:{color:0xffffff},
+        remove:true
+        
+     })
+
+     let frame_in = createCuboid({
+
+        size:{a:wa,b:0.5,c:wc},
+        position:{x:x+fx,y:y+fy,z:z+fz},
+        border:true,
+        materials:{color:0xffffff},
+        remove:true
+        
+     })
+
+     
+
+     let frame = setThreeBsp(frame_out,frame_in); 
+
+     
+     scene.add(wall);
+     
+     scene.add(frame);
+     
+
+
+
+     let window = createCuboid({
+
+        size:{a:wa,b:0.05,c:wc},
+        position:{x:x,y:y,z:z},
+        border:true,
+        materials:{
+            color:0xffffff,
+            transparent:true,
+            opacity:0.3
+        },
+        
+     })
+
+     let line1 = createCuboid({
+
+        size:{a:0.5,b:0.1,c:wc},
+        position:{x:x-wa/6,y:y,z:z},
+        border:true,
+        materials:{color:0xffffff} 
+     })
+
+     let line2 = createCuboid({
+
+        size:{a:0.5,b:0.1,c:wc},
+        position:{x:x+wa/6+1,y:y,z:z},
+        border:true,
+        materials:{color:0xffffff} 
+     })
+
+     let line3 = createCuboid({
+
+        size:{a:wa,b:0.1,c:0.5},
+        position:{x:x,y:y+wa/6,z:z},
+        border:true,
+        materials:{color:0xffffff} 
+     })
+
+     
+     
+
+
+}
+
+
+function createWindow_t3(wall_out,direction){
+
+
+    let {x,y,z} = wall_out.position;
+    
+    let size = wall_out.geometry.parameters;
+
+    let wa = 14, wc = 16;
+
+    let wall_in = createCuboid({
+
+       size:{a:wa,b:2.4,c:wc},
+       position:{x:x,y:y,z:z},
+       border:true,
+       materials:{color:0xffffff},
+       
+    })
+
+    let wall = setThreeBsp(wall_out,wall_in);
+    
+    
+
+    let fwidth = 1 * 2; //边框宽度 *2
+
+    let fx=0,fy=0,fz=0;
+
+    let fposition = {
+
+        "x":()=>fx+=1.45,
+        "-x":()=>fx-=1.45,
+        "y":()=>fy+=1.45,
+        "-y":()=>fy-=1.45,
+        "z":()=>fz+=1.45,
+        "-z":()=>fz-=1.45,
+        
+    }
+    
+    fposition[direction]();
+     
+    
+
+    let frame_out = createCuboid({
+
+       size:{a:wa+fwidth,b:0.5,c:wc+fwidth},
+       position:{x:x+fx,y:y+fy,z:z+fz},
+       border:true,
+       materials:{color:0xffffff},
+       remove:true
+       
+    })
+
+    let frame_in = createCuboid({
+
+       size:{a:wa,b:0.5,c:wc},
+       position:{x:x+fx,y:y+fy,z:z+fz},
+       border:true,
+       materials:{color:0xffffff},
+       remove:true
+       
+    })
+
+    
+
+    let frame = setThreeBsp(frame_out,frame_in); 
+
+    
+    scene.add(wall);
+    
+    scene.add(frame);
+    
+
+
+
+    let window = createCuboid({
+
+       size:{a:wa,b:0.05,c:wc},
+       position:{x:x,y:y,z:z},
+       border:true,
+       materials:{
+           color:0xffffff,
+           transparent:true,
+           opacity:0.3
+       },
+       
+    })
+
+    let line1 = createCuboid({
+
+       size:{a:0.5,b:0.1,c:wc},
+       position:{x:x,y:y,z:z},
+       border:true,
+       materials:{color:0xffffff} 
+    })
+
+    
+
+    let line3 = createCuboid({
+
+       size:{a:wa,b:0.1,c:0.5},
+       position:{x:x,y:y+3,z:z},
+       border:true,
+       materials:{color:0xffffff} 
+    })
+
+    
+    
+
+
+}
+
+
