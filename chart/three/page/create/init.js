@@ -24,6 +24,8 @@
 
     })
 
+    let floor_c2 = createFloor();
+
     ///层1墙0
     let wall_c1_0 = createCuboid({
            
@@ -206,12 +208,112 @@
     
     let wall_c1_10_window = createWindow_t2(wall_c1_10,"-z");
     
- 
 
-    scene.rotateX(Math.PI/6);  // Math.PI/6
+////////////二层//////
+
+let roof_1 = createShape({
+
+    points:[{x:0,y:4},{x:35.2,y:17},{x:82.4,y:-7},{x:82.4,y:-11},{x:35.2,y:13}],
+    depth:110.4,
+    position:{x:-30.2,y:48,z:35.2},
+    rotate:{x:0,y:Math.PI/2,z:0},
+    border:true,
+    materials:{color:0xffffff} 
+
+});
+
+let roof_2 = createShape({
+
+    points:[{x:0,y:4},{x:19.2,y:13},{x:38.4,y:4},{x:38.4,y:0},{x:19.2,y:9}],
+    depth:50.4,
+    position:{x:37.8,y:48,z:1.6},
+    //rotate:{x:0,y:0,z:0},
+    border:true,
+    materials:{color:0xffffff} 
+
+
+});
+
+    let wall_c2_1 = createShape({
+
+        points:[{x:94.4,y:0},{x:94.4,y:4},{x:47.2,y:28},{x:14,y:15},{x:0,y:15}],
+        depth:2.4,
+        position:{x:73.8,y:33,z:47.2},
+        rotate:{x:0,y:Math.PI/2,z:0},
+        border:true,
+        materials:{color:0x956e4d} 
+
+    });
+
+
+
+    let wall_c2_2 = createShape({
+
+            points:[{x:38.4,y:0},{x:38.4,y:15},{x:19.2,y:24},{x:0,y:15}],
+            depth:2.4,
+            position:{x:37.8,y:33,z:44.8},
+            //rotate:{x:0,y:0,z:0},
+            border:true,
+            materials:{color:0x956e4d} 
+
+    });
+
+    let wall_c2_3 = createShape({
+
+        points:[{x:12,y:0},{x:12,y:15},{x:0,y:15}],
+        depth:2.4,
+        position:{x:37.8,y:33,z:46},
+        rotate:{x:0,y:Math.PI/2,z:0},
+        border:true,
+        materials:{color:0x956e4d} 
+
+    });
+
+    let wall_c2_4 = createShape({
+
+        points:[{x:66.4,y:0},{x:66.4,y:15},{x:0,y:15}],
+        depth:2.4,
+        position:{x:-26.2,y:33,z:32.8},
+        rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{color:0x956e4d} 
+
+    });
+    
+    let wall_c2_5 = createShape({
+
+        points:[{x:82.4,y:0},{x:82.4,y:4},{x:35.2,y:28},{x:0,y:15}],
+        depth:2.4,
+        position:{x:-26.2,y:33,z:35.2},
+        rotate:{x:0,y:Math.PI/2,z:0},
+        border:true,
+        materials:{color:0x956e4d} 
+
+    });
+
+    let wall_c2_6 = createShape({
+
+        points:[{x:102.4,y:0},{x:102.4,y:4},{x:0,y:4}],
+        depth:2.4,
+        position:{x:-26.2,y:33,z:-47.2},
+        rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{color:0x956e4d} 
+
+    });
+
+    
+
+
+
+
+
+    //scene.rotateX(Math.PI/6);  // Math.PI/6
     //scene.rotateY(Math.PI*3/2);
     
-    camera.position.z = 120;    // 200
+    
+    
+    camera.position.z = 200;    // 200
     
     
     var render = function() {

@@ -764,3 +764,135 @@ function createWindow_t3(wall_out,direction){
 }
 
 
+function createFloor(){
+
+      let floor_left = createCuboid({
+
+            size:{a:64,b:80,c:2},
+            position:{x:7,y:33,z:-6},
+            border:true,
+            materials:{
+                color:0x70829a
+            },
+            remove:true
+
+      })
+
+      let floor_right = createCuboid({
+
+        size:{a:36,b:92,c:2},
+        position:{x:57,y:33,z:0},
+        border:true,
+        materials:{
+            color:0x70829a
+        },
+        remove:true
+
+      })
+
+
+      let floor = new THREE.Group();
+
+      floor.add(floor_left);
+      floor.add(floor_right);
+      
+      floor.children.forEach(item => {item.material.opacity = 0.8;item.material.transparent = true;})
+
+      scene.add(floor);
+
+
+      
+
+
+}
+
+
+function createShape({points,depth=0,position,rotate,border,materials,remove}){
+
+    var shape = new THREE.Shape();
+    shape.moveTo( 0, 0 );
+    
+    points.forEach(item =>{
+
+        shape.lineTo( item.x, item.y ); 
+
+    })
+
+    shape.lineTo( 0, 0 ); // close path
+    
+    var extrudeSettings = { depth: depth, bevelEnabled: true, bevelSegments: 1, steps: 0, bevelSize: 0, bevelThickness: 0 };
+
+    var geometry = new THREE.ExtrudeBufferGeometry( shape, extrudeSettings );
+
+	var cube = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial(materials) );
+
+    
+    if(border){
+    
+        let cubeEdges = new THREE.EdgesGeometry(geometry, 1);
+
+        let edgesMtl =  new THREE.LineBasicMaterial({color: 0x000000});
+        // edgesMtl.depthTest = false; 深度测试，若开启则是边框透明的效果
+        let cubeLine = new THREE.LineSegments(cubeEdges, edgesMtl);
+
+        cube.add(cubeLine);
+    
+    }
+
+    if(!position){
+
+        cube.position.set(0,0,0);
+
+    }else{
+        
+        position.x = position.x||0;
+        position.y = position.y||0;
+        position.z = position.z||0;
+      
+        cube.position.set(position.x,position.y,position.z);
+    }
+
+    if(!rotate){
+
+        cube.rotation.set(0,0,0);
+
+    }else{
+        
+        rotate.x = rotate.x||0;
+        rotate.y = rotate.y||0;
+        rotate.z = rotate.z||0;
+      
+        cube.rotation.set(rotate.x,rotate.y,rotate.z);
+    }
+ 
+    if(!remove)  scene.add(cube);
+
+
+    scene.add(cube);   
+
+
+    // var geometry = new THREE.Geometry();
+
+    // geometry.vertices.push(
+    //     new THREE.Vector3( -10,  10, 0 ),
+    //     new THREE.Vector3( -10, -10, 0 ),
+    //     new THREE.Vector3(  10, -10, 0 ),
+    //     new THREE.Vector3( -10,  10, 10 ),
+    //     new THREE.Vector3( -10, -10, 10 ),
+    //     new THREE.Vector3(  10, -10, 10 ),
+        
+    // );
+
+    // geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );                 
+    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
+    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
+    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
+    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
+    
+
+    // geometry.computeBoundingSphere();
+
+    // var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({color:0xfcaf41}) );
+
+                 
+}
