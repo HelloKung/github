@@ -37,6 +37,17 @@ const config = [{
 
     }]
     
+},{
+
+    firstMenuId:"module",
+    siderMenu:[{
+
+        id:"moduleIndex",
+        title:"首页",
+        icon:"icon-quill",
+      
+    }]
+    
 }]
 
 

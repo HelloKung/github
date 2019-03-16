@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import axios from 'axios'
-Vue.prototype.$http = axios
-
 Vue.use(Router)
+
+import platform from './module/platform';
+import practice from './module/practice';
+import module from './module/module';
 
 
 const routers=[
@@ -22,35 +24,11 @@ const routers=[
         path: '/layout',
         name: 'layout',
         component:()=>import('@/view/layout/layout'),
-        children:[
-
-              {
-                path: '/platform',
-                name: 'platform',
-                component:()=>import('@/view/platform')
-              },
-              {
-                path: '/icon',
-                name: 'icon',
-                component:()=>import('@/view/platform/icon')
-              },
-              
-              {
-                path: '/ElementTable',
-                name: 'ElementTable',
-                component:()=>import('@/view/practice/table/ElementTable')
-              },
-              {
-                path: '/chart',
-                name: 'chart',
-                component:()=>import('@/view/practice/chart')
-              },
-
-              
-
-             
-              
-        ]
+        children:[]
+                  .concat(platform)
+                  .concat(practice)
+                  .concat(module)
+  
       },
   
 ]

@@ -8,10 +8,15 @@
             @CellClick="CellClick"
             @ButtonFunc="ButtonFunc"
         >
-        <template slot-scope="data" slot="formatter">
-           <el-button  type="warning" size="mini" @click="update(data)">修改</el-button>
-           <el-button  type="danger" size="mini"  @click="del(data)">删除</el-button>
-        </template>  
+          <template slot-scope="data" slot="formatter">
+             <el-button  type="warning" size="mini" @click="update(data)">修改</el-button>
+             <el-button  type="danger" size="mini"  @click="del(data)">删除</el-button>
+          </template>
+          <template slot-scope="data" slot="sex">
+             <span v-if="data.row.sex==1">男</span>
+             <span v-else>女</span>
+          </template>
+          
         </ElementTable>
       </el-row>
     </div>
@@ -48,7 +53,8 @@ export default {
                        key:"age"
                    },{
                        name:"性别",
-                       key:"sex"
+                       key:"sex",
+                       formatter:true
                    },{
                        name:"城市",
                        key:"city",
@@ -67,51 +73,95 @@ export default {
                        width:200
                    }],
                    data:[{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:12
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:13
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       city:"沈阳",
-                       age:14
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:12
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:15
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:14
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:11
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:18
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:20
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:19
-                   },{
-                       name:"123",
-                       date:"2018-09-22",
-                       age:16
-                   }],
+                        "objectid": "350000201010214610",
+                        "name": "Paul Anderson",
+                        "age": 9,
+                        "sex": 2,
+                        "city": "北京市",
+                        "email": "m.altzwyes@fgi.coop",
+                        "date": "2005-08-06"
+                    },
+                    {
+                        "objectid": "150000198610164504",
+                        "name": "Jeffrey Lopez",
+                        "age": 2,
+                        "sex": 1,
+                        "city": "阜新市",
+                        "email": "y.xyqarainlp@bgphq.gt",
+                        "date": "1977-09-02"
+                    },
+                    {
+                        "objectid": "220000199707101617",
+                        "name": "Matthew Allen",
+                        "age": 8,
+                        "sex": 2,
+                        "city": "西安市",
+                        "email": "k.imyrzqhxz@fxaspvg.jo",
+                        "date": "2014-01-30"
+                    },
+                    {
+                        "objectid": "460000197212073744",
+                        "name": "Laura Hernandez",
+                        "age": 2,
+                        "sex": 1,
+                        "city": "双鸭山市",
+                        "email": "k.tmz@icntbhomn.ug",
+                        "date": "1980-07-12"
+                    },
+                    {
+                        "objectid": "23000019880522444X",
+                        "name": "Carol Thompson",
+                        "age": 2,
+                        "sex": 2,
+                        "city": "鄂州市",
+                        "email": "s.tccdeo@lbsoqqc.nu",
+                        "date": "2006-05-01"
+                    },
+                    {
+                        "objectid": "500000197112111718",
+                        "name": "Deborah Perez",
+                        "age": 8,
+                        "sex": 1,
+                        "city": "桂林市",
+                        "email": "t.ftgzebri@lwsters.asia",
+                        "date": "1977-03-03"
+                    },
+                    {
+                        "objectid": "320000201404287366",
+                        "name": "Jennifer Hernandez",
+                        "age": 5,
+                        "sex": 1,
+                        "city": "香港岛",
+                        "email": "e.paio@hakcb.tr",
+                        "date": "1986-08-28"
+                    },
+                    {
+                        "objectid": "410000200106294186",
+                        "name": "Timothy Young",
+                        "age": 5,
+                        "sex": 2,
+                        "city": "澎湖县",
+                        "email": "f.pelgh@ogvmu.jp",
+                        "date": "2000-07-28"
+                    },
+                    {
+                        "objectid": "360000199604033739",
+                        "name": "William Williams",
+                        "age": 1,
+                        "sex": 2,
+                        "city": "离岛",
+                        "email": "i.knryrg@nyhchepis.gd",
+                        "date": "2015-02-07"
+                    },
+                    {
+                        "objectid": "530000199210147591",
+                        "name": "Kevin Martinez",
+                        "age": 3,
+                        "sex": 2,
+                        "city": "黄石市",
+                        "email": "x.mckoexya@nxmwmkt.sm",
+                        "date": "1983-09-26"
+                    }],
                    pagination:{
                       
                       pageIndex:1,
@@ -178,9 +228,9 @@ export default {
             })
 
         },
-        update(){
+        update(data){
 
-
+           console.log(data);
 
         },
         del(){

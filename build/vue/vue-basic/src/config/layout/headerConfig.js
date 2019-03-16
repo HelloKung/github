@@ -13,6 +13,12 @@ const config = {
 
      },{
 
+      id:"module",
+      title:"模块打包",
+      
+
+     },{
+
         id:"github",
         title:"我的网站",
         href:"https://github.com/yitiaoxianyu0927/github"
