@@ -34,7 +34,12 @@ const config = [{
         id:"chart",
         title:"图形",
         icon:"icon-stats-dots",
+        children:[{
 
+           id:"timemap",
+           title:"时间轴地图",
+           icon:"icon-map"
+        }]
     }]
     
 },{

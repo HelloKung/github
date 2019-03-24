@@ -4,6 +4,7 @@ import ReactEcharts from 'echarts-for-react'
 import 'echarts/dist/extension/bmap.min.js'
 
 //import echarts from 'echarts'
+import bgurl from '../../../../assets/img/background/onlineMap.jpg'
 
 export default class barChart extends Component{
 
@@ -222,10 +223,11 @@ export default class barChart extends Component{
         return (
             
            <Fragment> 
-               <ReactEcharts   
+               {/* <ReactEcharts   
                   style={{width:"100%",height:"100%"}} 
                   option={this.getOption()} 
-               />
+               /> */}
+               {<img src={bgurl} style={{width:"100%",height:"100%"}} />}
            </Fragment> 
         )
 

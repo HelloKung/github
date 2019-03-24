@@ -4,6 +4,16 @@
 
 const path = require('path')
 
+const MODULE = process.env.MODULE_ENV || 'undefined';
+
+// const entry = {
+//   app: "./src/main.js",
+//   product: "./src/view/module/product/main.js",
+// }
+
+// const htmlTemplate = entry.MODULE;
+
+
 module.exports = {
   dev: {
 
@@ -49,9 +59,13 @@ module.exports = {
   build: {
     // Template for index.html
     index: path.resolve(__dirname, '../dist/index.html'),
-
+    //index: path.resolve(__dirname, '../dist', MODULE, 'index.html'), 
+    //htmlTemplate:htmlTemplate,
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
+    //assetsRoot: process.env.MODE_ENV === 'separate' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist'),
+    //assetsRoot: MODULE == 'product' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist'),
+    
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
 

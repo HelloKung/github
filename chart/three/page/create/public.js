@@ -763,6 +763,256 @@ function createWindow_t3(wall_out,direction){
 
 }
 
+function createWindow_t4(wall_out,direction){
+
+
+    let {x,y,z} = wall_out.position;
+    
+    let size = wall_out.geometry.parameters;
+
+    let wa = 14.0, wc = 10.0;
+
+    let wall_in = createCuboid({
+
+       size:{a:wa,b:2.4,c:wc},
+       position:{x:x,y:y,z:z},
+       border:true,
+       materials:{color:0xffffff},
+       
+    })
+
+    let wall = setThreeBsp(wall_out,wall_in);
+
+    let fwidth = 1 * 2; //边框宽度 *2
+
+    let fx=0,fy=0,fz=0;
+
+    let fposition = {
+
+        "x":()=>fx+=1.45,
+        "-x":()=>fx-=1.45,
+        "y":()=>fy+=1.45,
+        "-y":()=>fy-=1.45,
+        "z":()=>fz+=1.45,
+        "-z":()=>fz-=1.45,
+        
+    }
+    
+    fposition[direction]();
+     
+    
+
+    let frame_out = createCuboid({
+
+       size:{a:wa+fwidth,b:0.5,c:wc+fwidth},
+       position:{x:x+fx,y:y+fy,z:z+fz},
+       border:true,
+       materials:{color:0xffffff},
+       remove:true
+       
+    })
+
+    let frame_in = createCuboid({
+
+       size:{a:wa,b:0.5,c:wc},
+       position:{x:x+fx,y:y+fy,z:z+fz},
+       border:true,
+       materials:{color:0xffffff},
+       remove:true
+       
+    })
+
+    let frame = setThreeBsp(frame_out,frame_in); 
+
+    scene.add(frame);
+
+    
+    let window_left = createCuboid({
+           
+        size:{a:wa/2+1,b:1.0,c:wc},
+        position:{x:x-wa/4,y:y,z:z-0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+            color:0xffffff
+        },
+        remove:true
+    })
+
+    let window_left_in = createCuboid({
+           
+        size:{a:wa/2-1,b:1.0,c:wc-2},
+        position:{x:x-wa/4,y:y,z:z-0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+            color:0xffffff
+        },
+        remove:true
+    })
+
+    let window_left_glass = createCuboid({
+           
+        size:{a:wa/2-1,b:0.2,c:wc-2},
+        position:{x:x-wa/4,y:y,z:z-0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+            color:0xffffff,
+            opacity:0.3,
+            transparent:true
+        },
+        remove:true
+    })
+
+    let window_left_bsp = setThreeBsp(window_left,window_left_in);
+
+    scene.add(window_left_bsp);
+
+    window_left_bsp.position.set(0,0,0);
+    window_left_glass.position.set(0,0,0);
+    
+
+
+    let window_left_group = new THREE.Group();
+
+        window_left_group.add( window_left_bsp );
+        window_left_group.add( window_left_glass );
+
+        scene.add( window_left_group );
+        
+        
+        
+
+    let window_right = createCuboid({
+           
+        size:{a:wa/2+1,b:1.0,c:wc},
+        position:{x:x+wa/4,y:y,z:z+0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+           color:0xffffff
+        },
+        //remove:true
+    })
+
+    let window_right_in = createCuboid({
+           
+        size:{a:wa/2-1,b:1.0,c:wc-2},
+        position:{x:x+wa/4,y:y,z:z+0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+           color:0xffffff
+        },
+        remove:true
+    })
+
+    let window_right_glass = createCuboid({
+           
+        size:{a:wa/2-1,b:0.2,c:wc-2},
+        position:{x:x+wa/4,y:y,z:z+0.6},
+        //rotate:{x:0,y:0,z:0},
+        border:true,
+        materials:{
+            color:0xffffff,
+            opacity:0.3,
+            transparent:true
+        },
+        remove:true
+    })
+
+    let window_right_bsp = setThreeBsp(window_right,window_right_in,true);
+    
+    window_right_bsp.position.set(0,0,0);
+    window_right_glass.position.set(0,0,0);
+    
+    
+    let window_right_group = new THREE.Group();
+
+        window_right_group.add( window_right_bsp );
+        window_right_group.add( window_right_glass );
+
+        scene.add( window_right_group );
+    
+        //console.log("window_down_group",window_down_group);
+        //window_down_group.position.set(74.6,12.2,-2);    
+
+        //console.log(dx,dy,dz);
+
+        window_left_group.position.set(x-wa/4+0.5,y,z-0.5);
+        window_right_group.position.set(x+wa/4-0.5,y,z+0.5);  
+    
+    
+        objectEvent[window_left_group.uuid]=function(){
+        
+            let timer;
+    
+          
+            if(window_right_group.position.x>=x+wa/4-0.5){
+    
+              timer = setInterval(function(){
+        
+                     window_right_group.position.x-=0.05
+                    
+                    if(window_right_group.position.x<=x-wa/4+0.5)
+                    
+                    clearInterval(timer)
+                })
+    
+            }else if(window_right_group.position.x<=x-wa/4+0.5){
+    
+                timer = setInterval(function(){
+        
+                    window_right_group.position.x+=0.05
+                    
+                    if(window_right_group.position.x>=x+wa/4-0.5)
+                    
+                    clearInterval(timer)
+                })
+    
+            } 
+        }
+    
+        objectEvent[window_right_group.uuid]=function(){
+            
+            let timer;
+    
+            clearInterval(timer);
+            if(window_right_group.position.x>=x+wa/4-0.5){
+    
+              timer = setInterval(function(){
+        
+                window_right_group.position.x-=0.05
+                    
+                    if(window_right_group.position.x<=x-wa/4+0.5)
+                    
+                    clearInterval(timer)
+                })
+    
+            }else if(window_right_group.position.x<=x-wa/4+0.5){
+    
+                timer = setInterval(function(){
+        
+                    window_right_group.position.x+=0.05
+                    
+                    if(window_right_group.position.x>=x+wa/4-0.5)
+                    
+                    clearInterval(timer)
+    
+                })
+    
+            }  
+                    
+        }
+
+        scene.add(wall) 
+
+    return wall;
+}
+
+
+
 
 function createFloor(){
 
@@ -805,6 +1055,7 @@ function createFloor(){
 
 
 }
+
 
 
 function createShape({points,depth=0,position,rotate,border,materials,remove}){
@@ -868,31 +1119,314 @@ function createShape({points,depth=0,position,rotate,border,materials,remove}){
     if(!remove)  scene.add(cube);
 
 
-    scene.add(cube);   
+    //scene.add(cube);   
+
+    return cube;
+
+    // let wall_c2_1 = createShape({
+
+    //     points:[{x:94.4,y:0},{x:94.4,y:4},{x:47.2,y:28},{x:14,y:15},{x:0,y:15}],
+    //     depth:2.4,
+    //     position:{x:73.8,y:33,z:47.2},
+    //     rotate:{x:0,y:Math.PI/2,z:0},
+    //     border:true,
+    //     materials:{color:0x956e4d} 
+
+    // });
 
 
-    // var geometry = new THREE.Geometry();
 
-    // geometry.vertices.push(
-    //     new THREE.Vector3( -10,  10, 0 ),
-    //     new THREE.Vector3( -10, -10, 0 ),
-    //     new THREE.Vector3(  10, -10, 0 ),
-    //     new THREE.Vector3( -10,  10, 10 ),
-    //     new THREE.Vector3( -10, -10, 10 ),
-    //     new THREE.Vector3(  10, -10, 10 ),
-        
-    // );
-
-    // geometry.faces.push( new THREE.Face3( 0, 1, 2 ) );                 
-    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
-    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
-    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
-    // geometry.faces.push( new THREE.Face3( 3, 4, 5 ) );                 
-    
-
-    // geometry.computeBoundingSphere();
-
-    // var mesh = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({color:0xfcaf41}) );
-
+   
                  
 }
+
+
+function createCube({points,center,direction,depth,position}){
+
+
+        var geometry = new THREE.Geometry();
+
+        let fx=0,fy=0,fz=0;
+
+        let fdepth = {
+
+            "x":()=>{fx = depth},
+            "-x":()=>{fx = -depth},
+            "y":()=>{fy = depth},
+            "-y":()=>{fy = -depth},
+            "z":()=>{fz = depth},
+            "-z":()=>{fz = -depth},
+        }
+
+        fdepth[direction]();
+
+        let vertices = [];
+
+        for(let i = 0;i< points.length;i++ ){
+
+            vertices.push(new THREE.Vector3(points[i][0] - center[0],points[i][1] - center[1],points[i][2] - center[2]));
+
+        }
+
+        for( i = 0;i< points.length;i++ ){
+
+            vertices.push(new THREE.Vector3(points[i][0] - center[0] + fx,points[i][1] - center[1] + fy,points[i][2] - center[2]+ fz));
+
+        }
+
+        //console.log(vertices);
+        
+        geometry.vertices = vertices;
+
+        let faces = [];
+
+        ////前面
+        for(i = 0;i<points.length-2;i++){
+
+            faces.push( new THREE.Face3( i + 2, i + 1, 0 ));
+            
+        }
+        ////背面
+        for(i = 0;i<points.length-2;i++){
+
+            faces.push( new THREE.Face3( points.length, i + points.length + 1, i + points.length + 2 ));
+            
+        }
+        
+        ////侧面
+        for(i = 0;i<points.length;i++){
+
+            faces.push( new THREE.Face3( points.length + i, i == 0? points.length * 2 - 1:points.length + i - 1, (i + points.length - 1) % points.length ));
+            faces.push( new THREE.Face3( points.length + i, (i + points.length - 1) % points.length, i ));
+            
+        }
+
+        //console.log(faces);
+
+        geometry.faces = faces;
+
+
+        // geometry.vertices.push(
+            
+        //     new THREE.Vector3( 0 - 19.2,  0 -10, 0 -1.2 ),
+        //     new THREE.Vector3( 38.4 - 19.2,  0 -10, 0 -1.2 ),
+        //     new THREE.Vector3( 38.4 - 19.2, 15 -10, 0 -1.2 ),
+        //     new THREE.Vector3( 19.2 - 19.2, 24 -10, 0 -1.2 ),
+        //     new THREE.Vector3( 0 - 19.2,  15 -10, 0 -1.2 ),
+ 
+        //     new THREE.Vector3( 0 - 19.2,  0 -10, 1.2 ),   
+        //     new THREE.Vector3( 38.4 - 19.2,  0 -10,1.2 ),
+        //     new THREE.Vector3( 38.4 - 19.2, 15 -10, 1.2 ),
+        //     new THREE.Vector3( 19.2 - 19.2, 24 -10, 1.2 ),
+        //     new THREE.Vector3( 0 - 19.2,  15 -10, 1.2 ),
+
+           
+        // );
+
+        // geometry.faces.push( new THREE.Face3( 2, 1, 0 ) );                 
+        // geometry.faces.push( new THREE.Face3( 3, 2, 0 ) );                 
+        // geometry.faces.push( new THREE.Face3( 4, 3, 0 ) );  
+
+        // geometry.faces.push( new THREE.Face3( 5, 6, 7 ) );                 
+        // geometry.faces.push( new THREE.Face3( 5, 7, 8 ) );                 
+        // geometry.faces.push( new THREE.Face3( 5, 8, 9 ) );                 
+                         
+        // geometry.faces.push( new THREE.Face3( 7, 6, 1 ) );                 
+        // geometry.faces.push( new THREE.Face3( 7, 1, 2 ) );                 
+               
+        // geometry.faces.push( new THREE.Face3( 8, 7, 2 ) );                 
+        // geometry.faces.push( new THREE.Face3( 8, 2, 3 ) );                 
+        
+        // geometry.faces.push( new THREE.Face3( 9, 8, 3 ) );                 
+        // geometry.faces.push( new THREE.Face3( 9, 3, 4 ) );                 
+        
+        // geometry.faces.push( new THREE.Face3( 5, 9, 4 ) );                 
+        // geometry.faces.push( new THREE.Face3( 5, 4, 0 ) );                 
+        
+        // geometry.faces.push( new THREE.Face3( 6, 5, 0 ) );                 
+        // geometry.faces.push( new THREE.Face3( 6, 0, 1 ) );                 
+        
+
+
+        // geometry.vertices = vertices;
+        
+        geometry.computeBoundingSphere();
+
+        var cube = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({color:0x956e4d}) );
+
+        let cubeEdges = new THREE.EdgesGeometry(geometry, 1);
+
+        let edgesMtl =  new THREE.LineBasicMaterial({color: 0x000000});
+        // edgesMtl.depthTest = false; 深度测试，若开启则是边框透明的效果
+        let cubeLine = new THREE.LineSegments(cubeEdges, edgesMtl);
+
+        cube.add(cubeLine);
+
+        cube.position.set(position.x,position.y,position.z);
+
+        scene.add(cube); 
+        //createWindow_t2(cube,"x")
+
+        return cube;
+   
+
+}
+
+
+function createRoof(){
+
+
+    var geometry = new THREE.Geometry();
+    var points = new THREE.Geometry();
+    
+    
+    geometry.vertices.push(
+          //new THREE.Vector3(0, 0, 0),
+          new THREE.Vector3(0, 80, 0),
+          new THREE.Vector3(-30.2, 45, 43.3),  //1
+          new THREE.Vector3(-30.2, 48, 35.2),
+          new THREE.Vector3(-30.2, 61, 0),
+          new THREE.Vector3(-30.2, 37, -47.2),
+          new THREE.Vector3(80.2, 37, -47.2),
+          new THREE.Vector3(80.2, 61, 0),
+          new THREE.Vector3(80.2, 48, 35.2),
+          new THREE.Vector3(76.2, 48, 35.2),
+          new THREE.Vector3(76.2, 48, 51.2),
+          new THREE.Vector3(57, 57, 51.2),
+          new THREE.Vector3(37.8, 48, 51.2),
+          new THREE.Vector3(37.8, 48, 35.2),
+
+          new THREE.Vector3(37.8, 45, 43.3), //1
+          new THREE.Vector3(37.8, 61, 0), ///1
+          new THREE.Vector3(57, 57, 11), ///1
+          ///15///
+          new THREE.Vector3(-30.2, 43.2, 56),
+          new THREE.Vector3(-30.2, 41.2, 56),
+          new THREE.Vector3(-30.2, 41.2, 43.3),  //1 
+          new THREE.Vector3(-30.2, 63, 0),
+
+          
+    );
+    
+    let top_list = geometry.vertices.map(item => {
+
+        return new THREE.Vector3(item.x, item.y*1 + 2, item.z)
+    });
+
+    geometry.vertices = geometry.vertices.concat(top_list);
+
+    let num = geometry.vertices.length/2;
+
+    points.vertices = geometry.vertices;
+    
+    
+ 
+    for(let i=0;i<geometry.vertices.length-1;i++){
+       
+        points.faces.push(
+            new THREE.Face3( 0, i + 1, i + 2 ))
+
+    } 
+ 
+    geometry.faces.push(
+        new THREE.Face3(1, 3, 13),
+        new THREE.Face3(14, 13, 3),
+        new THREE.Face3(3, 4, 5),
+        new THREE.Face3(3, 5, 6),
+        new THREE.Face3(6, 7, 12),
+        new THREE.Face3(6, 12, 14),
+        new THREE.Face3(10, 12, 15),
+        new THREE.Face3(8, 10 , 15),
+        new THREE.Face3(8, 9 , 10),
+        new THREE.Face3(10, 11 , 12),
+        
+    ) 
+
+
+    geometry.faces = geometry.faces.concat(
+        geometry.faces.map(item => {
+            return new THREE.Face3(item.c + num,item.b + num, item.a + num)
+        })
+    )
+  
+    geometry.faces.push(
+
+        new THREE.Face3(21, 3 , 1),
+        new THREE.Face3(3, 21 , 23),
+        new THREE.Face3(23, 4 , 3),
+        new THREE.Face3(4, 23 , 24),
+        new THREE.Face3(24, 5 , 4),
+        new THREE.Face3(5, 24 , 25),
+        new THREE.Face3(25, 6 , 5),
+        new THREE.Face3(6, 25 , 26),
+        new THREE.Face3(26, 7 , 6),
+        new THREE.Face3(7, 26 , 27),
+        new THREE.Face3(27, 8 , 7),
+        new THREE.Face3(8, 27 , 28),
+        new THREE.Face3(28, 9 , 8),
+        new THREE.Face3(9, 28 , 29),
+        new THREE.Face3(29, 10 , 9),
+        new THREE.Face3(10, 29 , 30),
+        new THREE.Face3(30, 11 , 10),
+        new THREE.Face3(11, 30 , 31),
+        new THREE.Face3(31, 12 , 11),
+        new THREE.Face3(12, 31 , 32),
+        new THREE.Face3(32, 13 , 12),
+        new THREE.Face3(13, 32 , 33),
+        new THREE.Face3(33, 14 , 13),
+        new THREE.Face3(14, 33 , 34),
+        
+        new THREE.Face3(33, 21 , 1),
+        new THREE.Face3(1, 13 , 33),
+        
+        
+
+    )
+    
+    
+   
+    var loader = new THREE.TextureLoader();
+
+    var texture = loader.load( 'textures/roof2.png' );
+
+    
+    console.log(texture);
+
+    var material2 = new THREE.MeshBasicMaterial({
+        color: 0xffff00,
+        wireframe: true
+    });
+
+
+    var material = new THREE.MeshBasicMaterial({
+        //color: 0xffffff,
+        map:texture
+        //wireframe: true
+    });
+
+    material.side=THREE.DoubleSide;
+    
+    var mesh = new THREE.Mesh(geometry, material);
+    
+   
+        let cubeEdges = new THREE.EdgesGeometry(geometry, 1);
+
+        let edgesMtl =  new THREE.LineBasicMaterial({color: 0x000000});
+        // edgesMtl.depthTest = false; 深度测试，若开启则是边框透明的效果
+        let cubeLine = new THREE.LineSegments(cubeEdges, edgesMtl);
+
+        mesh.add(cubeLine);
+
+
+    var mesh2 = new THREE.Mesh(points, material2);
+    
+    scene.add(mesh);
+    //scene.add(mesh2);
+
+}  
+         
+       
+        
+
+
+ 

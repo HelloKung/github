@@ -80,8 +80,11 @@ const webpackConfig = merge(baseWebpackConfig, {
       chunksSortMode: 'dependency'
     }),
     new HtmlWebpackPlugin({
-      filename:'../dist/module.html',
+      filename: '../dist/module.html',
       template: './src/view/module/product/index.html',
+      //filename: path.resolve(__dirname,'../dist',"product","index.html"),//'../dist/module.html', //origin
+      //template: './src/view/module/product/index.html',
+      
       inject: true,
       minify: {
         removeComments: true,

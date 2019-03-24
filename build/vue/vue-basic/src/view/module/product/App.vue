@@ -10,7 +10,7 @@ export default {
   name: 'App',
   data () {
     return {
-      message: 'a模块的内容'
+      message: 'product模块的app页面内容'
     }
   }
 }

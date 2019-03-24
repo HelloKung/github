@@ -15,6 +15,12 @@ const routers=[
         name: "index",
         component:() => import("../pages/index.vue")
 
+      },{
+
+        path: '/home',
+        name: "home",
+        component:() => import("../pages/home/index.vue")
+
       }
       
   

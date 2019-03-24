@@ -5,9 +5,9 @@ const router = [{
     component:()=>import('@/view/practice/table/ElementTable')
   },
   {
-    path: '/chart',
-    name: 'chart',
-    component:()=>import('@/view/practice/chart')
+    path: '/timemap',
+    name: 'timemap',
+    component:()=>import('@/view/practice/chart/timemap')
   }]
 
 

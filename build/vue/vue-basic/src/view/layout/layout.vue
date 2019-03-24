@@ -2,11 +2,14 @@
   <div>
      <el-container style="height:100%">
       <el-header style="height:10%;">
-         <div class="logo">
+         <div class="header-logo">
             <i class="icon-youtube2" ></i>
          </div>
-         <div>
+         <div class="header-center-menu">
            <el-m-header  @gethd="getheader" ></el-m-header>
+         </div>
+         <div class="header-right-menu">
+           
          </div>
       </el-header  >
       <el-container style="height:90%;">
@@ -83,21 +86,11 @@ import sider  from './sider/index.vue'
 
 
 
-<style>
+<style scoped>
 
-    html,body,#app,#app>div {
-
-      padding: 0px;
-      margin: 0px;
-      height: 100%;
-      overflow: hidden;
-    }
     
-    div{
-      
-      box-sizing: border-box;
-
-    }
+    
+    
     
     .main{
 
@@ -127,9 +120,19 @@ import sider  from './sider/index.vue'
     }
     .el-header>div:nth-child(2) {
        
-       width: 85%;
+       width: 75%;
        float: left;
+       height: 100%;
     }
+    
+    .el-header>div:nth-child(3) {
+       
+       width: 10%;
+       background: #535c63;
+       float: left;
+       height: 100%;
+    }
+    
     .el-aside {
 
       width: 15% !important;
@@ -150,14 +153,20 @@ import sider  from './sider/index.vue'
       background-color: #fff;
     
     }
-    .icon-youtube2 {
+    .header-logo{
+       
+       display: flex;
+       align-items: center;
+       justify-content: center;
 
+    }
+    .header-logo > i{
+      
        color:#f5d049 !important;
        font-size: 30px;
-       vertical-align: middle;
-       height: 100%;
        line-height: 60px;
     }
+    
     .main-enter,.main-leave-to {
       opacity: 0;
       transform: translateX(50px)
@@ -165,7 +174,7 @@ import sider  from './sider/index.vue'
     .main-enter-active,.main-leave-active {
       transition: all 0.5s ease
     }
- 
-
+    
+    
 
 </style>
