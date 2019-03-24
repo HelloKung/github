@@ -1,11 +1,16 @@
 # vue-basic
 
 > 
-
+一、封装了表格
 <p align="center">
   <img src="https://github.com/yitiaoxianyu0927/github/blob/master/build/vue/vue-basic/src/assets/img/screenshot/screenshot1.png">
 </p>
 
+
+二、生成报告
+<p align="center">
+  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/build/vue/vue-basic/src/assets/img/screenshot/screenshot2.png">
+</p>
 
 
 ## Build Setup

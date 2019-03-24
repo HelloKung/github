@@ -27,6 +27,12 @@ const config = [{
             title:"表格封装",
             icon:"icon-stack"
          
+        },{
+
+            id:"word",
+            title:"报告",
+            icon:"icon-file-word"
+         
         }]
 
     },{

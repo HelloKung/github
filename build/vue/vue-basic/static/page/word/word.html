@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script type="text/javascript" src="./js/jquery-3.2.1.js"></script>
+
+    <link href="../../bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../echart/js/echarts.js"></script>
+
+    
+    <script src="./js/FileSaver.js"></script>
+    <script src="./js/jquery.wordexport1.js"></script>
+    <script src="./js/html2canvas.js"></script>  
+    <style>
+
+       p{ text-indent:2em; font-size:16px; }
+     
+       .title{ font-size: 12pt; font-family:宋体; font-weight: bold;}
+        
+    
+    </style>
+</head>
+<body>
+    
+    <div class="container-fluid" style="margin-top:20px;">
+        <div class="row" style="padding: 20px">
+           <div class="col-lg-2 col-md-2" style="width:240px;"> 
+              <label >年份：</label>    
+              <select id="year" class="form-control" style="width:150px;display: inline;">
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+              </select>
+           </div> 
+           <div class="col-lg-2 col-md-2" style="width:240px;"> 
+                <label  >月份：</label>    
+                <select id="month" class="form-control" style="width:150px;display: inline;">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                </select>
+            </div> 
+            <div class="col-lg-2 col-md-2" style="width:240px;"> 
+                <label>地区：</label>    
+                <select id="city" class="form-control" style="width:150px;display: inline;">
+                        <option value="沈阳">沈阳</option>
+                        <option value="大连">大连</option>
+                </select>
+            </div>  
+            <div class="col-lg-2 col-md-2 col-md-offset-2 col-lg-offset-3" style="float:right"> 
+                <button id="word" class="btn btn-primary" style="float:right">生成报告</button>
+                <button id="search" class="btn btn-primary" style="float:right;margin-right: 10px;">查找</button>
+            </div>  
+        </div>
+        <div id="word_demo">
+            <div class="row">
+            <h4 style="text-align: center; font-weight:500;">2019年1月份能源生产情况</h4> 
+            </div>
+            <div class="row" style="padding: 20px">
+                <p>1-2月份，规模以上工业原煤生产同比下降，原油、电力生产增速放缓，天然气生产保持较快增长。</p>
+                <p class="title">一、原煤生产下降，煤炭价格平稳</p>
+                <p>1-2月份，原煤生产同比下降1.5%，上年12月增长2.1%，增速由正转负；生产原煤5.1亿吨，日均产量871万吨。1月份进口煤炭3350万吨，增长19.5%；2月份进口1764万吨，下降15.6%。2月25日，秦皇岛港5500大卡煤炭综合交易价格为每吨569元，5000大卡煤炭每吨511元，4500大卡煤炭每吨454元，均与上年12月24日基本持平。</p>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                  <div class="echart"> 
+                   <div id="chart" style="width:500px;height: 300px;"></div>
+                  </div>  
+                </div> 
+                <div class="col-lg-6 col-md-6">
+                    <table id="table"  class="table table-striped" style="width: 500px; margin-top:30px;">
+                        <thead>
+                            <th>#</th>
+                            <th>能源</th>
+                            <th>生产</th>
+                            <th>单位</th>
+                            <th>销量</th>
+                            <th>同比</th>
+                        </thead>
+                        <tr>
+                           <td>1</td> 
+                           <td>柴油</td> 
+                           <td>1000</td> 
+                           <td>吨</td> 
+                           <td>2000</td> 
+                           <td>85.3%</td> 
+                        </tr>
+                        <tr>
+                            <td>2</td> 
+                            <td>电</td> 
+                            <td>1000</td> 
+                            <td>瓦</td> 
+                            <td>2000</td> 
+                            <td>74.3%</td> 
+                        </tr>
+                        <tr>
+                            <td>3</td> 
+                            <td>汽油</td> 
+                            <td>1000</td> 
+                            <td>吨</td> 
+                            <td>2000</td> 
+                            <td>88.4%</td> 
+                        </tr>
+                        <tr>
+                            <td>4</td> 
+                            <td>太阳能</td> 
+                            <td>1000</td> 
+                            <td>吨</td> 
+                            <td>2000</td> 
+                            <td>99.2%</td> 
+                        </tr>
+                        <tr>
+                            <td>5</td> 
+                            <td>核能</td> 
+                            <td>1000</td> 
+                            <td>吨</td> 
+                            <td>2000</td> 
+                            <td>79.1%</td> 
+                        </tr>     
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <p class="title">二、原油生产稳定，进口较快增长，价格震荡反弹</p>
+                <p>1-2月份，生产原油3069万吨，增长0.5%，增速比上年12月回落1.5个百分点；日均产量52万吨。原油进口较快增长。1月份和2月份分别进口4260万吨和3923万吨，增长5.1%和21.6%。原油价格震荡反弹。2月28日，布伦特原油现货离岸价格为65.03美元/桶，比上年12月28日的50.57美元/桶上涨28.6%，与2018年初基本持平。</p>    　　
+            </div>
+            <div class="row">
+                    <p class="title">三、原油加工增速加快，日均加工量再创新高</p>
+                    <p>1-2月份，原油加工量10249万吨，增长6.1%，增速较上年12月加快1.7个百分点；日均加工173.7万吨，再创新高。</p>    　　
+            </div>
+        </div>
+        <div class="row" style="padding: 20px">
+             <span style="float:right;font-weight:600;">注：只支持word下载</span>
+        </div>
+   </div>
+
+   <script>
+   
+        let chart = echarts.init($("#chart")[0]);
+        
+        chart.setOption({
+            
+            xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            tooltip:{
+
+            },
+            series: [{
+                data: [120, 200, 150, 80, 70, 110, 130],
+                type: 'bar',
+                barWidth:40,
+                itemStyle:{
+                   color:"#409eff"  
+                },
+                label:{
+                    show:true,
+                    color:"#fff"
+                }
+            }]
+        })
+
+
+
+        $("#word").click(()=>{
+
+            var word=$("#word_demo").clone();
+            	   
+            var img = new Image();
+            img.src = chart.getDataURL({
+                backgroundColor: '#fff'
+            });
+            
+            
+            word.find(".echart").html(img);
+            
+            $(word).wordExport($("#year").val()+"年"+$("#month").val()+"月 "+$("#city").val()+"地区报告");
+        })
+   
+   </script>
+
+</body>
+</html>
