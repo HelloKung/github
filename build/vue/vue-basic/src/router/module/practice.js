@@ -12,7 +12,12 @@ const router = [{
     path: '/timemap',
     name: 'timemap',
     component:()=>import('@/view/practice/chart/timemap')
+  },
+  {
+    path: '/drillmap',
+    name: 'drillmap',
+    component:()=>import('@/view/practice/chart/drillmap')
   }]
 
-
+  
 export default router;  

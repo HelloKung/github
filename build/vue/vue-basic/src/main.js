@@ -12,12 +12,15 @@ import store from './store'
 import ElementUI from 'element-ui'
 Vue.use(ElementUI)
 
+
+
 import '@/styles/index.css'
 
 import axios from 'axios'
 Vue.prototype.$http = axios
 
-
+import {Base64} from 'js-base64';
+Vue.prototype.$base64 = Base64;
 
 
 

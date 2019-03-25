@@ -8,8 +8,19 @@
          <div class="header-center-menu">
            <el-m-header  @gethd="getheader" ></el-m-header>
          </div>
-         <div class="header-right-menu">
+         <div class="header-right-menu" >
            
+           <div class="box-100" style="font-size:20px;  display:flex; align-items:center;justify-content:center; color:#fff;">
+             <i class="icon-user"></i> 
+             <el-dropdown trigger="click">
+                <span style="margin-left:10px;cursor:pointer; color:#fff;font-size:18px;">admin</span>
+             <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item icon="el-icon-setting">设置</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-news">登出</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+             
+           </div>
          </div>
       </el-header  >
       <el-container style="height:90%;">

@@ -30,7 +30,7 @@ const config = [{
         },{
 
             id:"word",
-            title:"报告",
+            title:"Word报告",
             icon:"icon-file-word"
          
         }]
@@ -45,6 +45,11 @@ const config = [{
            id:"timemap",
            title:"时间轴地图",
            icon:"icon-map"
+        },{
+
+            id:"drillmap",
+            title:"钻取地图",
+            icon:"icon-map"
         }]
     }]
     

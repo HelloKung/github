@@ -166,7 +166,7 @@ export default {
      },
      model:{
 
-         prop:"value",
+         prop:"options",
          event:"ModelValue"
 
      },

@@ -3,7 +3,6 @@
       <el-row style="height:100%">
         <ElementTable 
             v-model="options"
-            :options="options"
             @HandleFunc="HandleFunc"
             @CellClick="CellClick"
             @ButtonFunc="ButtonFunc"
