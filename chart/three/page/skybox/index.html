@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body,html{ margin:0;padding:0;width: 100%;height: 100%; }
+        canvas{ width: 100%;height: 100%; display: block;}
+        #output{ width: 100%;height: 100%;}
+     </style>
+    <script src="../../js/three.min.js"></script>
+    <script src="../../js/OrbitControls.js"></script>
+</head>
+<body>
+
+
+<div id="output"></div>
+
+
+<script>
+
+    var scene, camera, renderer;
+    var container, controls;
+
+
+    init();
+    animate();
+
+    // FUNCTIONS
+    function init()
+    {
+        // SCENE
+        scene = new THREE.Scene();
+        // CAMERA
+        var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+        var VIEW_ANGLE = 45, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 20000;
+        camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+        camera.position.set(0,150,400);
+        camera.lookAt(scene.position);
+
+        scene.add(camera);
+
+        // RENDERER
+
+        renderer = new THREE.WebGLRenderer( {antialias:true} );
+        renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+
+        container = document.getElementById( 'output' );
+        container.appendChild( renderer.domElement );
+
+        controls = new THREE.OrbitControls( camera, renderer.domElement );
+
+        // LIGHT
+        var light = new THREE.PointLight(0xffffff);
+        light.position.set(0,250,0);
+        scene.add(light);
+        // FLOOR
+
+        var path = "./texture/LarnacaBeach/";
+        var directions  = ["posx", "negx", "posy", "negy", "posz", "negz"];
+        var format = ".jpg";
+        var skyGeometry = new THREE.BoxGeometry( 5000, 5000, 5000 );
+
+        var materialArray = [];
+        for (var i = 0; i < 6; i++)
+            materialArray.push( new THREE.MeshBasicMaterial({
+                map: THREE.ImageUtils.loadTexture( path + directions[i] + format ),
+                side: THREE.BackSide
+            }));
+        var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+        var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+        //skyBox.scale.x=-1;也是镜像翻转，与上面的side一个效果
+        scene.add( skyBox );
+
+    }
+
+    function animate()
+    {
+        requestAnimationFrame( animate );
+        render();
+        update();
+    }
+
+    function update()
+    {
+        controls.update();
+    }
+
+    function render()
+    {
+        renderer.render( scene, camera );
+    }
+
+</script>
+</body>
+</html>
