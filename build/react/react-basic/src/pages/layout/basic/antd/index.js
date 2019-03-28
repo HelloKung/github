@@ -18,9 +18,11 @@ export default class ECharts extends Component{
 
         return (
             <div>
-               This is Ant Design page 
                <Card title="按钮板">
-                   <Button type="primary">button</Button> 
+                   <Button type="primary">Primary</Button> 
+                   <Button type="dashed">Dashed</Button> 
+                   <Button type="danger">Danger</Button> 
+                   <Button >Default</Button> 
                </Card>
             </div>
         )

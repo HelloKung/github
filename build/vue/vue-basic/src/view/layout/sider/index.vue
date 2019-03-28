@@ -4,6 +4,7 @@
     <el-menu
         :default-active="rootMenuId"
         class="el-menu-vertical-demo"
+        @select="handleSelect"
         @open="handleOpen"
         @close="handleClose"
         background-color="#545c64"
@@ -25,6 +26,8 @@
   import { mapActions } from 'vuex' 
 
   import  siderItem from './siderItem.vue'
+
+  import {getSession} from "@/utils/session";
 
   export default {
     
@@ -60,6 +63,11 @@
 
         console.log(key, keyPath);
       
+      },
+      handleSelect(key, keyPath){
+
+         this.$store.dispatch("setActiveSiderMenuId",key);
+
       }
     },
     computed:{
@@ -74,6 +82,9 @@
             return this.$store.state.menu.rootMenuId;
         }
     },
+    mounted(){
+
+    }
   }
 
 </script>

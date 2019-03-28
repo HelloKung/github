@@ -17,6 +17,11 @@ const router = [{
     path: '/drillmap',
     name: 'drillmap',
     component:()=>import('@/view/practice/chart/drillmap')
+  },
+  {
+    path: '/dynamicchart',
+    name: 'dynamicchart',
+    component:()=>import('@/view/practice/chart/dynamicchart')
   }]
 
   

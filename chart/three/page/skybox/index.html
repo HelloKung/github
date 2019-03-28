@@ -51,7 +51,8 @@
         container.appendChild( renderer.domElement );
 
         controls = new THREE.OrbitControls( camera, renderer.domElement );
-
+        controls.minDistance = 400;
+		controls.maxDistance = 600;
         // LIGHT
         var light = new THREE.PointLight(0xffffff);
         light.position.set(0,250,0);

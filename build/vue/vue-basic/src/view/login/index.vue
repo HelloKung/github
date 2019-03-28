@@ -7,20 +7,21 @@
 
           <div class="login-title">用 户 登 录</div>
    
-          <el-form ref="form" :model="form" >
+          <el-form ref="form" :model="form"  :rules="rules">
             
-            <el-form-item >
+            <el-form-item prop="username">
                 <div class="icon-user input-icon"></div>
                 
                 <el-input
                       v-model="form.username" 
                       class="icon-input" 
                       placeholder="请输入用户名" 
+                      autocomplete="on"
                       clearable
                 ></el-input>
             </el-form-item> 
 
-            <el-form-item >
+            <el-form-item prop="password">
                 <div class="icon-lock input-icon"></div>
                 <el-input 
                       v-model="form.password" 
@@ -28,11 +29,13 @@
                       placeholder="请输入用户密码" 
                       clearable 
                       show-password
+                      autocomplete="on"
+                      @change="passwordChange"
                 >
                 </el-input>
             </el-form-item>  
 
-            <el-form-item >
+            <el-form-item prop="checkcode">
                 <div class="icon-keyboard input-icon"></div>
                 <el-input 
                       v-model="form.checkcode" 
@@ -58,6 +61,8 @@
 
 import loginParticle from '@/components/loginParticle/index.vue';
 
+import queryApi from '@/api/login'
+
 export default {
 
       data(){
@@ -70,7 +75,20 @@ export default {
                  password:"",
                  checkcode:""
              },
-             checkcode:parseInt(Math.random()*8999+1000)
+             checkcode:parseInt(Math.random()*8999+1000),
+             rules: {
+                username: [
+                    { required: true, message: '请输入用户名称', trigger: 'blur' },
+                    { min: 10, max: 15, message: '长度在 10 到 15 个字符', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入用户密码', trigger: 'blur' }
+                ],
+                checkcode: [
+                    { required: true, message: '请输入验证码', trigger: 'blur' }
+                ]
+
+             }
           
          }
 
@@ -83,10 +101,28 @@ export default {
            
            login(){
 
-              this.$router.push({ path: '/layout' })
-              
-               
+              this.$refs["form"].validate(valid => {
+
+                   if(valid){
+
+                        this.$store.dispatch("LoginByUserName",this.form).then(res => {
+
+                                
+                                this.$router.push({ path: "/layout" })
+                                
+                        })
+
+                   }     
+
+               }) 
+
+   
            },
+           passwordChange(){
+
+               this.form.password = this.$base64.encode(this.form.password);
+
+           }
       },
       
       mounted(){

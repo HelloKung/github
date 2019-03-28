@@ -23,12 +23,14 @@ var axesHelper = new THREE.AxesHelper();
 ///创建一个光源
 
    
-    // let pointColor="#000000";
-    // let pointLight =new THREE.PointLight(pointColor);
-    // pointLight.distance = 100;
-    // pointLight.intensity = 200; //光强度的倍数,设为0则无灯光
-    // scene.add(pointLight)
+scene.add(new THREE.AmbientLight(0x444444));
+let light = new THREE.SpotLight(0xffffff);
 
+light.position.set(100,100,0);
+//告诉平行光需要开启阴影投射
+
+light.castShadow = true;
+scene.add(light);
 
 
 
@@ -139,9 +141,12 @@ function createCuboid({size,position,rotate,border,materials,remove}){ ///a => x
       
         cube.rotation.set(rotate.x,rotate.y,rotate.z);
     }
+
+    cube.castShadow = true; 
  
     if(!remove)  scene.add(cube);
    
+    
 
     return cube; 
 }

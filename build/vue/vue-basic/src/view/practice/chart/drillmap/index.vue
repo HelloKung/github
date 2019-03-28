@@ -26,9 +26,9 @@
 import axios from 'axios';
 import echarts from 'echarts';
 
-import chinaMap from "./china";
-import provinceMap from "./province";
-import cityMap from "./city"
+import chinaMap from "./components/china";
+import provinceMap from "./components/province";
+import cityMap from "./components/city"
 
 export default {
 

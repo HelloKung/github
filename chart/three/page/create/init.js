@@ -382,7 +382,8 @@
     
     var render = function() {
         requestAnimationFrame(render);
-     
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;  
         renderer.render(scene, camera);
     };
 

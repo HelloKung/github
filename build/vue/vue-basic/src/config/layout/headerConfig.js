@@ -13,8 +13,8 @@ const config = {
 
      },{
 
-      id:"module",
-      title:"模块打包",
+        id:"module",
+        title:"模块打包",
       
 
      },{

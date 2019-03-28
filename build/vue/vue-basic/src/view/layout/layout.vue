@@ -15,8 +15,12 @@
              <el-dropdown trigger="click">
                 <span style="margin-left:10px;cursor:pointer; color:#fff;font-size:18px;">admin</span>
              <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item icon="el-icon-setting">设置</el-dropdown-item>
-                <el-dropdown-item icon="el-icon-news">登出</el-dropdown-item>
+                <el-dropdown-item icon="el-icon-setting" >
+                   <span @click="setting">设置</span>
+                </el-dropdown-item>
+                <el-dropdown-item icon="el-icon-news" >
+                   <span @click="logout">登出</span>
+                </el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
              
@@ -73,9 +77,25 @@ import sider  from './sider/index.vue'
             this.$refs.siderfun.siderMenuRender(this.headerMenuId);
 
          },
-         getPath(){
+         setting(){
 
-           return '/login';
+
+         },
+         logout(){
+
+              this.$store.dispatch("Logout").then(res => {
+
+
+                    this.$router.push({path: "/"});
+
+
+              }).catch(err => {
+
+                 console.log(err);
+              })
+
+
+
          }
 
        },

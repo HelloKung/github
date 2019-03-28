@@ -1,8 +1,11 @@
+import {setSession} from '@/utils/session'
+
 
 const store = {
 
      state:{
-
+        
+        activefirstMenuId:null,
         siderMenu:[],
         rootMenuId:"",
 
@@ -14,7 +17,15 @@ const store = {
             state.siderMenu = siderMenu;
             
             state.rootMenuId = getRootMenu(siderMenu[0]).id;
+
+            //setSession("activeSiderMenuId",getRootMenu(siderMenu[0]).id);
         
+        },
+        setActiveFirstMenuId(state,firstMenuId){
+
+            state.activefirstMenuId = firstMenuId;
+
+            setSession("activefirstMenuId",firstMenuId);
         }
           
 
@@ -23,8 +34,14 @@ const store = {
 
         setSiderMenu({commit,state},param){
 
+           
+            commit("setActiveFirstMenuId",param.firstMenuId)
             commit("setSiderMenu",param.siderMenu);
- 
+        },
+        setActiveSiderMenuId({commit},activeSiderMenuId){
+
+           setSession("activeSiderMenuId",activeSiderMenuId)
+
         }
 
 

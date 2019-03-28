@@ -30,9 +30,9 @@
 
 <script>
 
-import headerConfig from "@/config/layout/headerConfig.js"
-import siderConfig from "@/config/layout/siderConfig.js"
-
+import headerConfig from "@/config/layout/headerConfig.js";
+import siderConfig from "@/config/layout/siderConfig.js";
+import {getSession} from "@/utils/session";
   
   export default {
     
@@ -58,8 +58,11 @@ import siderConfig from "@/config/layout/siderConfig.js"
                
                let siderMenu = siderConfig.filter(item => item.firstMenuId == key)[0].siderMenu;
 
+              
+
                this.$store.dispatch('setSiderMenu',{
-                    siderMenu
+                    siderMenu,
+                    firstMenuId:key
                });
 
            }
@@ -68,11 +71,21 @@ import siderConfig from "@/config/layout/siderConfig.js"
       renderMenu(){
 
           this.menuConfig = headerConfig.menu;
-          this.activeId =  this.menuConfig[0].id;
+          
+          this.activeId =  getSession("activefirstMenuId")?
+                                 getSession("activefirstMenuId"):this.menuConfig[0].id;
+          
+          
           this.handleSelect(this.activeId);
-
+          
+         
       }
     
+    },
+    computed:{
+
+     
+
     },
     mounted(){
 

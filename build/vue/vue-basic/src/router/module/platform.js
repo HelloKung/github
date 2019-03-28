@@ -1,7 +1,7 @@
 
 const router = [{
-    path: '/platform',
-    name: 'platform',
+    path: '/platformfirst',
+    name: 'platformfirst',
     component:()=>import('@/view/platform')
   },
   {

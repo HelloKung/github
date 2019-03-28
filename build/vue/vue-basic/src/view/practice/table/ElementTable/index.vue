@@ -18,6 +18,21 @@
           
         </ElementTable>
       </el-row>
+
+
+      <!-- 钻取页面  -->
+     
+      <!-- <el-dialog 
+         title="提示"
+         :visible.sync="visible"
+         width="80%"
+         center
+      >
+
+          <span>123</span>
+
+      </el-dialog> -->
+
     </div>
 </template>
 
@@ -38,7 +53,7 @@ export default {
 
         let  data = {
 
-             
+             visible:true,
              options:{
                    
                    hasIndex:true,

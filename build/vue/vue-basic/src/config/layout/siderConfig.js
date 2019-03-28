@@ -3,7 +3,7 @@ const config = [{
     firstMenuId:"platform",
     siderMenu:[{
 
-         id:"platform",
+         id:"platformfirst",
          title:"平台一",
          icon:"icon-office"
     },{
@@ -49,6 +49,11 @@ const config = [{
 
             id:"drillmap",
             title:"钻取地图",
+            icon:"icon-map"
+        },{
+
+            id:"dynamicchart",
+            title:"动态图形",
             icon:"icon-map"
         }]
     }]

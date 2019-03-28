@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import axios from 'axios'
 Vue.use(Router)
 
 import platform from './module/platform';
@@ -8,17 +7,19 @@ import practice from './module/practice';
 import module from './module/module';
 
 
-const routers=[
 
+
+const routersConfig=[
+       
       {
-        path: '',
+        path: '/',
         redirect: '/login',
 
       },
       {
         path: '/login',
         name: 'login',
-        component:()=>import('@/view/login/login')
+        component:()=>import('@/view/login')
       },
       {
         path: '/layout',
@@ -34,9 +35,13 @@ const routers=[
 ]
 
 
-
-
-export default new Router({
+const router = new Router({
   scrollBehavior: () => ({ y: 0 }),
-  routes: routers
+  // mode:"history",
+  routes: routersConfig
 })
+
+
+
+
+export default router;
