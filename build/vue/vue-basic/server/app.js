@@ -4,10 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var test1 = require('./routes/test1');
-
 
 
 var app = express();
@@ -24,11 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(express.static(path.join(__dirname, 'routers')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/test1', test1);
-app.use('/table2', require('./routes/table2'));
-app.use('/router', require('./routes/router'));
+
+///引用路由
+app.use("/practice",require("./routes/practice"))
+
+
+
 
 
 // catch 404 and forward to error handler

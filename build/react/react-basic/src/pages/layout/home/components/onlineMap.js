@@ -223,11 +223,11 @@ export default class barChart extends Component{
         return (
             
            <Fragment> 
-               {/* <ReactEcharts   
+               <ReactEcharts   
                   style={{width:"100%",height:"100%"}} 
                   option={this.getOption()} 
-               /> */}
-               {<img src={bgurl} style={{width:"100%",height:"100%"}} />}
+               />
+               {/* {<img src={bgurl} style={{width:"100%",height:"100%"}} />} */}
            </Fragment> 
         )
 

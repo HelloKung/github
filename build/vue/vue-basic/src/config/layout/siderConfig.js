@@ -33,6 +33,12 @@ const config = [{
             title:"Word报告",
             icon:"icon-file-word"
          
+        },{
+
+            id:"node",
+            title:"Node",
+            icon:"icon-books"
+         
         }]
 
     },{

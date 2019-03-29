@@ -7,6 +7,10 @@ const router = [{
     path: '/word',
     name: 'word',
     component:()=>import('@/view/practice/table/word')
+  },{
+    path: '/node',
+    name: 'node',
+    component:()=>import('@/view/practice/table/node')
   },
   {
     path: '/timemap',
