@@ -49,7 +49,8 @@
          
          mounted(){
 
-             this.$router.push("/"+ this.$store.state.menu.rootMenuId);
+             
+             this.$router.push("/"+ getSession("activeSiderMenuId"));
 
          }
        

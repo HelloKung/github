@@ -258,7 +258,7 @@ export default {
     mounted(){
 
         this.getListTableData(); 
-        
+        console.log(this.$store)
     }
 
 

@@ -9,6 +9,25 @@ queryApi.getListData = () => {
 
 }
 
+queryApi.getMapTitle = (type = 1818940751,zoom = 12,x = 3449,y = 1529) => {
+
+
+    const data = {
+
+        type,
+        zoom,
+        x,
+        y
+
+    }
+
+   
+    return  request.get(`/node/practice/table/node/getMaptitle?type=${type}&zoom=${zoom}&x=${x}&y=${y}`);
+ 
+ }
+
+
+
 queryApi.fileUpload = (formData) => {
 
    

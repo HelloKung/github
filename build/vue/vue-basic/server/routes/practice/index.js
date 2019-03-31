@@ -1,4 +1,5 @@
 var express = require('express');
+var url = require("url");
 var router = express.Router();
 var fs = require("fs");
 var mysql      = require('mysql');
@@ -32,7 +33,27 @@ router.post('/table/node/querylist', function(req, res, next) {
 });
 
 
+router.get('/table/node/getMaptitle', function (req, res) {
 
+    console.log(req.body,req.query);
+
+
+    let {type,zoom,x,y} = req.query;
+
+    connection.query(`select Tile from gmapnetcache where Type=${type} and Zoom=${zoom} and X=${x} and Y=${y}`, function (error, results, fields) {
+        if (error || !results || !results[0]) {
+            res.statusCode = 500;
+            res.setHeader("Content-Type", "text/plain");
+            res.write(error + "\n");
+            res.end();
+            return;
+        };
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'image/png');
+        res.write(results[0].Tile, "binary");
+        res.end();
+    });
+})
 
 
 
@@ -48,17 +69,21 @@ router.post('/table/node/fileUpload', function (req, res) {
           if( err ){
                console.log( err );
           }else{
-                response = {
+                res = {
                     message:'File uploaded successfully', 
                     filename:req.files[0].originalname
                };
            }
-           console.log( response );
-           res.end( JSON.stringify( response ) );
+           console.log( res );
+           res.end( JSON.stringify( res ) );
         });
     });
  })
   
+
+ 
+
+
 
 
 
