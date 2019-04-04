@@ -58,27 +58,27 @@ router.get('/table/node/getMaptitle', function (req, res) {
 
 
 
-router.post('/table/node/fileUpload', function (req, res) {
+// router.post('/table/node/fileUpload', function (req, res) {
  
-    console.log("asdas",req); 
-    console.log(req.files[0]);  // 上传的文件信息
+//     console.log("asdas",req); 
+//     console.log(req.files[0]);  // 上传的文件信息
   
-    var des_file = __dirname + "/" + req.files[0].originalname;
-    fs.readFile( req.files[0].path, function (err, data) {
-         fs.writeFile(des_file, data, function (err) {
-          if( err ){
-               console.log( err );
-          }else{
-                res = {
-                    message:'File uploaded successfully', 
-                    filename:req.files[0].originalname
-               };
-           }
-           console.log( res );
-           res.end( JSON.stringify( res ) );
-        });
-    });
- })
+//     var des_file = __dirname + "/" + req.files[0].originalname;
+//     fs.readFile( req.files[0].path, function (err, data) {
+//          fs.writeFile(des_file, data, function (err) {
+//           if( err ){
+//                console.log( err );
+//           }else{
+//                 res = {
+//                     message:'File uploaded successfully', 
+//                     filename:req.files[0].originalname
+//                };
+//            }
+//            console.log( res );
+//            res.end( JSON.stringify( res ) );
+//         });
+//     });
+//  })
   
 
  

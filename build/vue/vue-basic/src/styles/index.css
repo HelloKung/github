@@ -35,3 +35,8 @@ html,body,#app,#app>div {
 
     padding: 20px;
 }
+
+.leaflet-control > a{
+
+    display: none;
+}

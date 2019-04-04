@@ -14,9 +14,9 @@
             </div>
             <div style="width:100%;height:400px;" ref="lxmap"></div>
         </el-card>
-        <!-- <el-card class="box-card">
+        <el-card class="box-card" style="margin-bottom:20px;">
             <div slot="header" class="clearfix">
-                <span>请求接口</span>
+                <span>上传文件在本地node服务器上   上传地址工程server文件夹下bin/upload目录下(单文件)</span>
             </div>
             <div>
                <el-row>
@@ -25,7 +25,7 @@
                         class="upload-demo"
                         action=""
                         multiple
-                        :limit="3"
+                        :limit="1"
                         ref="upload"
                         :http-request="uploadSectionFile"
                         >
@@ -37,7 +37,7 @@
                   </el-col>
                </el-row>
             </div>
-        </el-card> -->
+        </el-card>
     </div>
 </template>
 
@@ -45,10 +45,14 @@
 <script>
 
 import queryApi from "@/api/practice/node";
+import echarts from "echarts";
 
-import 'leaflet/dist/leaflet.css'
 
-import * as L from 'leaflet' 
+import L from 'leaflet' 
+import 'leaflet/dist/leaflet.css';
+import icon from 'leaflet/dist/images/marker-icon.png';
+import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+
 
 export default {
     
@@ -111,36 +115,139 @@ export default {
                                        layers:[glayer_normal],
                                        maxBounds:bounds
                               });
-
+             
           
 
+           let DefaultIcon = L.icon({
+                    iconUrl: icon,
+                    shadowUrl: iconShadow
+                });
+            L.Marker.prototype.options.icon = DefaultIcon;
+
+
+           let marker = L.marker([41.8041,123.4259]).addTo(map); ///添加标记  
+
+           let content = '<div style="width: 220px; height: 180px;" id="marker"></div>';
+
+               marker.bindPopup(content, {});
+               marker.on('popupopen', function(e) {
+
+                    let chart = echarts.init(document.querySelector("#marker"));
+        
+                    chart.setOption({
+                        
+                        grid:{
+                            top:20,
+                            left:30,
+                            right:0,
+                            bottom:40
+                        },
+                        xAxis: {
+                            type: 'category',
+                            data: ['2017', '2018', '2019']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        tooltip:{
+
+                        },
+                        series: [{
+                            data: [120, 200, 150, 80, 70],
+                            type: 'bar',
+                            barWidth:30,
+                            itemStyle:{
+                            color:"#409eff"  
+                            },
+                            label:{
+                                show:true,
+                                color:"#fff"
+                            }
+                        }]
+                    })
+
+
+                
+               });
+
+           ///////leaflet-echarts  显示echarts
+               
+            
+        //    let bgoption = {
+                
+        //         bmap: {
+        //             roam: true,
+        //             mapStyle: {
+        //                 style: "grayscale"
+        //             }
+        //         },
+        //         series: [{
+        //             coordinateSystem: 'bmap',
+        //             type: 'effectScatter',
+        //             symbolSize:20,
+        //             itemStyle: {
+                        
+        //                 color: 'rgba(18,89,147,1)'
+                        
+        //             },
+        //             data: [{name:"沈阳",value:[123.4259,41.8041,10]}]
+        //         }]
+        //     };
+
+        //     let bgchartPane = document.createElement("div");
+        //     bgchartPane.style.width="1062px"; //this.$refs["lxmap"].clientWidth;
+        //     bgchartPane.style.height="400px"; //this.$refs["lxmap"].clientHeight;
+        //     bgchartPane.id = "bgchart";
+        //     bgchartPane.style.zIndex="800";
+
+        //     this.$refs["lxmap"].querySelector(".leaflet-overlay-pane").appendChild(bgchartPane);
+
+        //     console.log(this.$refs["lxmap"]);
+
+        //     let bgChart =  echarts.init(bgchartPane);
+            
+        //     bgChart.setOption(bgoption);
 
         },
 
-        // uploadSectionFile(param){
-        //     console.log(param)
-        //     this.filelist.push(param.file)
-        // },
-        // fileUpload(){
+        uploadSectionFile(param){
+            console.log(param)
+            this.filelist.push(param.file)
+        },
+        fileUpload(){
 
-
+            console.log(this.filelist)
             
-        //     let formData = new FormData();
-        //     for(let i=0;i<this.filelist.length;i++){
-        //        formData.append("file",this.filelist[i])
-        //     }
+            let formData = new FormData();
+            // for(let i=0;i<this.filelist.length;i++){
+            //    formData.append("file",this.filelist[i])
+            // }
 
-        //     queryApi.fileUpload(formData).then( res => {
+            let file = this.$refs.upload.uploadFiles[0];
 
-        //          this.$message({
-        //              message:"上传成功",
-        //              type:"success"
-        //          })
+            formData.append("file",file.raw);
 
-        //     })
+             if (!file) { // 若未选择文件
+                this.$message({
+                     message:"请选择文件",
+                     type:"warning"
+                })
+                return;
+             }
 
 
-        // } 
+
+            queryApi.fileUpload(formData).then( res => {
+
+                 this.$message({
+                     message:"上传成功",
+                     type:"success"
+                 })
+
+            })
+
+
+        } 
 
 
 
@@ -167,5 +274,7 @@ export default {
       margin-top: 10px;
 
    }
+   
+ 
 
 </style>

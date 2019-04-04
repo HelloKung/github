@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'routers')));
 
 ///引用路由
 app.use("/practice",require("./routes/practice"))
+app.use("/practice",require("./routes/practice/upload.js"))
 
 
 
