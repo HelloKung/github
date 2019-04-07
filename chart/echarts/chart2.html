@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="./lib/echarts.js"></script>
+    <script src="./lib/echarts-liquidfill.min.js"></script>
+    <script src="./lib/jquery.min.js"></script>
+    
+</head>
+<body>
+    <img src="./asset/img/chart2.png" style=" display:inline-block;">
+    <div id="container" style="width:512px; height: 432px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+ 
+         console.log(Array.from({length:20},(elem,index)=>{
+                                let list = [];
+                                list[0] = (index+1)/20.0;
+                                list[1] = `rgb(${64+list[0]*(186-64)},${127+list[0]*(65-127)},${171+list[0]*(171-119)})` 
+                                return list;
+                            }))
+
+         let option = {
+             
+             backgroundColor:"#0d1e3b",
+             title:[{
+                  
+                  text:"9.5%↑\n{space| }\n{sub|+1.5%}",
+                  x:"center",
+                  y:"center",
+                  textStyle:{
+
+                     color:"#e53057",
+                     fontSize:56,
+                     fontWeight:400,
+                     fontFamily:"Microsoft YaHei",
+                     rich:{
+                         sub:{
+                             //padding:[10,0,0,0],
+                             fontSize:24
+                         },
+                         space:{
+                             fontSize:20
+                         }
+                     }
+                  }
+
+             }],
+             series:[{
+
+                  name:"bg",
+                  type:"pie",  
+                  radius:"80%",
+                  hoverAnimation:false,
+                  animation:false,
+                  label:{show:false},
+                  data:[{name:"bg",value:100}],
+                  itemStyle:{
+                      color:"#162c58",
+                      opacity:0.7
+                  },
+                  z:0
+                },{
+
+                    name:"ring",
+                    type:"pie",  
+                    radius:["71%","75%"],
+                    hoverAnimation:false,
+                    animation:false,
+                    label:{show:false},
+                    data:[{name:"bg",value:100}],
+                    itemStyle:{
+                        color:"#7ab8e8"
+                        
+                    },
+                    z:1
+                },{
+                    name: "gaugebg",
+                    type: "gauge",
+                    splitNumber: 10, //刻度数量
+                    startAngle:-120,
+                    endAngle:-270,
+                    min: 0,
+                    max: 100,
+                    radius: '68%', //图表尺寸
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 3,
+                            shadowBlur: 0,
+                            opacity:0,
+                            color: [[1,'#29537d']]
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        lineStyle: {
+                            color: '#29537d',
+                            width: 3
+                        },
+                        length: 26,
+                        splitNumber: 4
+                    },
+                    splitLine: {
+                        show: true,
+                        length: 26,
+                        lineStyle: {
+                            color: 'auto',
+                        }
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: { //仪表盘指针
+                        show: false, 
+                    },
+                    detail: {
+                        show: false, 
+                    }, 
+                  },{
+                    name: "gauge",
+                    type: "gauge",
+                    splitNumber: 10, //刻度数量
+                    startAngle:90,
+                    endAngle:-120,
+                    min: 0,
+                    max: 100,
+                    radius: '68%', //图表尺寸
+                    axisLine: {
+                        show: true,
+                        lineStyle: {
+                            width: 3,
+                            shadowBlur: 0,
+                            opacity:0, ///64,127,171    186,65,119
+                            color: [].concat(Array.from({length:20},(elem,index)=>{
+                                let list = [];
+                                list[0] = (index+1)/20.0;
+                                list[1] = `rgb(${parseInt(64+list[0]*(186-64))},${parseInt(127+list[0]*(65-127))},${parseInt(171+list[0]*(119-171))})` 
+                                return list;
+                            }))
+                        }
+                    },
+                    axisTick: {
+                        show: true,
+                        lineStyle: {
+                            color: 'auto',
+                            width: 3
+                        },
+                        length: 26,
+                        splitNumber: 5
+                    },
+                    splitLine: {
+                        show: true,
+                        length: 26,
+                        lineStyle: {
+                            color: 'auto',
+                        }
+                    },
+                    axisLabel: {
+                        show: false
+                    },
+                    pointer: { //仪表盘指针
+                        show: false, 
+                    },
+                    detail: {
+                        show: false, 
+                    }, 
+                  }]
+       
+
+
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>

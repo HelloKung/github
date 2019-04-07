@@ -47,7 +47,7 @@ router.post('/table/node/fileUpload', upload.single('file'), function (req, res,
 
 
 //多图片上传
-app.post('/table/node/fileUploads', upload.array('file', 3), function (req, res, next) {
+router.post('/table/node/fileUploads', upload.array('file', 3), function (req, res, next) {
     res.send({ret_code: '上传成功'});
 });
 
