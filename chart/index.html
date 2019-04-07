@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    
+    <link rel="stylesheet" href="./lib/layui/css/layui.css"/>
+    <script src="./lib/layui/layui.js"></script>
+    <style>
+    
+        html,body{
+           
+           width:100%;
+           height:100%;
+        }
+    
+    </style>
+</head>
+<body >
+   
+    <div class="layui-row" style="height:100%;">
+      <div style="width:200px;height:100%;background-color: #393D49; float: left;">
+        <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;height:100%;">
+            <li class="layui-nav-item layui-nav-itemed">
+              <a href="javascript:;">echarts图表</a>
+              <dl class="layui-nav-child">
+                <dd><a href="./echarts/page/chart1.html" target="container">chart1</a></dd>
+                <dd><a href="./echarts/page/chart2.html" target="container">chart2</a></dd>
+                <dd><a href="./echarts/page/chart3.html" target="container">chart3</a></dd>
+                <dd><a href="./echarts/page/chart4.html" target="container">chart4</a></dd>
+              </dl>
+            </li>
+            <li class="layui-nav-item">
+              <a href="javascript:;">three图表</a>
+              <dl class="layui-nav-child">
+                <dd><a  href="./three/page/house/index.html" target="container">房子模型</a></dd>
+                <dd><a  href="./three/page/create/index.html" target="container">别墅</a></dd>
+                <dd><a  href="./three/page/skybox/index.html" target="container">天空盒</a></dd>
+              </dl>
+            </li>
+        </ul>
+      </div>   
+      <div style="height: 100%; width: calc(100% - 200px); float: left;">
+          <iframe name="container" src="./echarts/page/chart1.html" style="width:100%;height:100%;border: none;"></iframe>
+      </div> 
+  </div>   
+  
+  <script>
+      layui.use('element', function(){
+        var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+        
+        //监听导航点击
+        // element.on('nav(demo)', function(elem){
+        //   //console.log(elem)
+        //   layer.msg(elem.text());
+        // });
+      });
+ </script>
+</body>
+</html>

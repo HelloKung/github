@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    
+</head>
+<body>
+    <img src="../asset/img/chart3.png" style="width:555px; height: 424px; display:inline-block;">
+    <div id="container" style="width:555px; height: 424px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+
+
+         let option = {
+             
+            backgroundColor:"#0d1e3b",
+            title:[{
+
+                 text:"+400人",
+                 left:"32%",
+                 top:"50%",  
+                 textStyle:{
+                       
+                     color:"#e63054",
+                     fontSize:40,
+                     fontFamily:"'Arial"
+
+                 } 
+
+            },{
+
+                text:"",
+                left:"center",
+                top:"50%",  
+                textStyle:{
+                    
+                    color:"#e63054",
+                    fontSize:40,
+                    fontFamily:"'Arial"
+
+                } 
+
+            }],
+            grid:{
+                top:40,
+                left:-100,
+                right:-100
+            },
+            xAxis : [{
+                
+                    type : "category",
+                    data : ["bar1","bar2"],
+                    axisTick: {
+                        show:false
+                    },
+                    axisLine: {
+                        show:false
+                    },
+                    axisLabel:{
+                        show:false
+                    }
+                
+            }],
+            yAxis : [{
+                
+                    type : "value",
+                    axisTick: {
+                        show:false
+                    },
+                    axisLine: {
+                        show:false
+                    },
+                    axisLabel:{
+                        show:false
+                    },
+                    splitLine:{
+                        show:false
+                    }
+                
+                
+            }],
+            graphic:{
+                elements:[{
+                   
+                    type:"image",
+                    style:{
+                        image:"../asset/img/chart3arrow.png",
+                        width:220,
+                        height:36,
+                        x:170,
+                        y:250
+                    }
+
+                }]
+                
+            },
+            series : [{
+                
+                    name:"bar1",
+                    type:"bar",
+                    barWidth: 100,
+                    data:[{
+                        name:"bar1",
+                        value:1800,
+                        itemStyle:{
+                            borderWidth:2,
+                            borderColor: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#51a0c5'
+                                    },{
+                                        offset: 1,
+                                        color: '#2441a8'
+                                    }
+                                ]),
+                            barBorderRadius:5,
+                            borderType:"solid",
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#51a0c5'
+                                    },{
+                                        offset: 1,
+                                        color: '#2441a8'
+                                    }
+                                ])
+          
+                        },
+                        label:{
+                            show:true,
+                            position:"top",
+                            color:"#fff",
+                            fontSize:36
+                        }
+                    
+                    },{
+                        name:"bar2",
+                        value:2200,
+                        itemStyle:{
+                            borderWidth:2,
+                            borderColor: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#e63054'
+                                    },{
+                                        offset: 1,
+                                        color: '#2441a8'
+                                    }
+                                ]),
+                            barBorderRadius:5,
+                            borderType:"solid",
+                            color: new echarts.graphic.LinearGradient(
+                                0, 0, 0, 1, [{
+                                        offset: 0,
+                                        color: '#e63054'
+                                    },{
+                                        offset: 1,
+                                        color: '#2441a8'
+                                    }
+                                ])
+          
+                        },
+                        label:{
+                            show:true,
+                            position:"top",
+                            color:"#e63054",
+                            fontSize:36
+                        }
+                    
+                    }],
+                    z:2
+                },{
+                
+                    name:"bar1",
+                    type:"bar",
+                    barWidth: 100,
+                    data:[3000,3000],
+                    itemStyle:{
+                        borderWidth:1,
+                        borderColor:"#51a0c5",
+                        barBorderRadius:5,
+                        borderType:"dotted",
+                        color:"rgba(26,49,78,0.8)"
+                    },
+                    barGap:"-100%",
+                    z:1
+                }
+            ]
+   
+       
+
+
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>

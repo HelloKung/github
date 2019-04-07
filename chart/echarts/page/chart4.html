@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    
+</head>
+<body>
+    <img src="../asset/img/chart4.png" style="width:555px; height: 424px; display:inline-block;">
+    <div id="container" style="width:555px; height: 424px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+         let d1 = 50,d2=80,dm=100,h=340;
+
+
+
+         let option = {
+             
+            backgroundColor:"#0d1e3b",
+            title:[{
+
+                 text:"-4 间",
+                 left:"37%",
+                 top:"60%",  
+                 textStyle:{
+                       
+                     color:"#68d576",
+                     fontSize:40,
+                     fontFamily:"'Arial"
+
+                 } 
+
+            },{
+
+                text:"",
+                left:"center",
+                top:"50%",  
+                textStyle:{
+                    
+                    color:"#e63054",
+                    fontSize:40,
+                    fontFamily:"'Arial"
+
+                } 
+
+            }],
+            grid:{
+                top:60,
+                bottom:20,
+                left:-100,
+                right:-100
+            },
+            tooltip:{
+
+                axisPointer:{
+                    type:"shadow"
+                }
+
+            },
+            xAxis : [{
+                
+                    type : "category",
+                    data : ["bar1","bar2"],
+                    axisTick: {
+                        show:false
+                    },
+                    axisLine: {
+                        show:false
+                    },
+                    axisLabel:{
+                        show:false
+                    }
+                
+            }],
+            yAxis : [{
+                
+                    type : "value",
+                    axisTick: {
+                        show:false
+                    },
+                    axisLine: {
+                        show:false
+                    },
+                    axisLabel:{
+                        show:false
+                    },
+                    splitLine:{
+                        show:false
+                    }
+                
+                
+            }],
+            graphic:{
+                elements:[{
+                   
+                    type:"image",
+                    style:{
+                        image:"../asset/img/chart4arrow.png",
+                        width:220,
+                        height:36,
+                        x:170,
+                        y:290
+                    }
+
+                }]
+                
+            },
+            series : [{
+                
+                    name:"bar1",
+                    type:"pictorialBar",
+                    barWidth: 100,   
+                    //symbol: 'roundRect',
+                    //symbolRepeat: true,
+                    symbolSize:[100,"100%"],
+                    //symbolMargin:1,
+                    symbolClip:true,
+                    symbolBoundingData: 20,
+                    data:[{
+                        name:"bar1",
+                        value:d1/dm*20,
+                        symbol:"image://../asset/img/chart4bg1.png",
+                        label:{
+                            show:true,
+                            position:"top",
+                            color:"#fff",
+                            offset:[0,(1-d1/100)*h],
+                            fontSize:36,
+                            formatter:()=>d1
+                        },
+                        itemStyle:{
+
+                            color:"#4fa1c5"
+                        }
+                    
+                    },{
+                        name:"bar2",
+                        value:d2/dm*20,
+                        itemStyle:{
+                            
+                            color: "#59b980"
+                           
+          
+                        },
+                        symbol:"image://../asset/img/chart4bg2.png",//"image://"+fillImg,
+                        label:{
+                            show:true,
+                            position:"top",
+                            offset:[0,(1-d2/100)*h],
+                            color:"#67d379",
+                            formatter:()=>d2,
+                            fontSize:36
+                        }
+                    
+                    }],
+                    z:2
+                },{
+                
+                    name:"bar2",
+                    type:"pictorialBar",
+                    barWidth: 100,
+                    symbolSize: [100, '100%'],
+                    symbolClip:true,
+                    symbol:"image://../asset/img/chart4bg0.png",
+                    symbolBoundingData: 20,
+                    data:[20,20],
+                    barGap:"-100%",
+                    z:1
+                }
+            ]
+   
+       
+
+
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>
