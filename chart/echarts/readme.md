@@ -9,7 +9,7 @@
   <img src="https://github.com/yitiaoxianyu0927/github/tree/master/chart/echarts/asset/sheetshot/chart2.png">
 </p>
 
-4.图表4
+3.图表3
 <p align="center">
   <img src="https://github.com/yitiaoxianyu0927/github/tree/master/chart/echarts/asset/sheetshot/chart3.png">
 </p>
