@@ -1,0 +1,354 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<script src="../lib/echarts.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+<script>
+
+$(function(){
+
+   var chart=echarts.init($('#main')[0]);
+   
+   var pd4=[];
+   
+   for(i=0;i<100;i++){
+   
+      
+      pd4.push({value:3,itemStyle:{color: '#74afff'}})
+      pd4.push({value:1,itemStyle:{color: 'transparent'}})
+      
+   }
+   
+   var rich1={
+			   
+			     yellow1:{
+				 
+				    color:"#df7518",
+				    fontSize:38,
+					
+				 
+				 },
+				 yellow2:{
+				 
+				    color:"#df7518",
+				    fontSize:15,
+					
+				 
+				 },
+				 blue1:{
+				 
+				    color:"#74afff",
+				    fontSize:15,
+				    
+				 },
+				 
+			   
+			   
+			   }
+   
+   
+   var option={
+   
+          title:[{
+		  
+		    text:"{yellow1|577}\n{blue1|   总数}", 
+		
+		    
+			x:"18%",
+			y:"38%",
+			textStyle:{
+			
+			   rich:rich1,
+			
+			},
+			itemGap:5,
+		  
+		  
+		  
+		  },
+		  {
+		  
+		    text:"{blue1|在线}  {yellow2|325}", 
+		    x:"33%",
+			y:"28%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  {
+		  
+		    text:"{blue1|离线}  {yellow2|225}", 
+		    x:"33%",
+			y:"35%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  {
+		  
+		    text:"{blue1|故障}  {yellow2|2}", 
+		    x:"33%",
+			y:"42%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  {
+		  
+		    text:"{blue1|当前接入用户数}  {yellow2|325}", 
+		    x:"33%",
+			y:"49%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  {
+		  
+		    text:"{blue1|总流量}  {yellow2|158G}", 
+		    x:"33%",
+			y:"56%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  {
+		  
+		    text:"{blue1|历史流量峰值}  {yellow2|87G}", 
+		    x:"33%",
+			y:"63%",
+			textStyle:{rich:rich1,},
+			
+		  },
+		  ],
+		  
+		  
+		  
+		  series:[
+                            {
+                                     
+                                     type:"pie",                         
+                                     data:[100],
+                                     radius:['64.5%','65%'],
+									 center:['40%','50%'],
+									 hoverAnimation:false,
+                                     itemStyle:{
+									 
+									    color:"#74afff",
+									 
+									 
+									 },
+									 labelLine:{
+									 
+									    show:false,
+									 
+									 }
+                            },
+                            {
+                                     
+                                     type:"pie",                         
+                                     
+                                     radius:['68%','76%'],
+									 center:['40%','50%'],
+									 hoverAnimation:false,
+									 startAngle:-45,
+									 data:[{
+                                              
+											  value:100,
+									          itemStyle:{
+									             color:"#74afff",
+												 borderColor:"#74afff",
+											  }   
+									       },
+										   {
+                                              value:300,
+									          itemStyle:{
+									             color: 'transparent'
+									          }   
+									       }
+										   
+										   
+										  ],
+									 labelLine:{
+									 
+									    show:false,
+									 
+									 }
+                            },{
+                                     
+                                     type:"pie",                         
+                                     
+                                     radius:['69.5%','74.5%'],
+									 center:['40%','50%'],
+									 hoverAnimation:false,
+									 startAngle:-45,
+									 data:[{
+                                              
+											  value:100,
+									          itemStyle:{
+									             color:'transparent',
+												
+											  }   
+									       },
+										   {
+                                              value:300,
+									          itemStyle:{
+									             color: 'rgba(49,81,133,0.8)'
+									          }   
+									       }
+										   
+										   
+										  ],
+									 labelLine:{
+									 
+									    show:false,
+									 
+									 }
+                            },
+                            {
+                                     
+                                     type:"pie",                         
+                                     
+                                     radius:['80%','81%'],
+									 center:['40%','50%'],
+									 hoverAnimation:false,
+									 startAngle:-45,
+									 data:pd4,
+									 labelLine:{
+									 
+									    show:false,
+									 
+									 }
+                            }, 
+                            {
+                                     
+                                     type:"pie",                         
+                                     
+                                     radius:['87.5%','96%'],
+									 center:['40%','50%'],
+									 hoverAnimation:false,
+									 startAngle:-45,
+									 data:[{
+									 
+									 name:"平安城市",
+									 value:100,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}      
+									 
+									 },{
+									 
+									 value:165,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',},
+                                     
+									 },
+									 {
+									 name:"路灯监控",
+									 value:33,
+									 itemStyle:{color:"#df7518",},
+                                     label:{fontSize:21}									 
+									 
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 {
+									 name:"气象监测",
+									 value:18,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}	
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 {
+									 name:"视频监控",
+									 value:18,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 {
+									 name:"LED",
+									 value:16,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 {
+									 name:"车流量",
+									 value:20,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 {
+									 name:"无线城市",
+									 value:18,
+									 itemStyle:{color:"#74afff",},  
+									 label:{fontSize:21}  
+									 
+									 },
+									 {
+									 
+									 value:2,
+									 itemStyle:{color:'rgba(4,14,40,0.2)',}  
+									 
+									 },
+									 
+									 
+									 ],
+									 labelLine:{
+									 
+									    show:false,
+									 
+									 }
+                            },
+							
+                    ]   
+
+
+   }
+
+
+  chart.setOption(option);
+
+
+
+
+});
+
+
+</script>
+
+
+
+
+
+</head>
+
+<body>
+
+<div  id='main'  style="width:550px; height:400px; float:left;background:#3c454c;margin-left:20px;"></div>
+
+<img src="../asset/img/chart5.png" style="margin-left:150px;">
+
+</body>
+
+
+
+</html>

@@ -18,7 +18,7 @@
     
          let chart = echarts.init($("#container")[0]);
          
-         let d1 = 50,d2=80,dm=100,h=340;
+         let d1 = 60,d2=80,dm=100,h=340;
 
 
 
@@ -132,7 +132,7 @@
                             show:true,
                             position:"top",
                             color:"#fff",
-                            offset:[0,(1-d1/100)*h],
+                            offset:[0,(1-d1/dm)*h],
                             fontSize:36,
                             formatter:()=>d1
                         },
@@ -154,7 +154,7 @@
                         label:{
                             show:true,
                             position:"top",
-                            offset:[0,(1-d2/100)*h],
+                            offset:[0,(1-d2/dm)*h],
                             color:"#67d379",
                             formatter:()=>d2,
                             fontSize:36
