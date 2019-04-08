@@ -18,7 +18,7 @@
     
          let chart = echarts.init($("#container")[0]);
          
-         let rat=0.8; 
+         let rat=0.7; 
 
 
          let option = {
@@ -79,7 +79,7 @@
                     name: "gaugebg",
                     type: "gauge",
                     splitNumber: 1, //刻度数量
-                    startAngle:90 - 360 * 0.8,
+                    startAngle:90 - 360 * rat,
                     endAngle:-270,
                     min: 0,
                     max: 100,
@@ -123,7 +123,7 @@
                     type: "gauge",
                     splitNumber: 1, //刻度数量
                     startAngle:90,
-                    endAngle:90 - 360 * 0.8,
+                    endAngle:90 - 360 * rat,
                     min: 0,
                     max: 100,
                     radius: '68%', //图表尺寸
