@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react";
 import {View, Image} from "react-native";
-import { createSwitchNavigator,createAppContainer,createStackNavigator,createBottomTabNavigator } from 'react-navigation';
+import { createSwitchNavigator,createAppContainer,createStackNavigator,createBottomTabNavigator,withNavigation } from 'react-navigation';
 import Icon  from "react-native-vector-icons/AntDesign"
 
 
@@ -11,7 +11,7 @@ import User from '../user'
 
 
 
-const Content = createAppContainer(createBottomTabNavigator({
+const Home = createAppContainer(createBottomTabNavigator({
     
     Statistic: {
         
@@ -71,22 +71,6 @@ const Content = createAppContainer(createBottomTabNavigator({
 
 
 
-export default class Home extends Component {
-    
-    state = {
-
-        text:"这个一个按钮",
-        checked:true
-    }
-    render(){
-      
-         return (
-                <Content/>
-         )
 
 
-    }
-
-
-
-}
+export default withNavigation(Home)

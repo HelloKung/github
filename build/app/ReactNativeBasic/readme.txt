@@ -26,3 +26,6 @@ https://www.cnblogs.com/qiyecao/p/8316231.html
 
 3.axios 封装
 https://blog.csdn.net/sinat_33134895/article/details/80945642
+
+
+4.react-native-splash-screen 启动屏 https://www.jianshu.com/p/4540ac17dfd4

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react";
 import { View,Text,ImageBackground,StyleSheet,AsyncStorage } from "react-native"
-import { Actions } from 'react-native-router-flux'
+import { NavigationActions } from 'react-navigation'
 
 
 export default class Nco extends Component {
@@ -26,9 +26,14 @@ export default class Nco extends Component {
            
                 if(isLogin)  
                 
-                        Actions.home();
+                      this.props.navigation.dispatch(NavigationActions.navigate({
+                             routeName: 'Home',
+                      }));
+
                 else   
-                        Actions.login();
+                      this.props.navigation.dispatch(NavigationActions.navigate({
+                            routeName: 'Login',
+                      }));
                 
            },2000)     
       })

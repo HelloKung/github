@@ -1,12 +1,52 @@
 import React, {Component} from 'react';
-import { createSwitchNavigator,createAppContainer,createStackNavigator } from 'react-navigation';
-import { Router,Stack,Scene,Actions } from 'react-native-router-flux'
+import { createAppContainer,createStackNavigator } from 'react-navigation';
+
 
 import Loading from '../loading';
 import Home from '../home';
 import Login from '../login';
 import Zps from '../statistic/zps'
-import { AsyncStorage,View,Text } from "react-native"
+import WebView from "../../components/WebView"
+import { View,Text } from "react-native"
+import { Button } from '../../../node_modules/react-native-elements';
+
+const Container = createAppContainer(createStackNavigator({
+
+        Loading:{
+
+            screen:Loading,
+            navigationOptions:({
+               header:null
+            })    
+            
+        },
+        Login:{
+
+            screen:Login,
+            navigationOptions:({
+              header:null
+            })  
+
+        },
+        Home:{
+           
+            screen:Home,
+            navigationOptions:({
+              header:null
+            })
+
+        },
+        Zps:Zps,
+        WebView:WebView
+
+},{
+
+        initialRouteName:"Loading"
+   
+}))
+
+
+
 
 
 export default class Root extends Component {
@@ -21,7 +61,7 @@ export default class Root extends Component {
 
     componentWillMount(){
 
-
+     
 
     }
     componentDidMount(){
@@ -29,24 +69,16 @@ export default class Root extends Component {
       
 
     }
+   
 
     render() {
       
         
         return (
   
-          <Router>
-            <Stack key="root">
-              
-              <Scene key="loading" component={Loading}  hideNavBar={true}  />
-              <Scene key="login" component={Login}  hideNavBar={true}  />
-              <Scene key="home" component={Home}    hideNavBar={true} />
-              <Scene key="zps" component={Zps}  title="摘牌数" navigationBarStyle={{
-                borderBottomColor:"#ccc",borderBottomWidth:3,boxShadowRadius:3
-              }}/>
-              
-            </Stack>
-          </Router>
+           
+              <Container/>
+           
         );
       
     
