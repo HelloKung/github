@@ -38,6 +38,23 @@
                </el-row>
             </div>
         </el-card>
+
+        <el-card class="box-card" style="margin-bottom:20px;">
+            <div slot="header" class="clearfix">
+                <span>websocket 轮询</span>
+            </div>
+            <el-button  type="primary" @click="queryWebSocket" size="small" >请求websoket连接</el-button>
+            <el-button  type="warning" @click="startWebSocket" size="small" >开始请求轮询数据</el-button>
+            <el-button  type="success" @click="endWebSocket" size="small" >结束请求轮询数据</el-button>
+            
+            <br/>
+            <div style="padding:20px;height:200px;overflow:auto;margin-top:20px;">
+              <span v-for="(item,index) in websocketMsg" :key="index">{{item}}<br/></span>
+            </div>
+        </el-card>
+
+       
+
     </div>
 </template>
 
@@ -53,6 +70,8 @@ import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 
+import io from 'socket.io-client';
+
 
 export default {
     
@@ -61,7 +80,11 @@ export default {
          let data = {
 
               list:"请求未成功",
-              filelist:[]
+              filelist:[],
+              aa:["aa","bb"],
+              websocketMsg:[],
+              socket:null
+
          }
        
          return data;
@@ -247,7 +270,35 @@ export default {
             })
 
 
-        } 
+        },
+        queryWebSocket(){
+
+           
+            this.socket = io.connect('http://localhost:3000');
+
+            this.socket.on('conn', (obj)=> {
+
+                this.websocketMsg = [obj];
+
+            });
+
+            this.socket.on('message', (obj)=> {
+                 
+                this.websocketMsg.push(obj)
+                
+            });
+
+        }, 
+        startWebSocket(){
+
+           this.socket.emit("start","start")
+
+        },
+        endWebSocket(){
+
+            this.socket.emit("end","end")
+
+        }
 
 
 

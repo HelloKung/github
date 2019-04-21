@@ -5,7 +5,7 @@ const queryApi = {};
 queryApi.getListData = () => {
 
    
-   return  request.post("/node/practice/table/node/querylist");
+   return  request.post("http://localhost:3000/practice/table/node/querylist");
 
 }
 
@@ -22,7 +22,7 @@ queryApi.getMapTitle = (type = 1818940751,zoom = 12,x = 3449,y = 1529) => {
     }
 
    
-    return  request.get(`/node/practice/table/node/getMaptitle?type=${type}&zoom=${zoom}&x=${x}&y=${y}`);
+    return  request.get(`http://localhost:3000/practice/table/node/getMaptitle?type=${type}&zoom=${zoom}&x=${x}&y=${y}`);
  
  }
 
@@ -31,7 +31,7 @@ queryApi.getMapTitle = (type = 1818940751,zoom = 12,x = 3449,y = 1529) => {
 queryApi.fileUpload = (formData) => {
 
    
-    return  request.post("/node/practice/table/node/fileUpload",formData,{ headers: { 'Content-Type': 'multipart/form-data' }});
+    return  request.post("http://localhost:3000/practice/table/node/fileUpload",formData,{ headers: { 'Content-Type': 'multipart/form-data' }});
  
  }
  
