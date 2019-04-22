@@ -106,6 +106,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        aaptOptions.cruncherEnabled = false
+        aaptOptions.useNewCruncher = false
     }
     splits {
         abi {
@@ -130,6 +132,10 @@ android {
             signingConfig signingConfigs.release
         }
     }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -146,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-image-picker')
     compile project(':react-native-webview')
     compile project(':react-native-splash-screen')
     compile project(':realm')
