@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>maptalks.E4layer Demo: Bus lines</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        #map {
+            width: 960px;
+            height: 600px;
+        }
+    </style>
+    <script type="text/javascript" src="./../node_modules/echarts/dist/echarts.js"></script>
+    <script type="text/javascript" src="./../node_modules/echarts-gl/dist/echarts-gl.js"></script>
+    <script type="text/javascript" src="./../node_modules/maptalks/dist/maptalks.js"></script>
+    <script type="text/javascript" src="./../node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="./../dist/maptalks.e4.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+
+        var map = new maptalks.Map("map", {
+            center: [120.13066322374, 30.240018034923],
+            zoom: 14
+        });
+
+        var tileLayer = new maptalks.TileLayer('base', {
+            urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            subdomains: ['a', 'b', 'c', 'd']
+        });
+
+        map.addLayer(tileLayer);
+
+        $.getJSON('./assets/hanzou-tracks.json', function (data) {
+
+            var points = [].concat.apply([], data.map(function (track) {
+                return track.map(function (seg) {
+                    return seg.coord.concat([1]);
+                });
+            }));
+
+            const ecOption = {
+                animation: true,
+                maptalks2D: {
+                },
+                visualMap: {
+                    show: false,
+                    top: 'top',
+                    min: 0,
+                    max: 5,
+                    seriesIndex: 0,
+                    calculable: true,
+                    inRange: {
+                        color: ['blue', 'blue', 'green', 'yellow', 'red']
+                    }
+                },
+                series: [{
+                    type: 'heatmap',
+                    coordinateSystem: 'maptalks2D',
+                    data: points,
+                    pointSize: 5,
+                    blurSize: 6
+                }]
+            };
+
+            var e4Layer = new maptalks.E4Layer('e4', ecOption, { hideOnZooming: false, hideOnRotating: false, hideOnMoving: false, removeBaseLayer: true }).addTo(map);
+
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

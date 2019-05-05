@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>离线地图</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+    <style type="text/css">
+
+        body,html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        .maptalks-attribution{
+            display: none;
+        }
+    
+    </style>
+    <script type="text/javascript" src="../../echarts/lib/echarts.js"></script>
+    <script type="text/javascript" src="../../echarts/lib/echarts-gl.min.js"></script>
+    <script type="text/javascript" src="../lib/maptalks-0.44.0/maptalks.min.js"></script>
+    <script type="text/javascript" src="../../echarts/lib/jquery.min.js"></script>
+    <script type="text/javascript" src="../lib/maptalks.e4-master/maptalks.e4-master/dist/maptalks.e4.js"></script>
+   
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        
+        let map = new maptalks.Map('map', {
+                    center: [123.4259,41.8041],
+                    zoom: 12,
+                    minZoom : 8, 
+                    maxZoom : 12,
+            });
+            
+        let tileLayer = new maptalks.TileLayer('base', {
+                urlTemplate: 'http://localhost:3000/practice/table/node/getMaptitle?type=1818940751&zoom={z}&x={x}&y={y}',
+                subdomains: ['a', 'b', 'c', 'd']
+            });
+
+        map.addLayer(tileLayer);  ///加入地图层
+
+           
+
+        map.setMaxExtent(map.getExtent()); ///设置边界
+
+        map.setPitch(30);  ///设置旋转尺寸
+            
+        let e4Option = {
+
+                tooltip:{
+
+                    formatter:(item)=>{
+                         
+                        if(item.seriesType=="effectScatter")
+                      
+                        return `${item.seriesName}<br>
+                        <span style="display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:${item.color};"></span>
+                        ${item.name} : ${item.value[2]} 人`
+                    
+                    }
+                
+                },
+                maptalks2D: {},
+                series:[{
+
+                    name:"主要建筑",
+                    type:"effectScatter",
+                    coordinateSystem: 'maptalks2D',
+                    data:[{
+                        name:"市政府广场",
+                        value:[123.4259,41.8041,15]
+                    },{
+                        name:"九一八历史博物馆",
+                        value:[123.4679,41.8401,15]
+                    }],
+                    symbolSize:(val)=>val[2]
+
+
+                },{
+
+                    name:"路径",
+                    type:"lines",
+                    coordinateSystem: "maptalks2D",
+                    polyline: true,
+                    data:[{
+                        coords:[
+                            [123.4259,41.8041,15],
+                            [123.4259,41.8141,15],
+                            [123.4259,41.8241,15],
+                            [123.4359,41.8341,15],
+                            [123.4459,41.8341,15],
+                            [123.4559,41.8341,15],
+                            [123.4679,41.8401,15]
+                        ]
+                    }],
+                    lineStyle: {
+
+                        color: "#83e80d",
+                        width: 5,
+                        opacity: 0.6,
+                        curveness: 0.2
+                        
+                    },
+                    large:true,
+                    effect: {
+                        show: true,
+                        period: 6,
+                        trailLength: 0,
+                        color:"#46bee9",
+                        //symbol: planePath,
+                        symbolSize: 8
+                    },
+                    
+
+
+                }]
+        }
+
+        console.log(map.getZoom())
+
+        let e4Layer = new maptalks.E4Layer('e4', e4Option, { hideOnZooming: false, hideOnRotating: false, hideOnMoving: false, removeBaseLayer: true }).addTo(map);
+                          
+  
+    </script>
+</body>
+
+</html>

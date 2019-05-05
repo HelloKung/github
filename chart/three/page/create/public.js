@@ -1288,22 +1288,22 @@ function createRoof(){
     geometry.vertices.push(
           //new THREE.Vector3(0, 0, 0),
           new THREE.Vector3(0, 80, 0),
-          new THREE.Vector3(-30.2, 45, 43.3),  //1
+          new THREE.Vector3(-30.2, 37, 43.3),  //1
           new THREE.Vector3(-30.2, 48, 35.2),
           new THREE.Vector3(-30.2, 61, 0),
           new THREE.Vector3(-30.2, 37, -47.2),
           new THREE.Vector3(80.2, 37, -47.2),
           new THREE.Vector3(80.2, 61, 0),
-          new THREE.Vector3(80.2, 48, 35.2),
-          new THREE.Vector3(76.2, 48, 35.2),
+          new THREE.Vector3(80.2, 48, 23.2),
+          new THREE.Vector3(76.2, 48, 23.2),
           new THREE.Vector3(76.2, 48, 51.2),
           new THREE.Vector3(57, 57, 51.2),
           new THREE.Vector3(37.8, 48, 51.2),
-          new THREE.Vector3(37.8, 48, 35.2),
+          new THREE.Vector3(37.8, 48, 23.2),
 
-          new THREE.Vector3(37.8, 45, 43.3), //1
+          new THREE.Vector3(37.8, 37, 43.3), //1
           new THREE.Vector3(37.8, 61, 0), ///1
-          new THREE.Vector3(57, 57, 11), ///1
+          new THREE.Vector3(57, 57, 7.6), ///1
           ///15///
           new THREE.Vector3(-30.2, 43.2, 56),
           new THREE.Vector3(-30.2, 41.2, 56),
@@ -1404,8 +1404,8 @@ function createRoof(){
 
 
     var material = new THREE.MeshBasicMaterial({
-        //color: 0xffffff,
-        map:texture
+        //color: 0xff0000,
+        map:texture,
         //wireframe: true
     });
 

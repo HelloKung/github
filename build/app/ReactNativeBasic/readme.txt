@@ -31,3 +31,5 @@ https://blog.csdn.net/sinat_33134895/article/details/80945642
 4.react-native-splash-screen 启动屏 https://www.jianshu.com/p/4540ac17dfd4
 
 5.react-native-image-picker  上传图片 https://www.jianshu.com/p/727c9d4c080c
+
+6.react-native-camera  识别二维码 https://www.jianshu.com/p/bfad4c158f07  https://www.jianshu.com/p/61fb36bea60d

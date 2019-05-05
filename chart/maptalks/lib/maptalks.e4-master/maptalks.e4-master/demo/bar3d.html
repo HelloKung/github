@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>maptalks.E4layer Demo: Bus lines</title>
+    <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css">
+    <style type="text/css">
+        body {
+            margin: 0;
+        }
+
+        #map {
+            width: 960px;
+            height: 600px;
+        }
+    </style>
+    <script type="text/javascript" src="./../node_modules/echarts/dist/echarts.js"></script>
+    <script type="text/javascript" src="./../node_modules/echarts-gl/dist/echarts-gl.js"></script>
+    <script type="text/javascript" src="./../node_modules/maptalks/dist/maptalks.js"></script>
+    <script type="text/javascript" src="./../node_modules/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="./../dist/maptalks.e4.js"></script>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+
+        var map = new maptalks.Map("map", {
+            center: [109.20129, 34.360339],
+            zoom: 2,
+            attributionControl: {
+                'content': '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/attributions">CARTO</a>'
+            }
+        });
+
+        //var wmslayer = new maptalks.WMSTileLayer('wmsl', {
+        //    'urlTemplate': 'http://117.36.75.134:6080/arcgis/services/LT/canyin/MapServer/WMSServer/wms',
+        //    'layers': 'canyin',
+        //    'version': '1.3.0',
+        //    'format': 'image/png',
+        //    'transparent': true,
+        //    //renderer:'gl'
+        //    'renderer': 'canvas',
+        //});
+
+        //map.addLayer(wmslayer);
+
+        var tileLayer = new maptalks.TileLayer('base', {
+            urlTemplate: 'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+            subdomains: ['a', 'b', 'c', 'd']
+        });
+
+        map.addLayer(tileLayer);
+
+        //map.setPitch(50);
+        
+        //map.setBearing(-10);
+
+        $.getJSON('./assets/population.json', function (data) {
+            data = data.filter(function (dataItem) {
+                return dataItem[2] > 0;
+            }).map(function (dataItem) {
+                return [dataItem[0], dataItem[1], dataItem[2]];
+            });
+            //
+            const ecOption = {
+                visualMap: {
+                    show: false,
+                    max: 1000,
+                    calculable: true,
+                    realtime: false,
+                    inRange: {
+                        color: ['#313695', '#4575b4', '#74add1', '#abd9e9', '#e0f3f8', '#ffffbf', '#fee090', '#fdae61', '#f46d43', '#d73027', '#a50026']
+                    },
+                    outOfRange: {
+                        colorAlpha: 0
+                    }
+                },
+                maptalks3D: {
+                    boxHeight: 50,
+                    // altitudeScale: 1e2,
+                    postEffect: {
+                        enable: true,
+                        screenSpaceAmbientOcclusion: {
+                            enable: true,
+                            radius: 2
+                        }
+                    },
+                    light: {
+                        main: {
+                            intensity: 2,
+                            shadow: true,
+                            shadowQuality: 'high'
+                        },
+                        ambient: {
+                            intensity: 0.
+                        }
+                    }
+                },
+                series: [{
+                    type: 'bar3D',
+                    coordinateSystem: 'maptalks3D',
+                    shading: 'lambert',
+                    minHeight: 0.1,
+                    barSize: 0.1,
+                    data: data,
+                    silent: true,
+                    animationEasingUpdate: 2000
+                }]
+            };
+            //
+            var e4Layer = new maptalks.E4Layer('e4', ecOption, { hideOnZooming: false, hideOnRotating: false, hideOnMoving: false , removeBaseLayer:true }).addTo(map);
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>

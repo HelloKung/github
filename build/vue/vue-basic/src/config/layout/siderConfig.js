@@ -62,6 +62,18 @@ const config = [{
             title:"动态图形",
             icon:"icon-map"
         }]
+    },{
+        
+        id:"map",
+        title:"地图",
+        icon:"icon-map",
+        children:[{
+
+           id:"maptalks",
+           title:"maptalks",
+           icon:"icon-map"
+
+        }]
     }]
     
 },{
