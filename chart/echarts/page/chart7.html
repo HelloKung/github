@@ -9,11 +9,18 @@
     <script src="../lib/echarts.js"></script>
     <script src="../lib/echarts-liquidfill.min.js"></script>
     <script src="../lib/jquery.min.js"></script>
-    
+    <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
+    <style>
+        .font{
+            font-family: 'Industry-Demi' !important;
+            font-style:"normal"
+        }
+    </style>
 </head>
 <body>
     <!-- <img src="../asset/img/chart7.gif" style="width:498px; height: 317px; display:inline-block;"> -->
     <img src="../asset/img/chart7.png" style="width:498px; height: 317px; display:inline-block;">
+    <span class="font">123456</span>
     <div id="container" style="width:600px; height: 400px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
     <script>
     
@@ -68,7 +75,8 @@
                     axisLabel:{
                         interval:0,
                         color:"#fff",
-                        fontSize:10
+                        fontSize:10,
+                        fontFamily:'Arial Unicode MS'
                     },
                     axisLine:{show:false},
                     axisTick:{show:false},
@@ -140,7 +148,8 @@
                                 textAlign: "right",
                                 textVerticalAlign: "middle",
                                 x: coord[0]-4,
-                                y: coord[1]
+                                y: coord[1],
+                                fontFamily:'Arial Unicode MS'
                             }
                         };
                     },
@@ -354,11 +363,13 @@
                                 origin: [0,0],
                                 style: {
 
+ 
                                     text:"负责人 : 张三\n受理人 : 李四",
                                     x:100,
                                     y:-28,
                                     fill: "#fff",
-                                    font: '10px "Microsoft YaHei", sans-serif',
+                                    font: '10px "Arial Unicode MS"',
+                                    
                                     shadowColor:"#c09315",
                                     shadowBlur:4
                                     

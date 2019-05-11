@@ -1,0 +1,18 @@
+@font-face{
+
+    font-family:'Industry-Demi';
+    src:url("./Industry-Demi.woff") format('woff'),
+        url("./Industry-Demi.otf") format('truetype'); 
+    font-weight: normal;
+    font-style: normal;    
+        
+}
+
+@font-face{
+
+    font-family:'Industry-Bold';
+    src:url("./Industry-Bold.woff") format('woff'),
+    url("./Industry-Bold.otf") format('truetype');
+    font-weight: normal;
+    font-style: normal;    
+}
