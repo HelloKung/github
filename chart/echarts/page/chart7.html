@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    
+</head>
+<body>
+    <!-- <img src="../asset/img/chart7.gif" style="width:498px; height: 317px; display:inline-block;"> -->
+    <img src="../asset/img/chart7.png" style="width:498px; height: 317px; display:inline-block;">
+    <div id="container" style="width:600px; height: 400px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+         let time = [{
+                value:"07.22",
+                circleColor:"#26458b",
+                radiusValue:68,
+                bgPieRaidus:"72%"
+            },{
+                value:"08.15",
+                circleColor:"#3264b1",
+                radiusValue:54,
+                bgPieRaidus:"60%" 
+            },{
+                    
+                value:"10.26",
+                circleColor:"#3c75b9",
+                radiusValue:40,
+                bgPieRaidus:"46%" 
+
+            },{
+                    
+                value:"11.12",
+                circleColor:"#4d98d8",
+                radiusValue:60,
+                bgPieRaidus:"32%" 
+
+            },{
+                    
+                value:"05.18",
+                circleColor:"#5bb5ed",
+                radiusValue:52,
+                bgPieRaidus:"20%" 
+
+            }] 
+
+
+         let option = {
+             
+                backgroundColor:"#1a242a",
+                angleAxis: [{
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    axisLabel:{show:false},
+                    splitLine:{show:false}
+                }],
+                radiusAxis: {
+                    type: 'category',
+                    data: ['设备1', '设备2', '设备3', '设备4', '设备5',''],
+                    axisLabel:{
+                        interval:0,
+                        color:"#fff",
+                        fontSize:10
+                    },
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    inverse:true,
+                    z: 10
+                },
+                polar: {
+                },
+                series: [{
+
+                    name: "polarbg",
+                    type: 'bar',
+                    data: [75, 75, 75, 75,75,{
+                        value:100,
+                        itemStyle:{
+                            opacity:0
+                        }
+                    }],
+                    itemStyle:{
+                        color:"#183044",
+                        borderWidth:2,
+                        borderColor:"#183044"
+                    },
+                    label:{
+                        show:true,
+                        position: 'top',
+                        color:"#fff"
+                    },
+                    barWidth:4,
+                    silent:true,
+                    coordinateSystem: 'polar',
+                    stack: 'a'
+                },{
+                    type: 'bar',
+                    data: [68, 54, 40, 60,52].map((item,index)=>{
+
+                         let arr = {};
+                         arr.value = item;
+                         arr.itemStyle = {
+                             color:time[index].circleColor,
+                             shadowColor:time[index].circleColor
+                         }
+
+                         return arr;
+
+                    }),
+                    barGap:"-100%",
+                    barWidth:4,
+                    coordinateSystem: 'polar',
+                    name: 'B',
+                    stack: 'b',
+                    animationDelay:1000,
+                    z:10
+                },{
+                    type: "custom",
+                    coordinateSystem: 'polar',
+                    renderItem: function(params, api) {
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+                        return {
+                            type: 'text',
+                            position: [3 * Math.sin(coord[3]), 3 * Math.cos(coord[3])],
+                            rotation: coord[3] + Math.PI / 2,
+                            origin: [coord[0], coord[1]],
+                            style: {
+                                text: time[api.value(0)].value,
+                                fill: "#fff",
+                                fontSize: 9,
+                                textAlign: "right",
+                                textVerticalAlign: "middle",
+                                x: coord[0]-4,
+                                y: coord[1]
+                            }
+                        };
+                    },
+                    data: [75,75,75,75,75],
+                    animationDelay:500,
+                },{
+                    type: "custom",
+                    coordinateSystem: 'polar',
+                    renderItem: function(params, api) {
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+                        return {
+                            type: 'group',
+                            children:[{
+                                type: 'circle',
+                                shape:{
+                                    r:3.5,
+                                    cx: coord[0],
+                                    cy: coord[1]
+                                },
+                                style: {
+                                    fill: time[api.value(0)].circleColor,
+                                    shadowColor:"#333",
+                                    shadowBlur:4
+                                    
+                                }
+                            },{
+                               type:"polygon",
+                               origin: [0,0],
+                               rotation: coord[3] + Math.PI / 2,
+                               position: [coord[0], coord[1]],
+                               shape:{
+                                  points:[[0,6],[-4,12.93],[4,12.93]]  
+                               },
+                               style: {
+                                    fill: "#e6ec11",
+                               }
+
+
+                            }]
+                        };
+                    },
+                    data: [68 , 54, 40, 60,52],
+                    animationDelay:1200,
+                    z:10
+                },{
+
+                    name: 'd',
+                    type:"pie",
+                    radius:["9%","10%"],
+                    data:[{
+                        value:68,
+                        itemStyle:{
+                            color:"#e6ec11"
+                        }
+                    
+                    },{
+                        value:100-68,
+                        itemStyle:{
+                            opacity:0
+                        }
+                    }],
+                    label:false,
+                    animationDelay:2000
+
+                },{
+
+                    name: 'e',
+                    type:"pie",
+                    radius:["4%","7%"],
+                    data:Array.from({length:28},(item,index)=>{
+                        
+                        return {
+                            value:index % 2 == 0?1:4,
+                            itemStyle:{
+                                color:"#4f4927",
+                                opacity:index % 2==0?1:0
+                            }
+                        }
+                    }).concat({
+                        value:100-70,
+                        itemStyle:{
+                            opacity:0
+                        }
+                    }),
+                    label:false,
+                    animationDelay:2000
+
+                    },{
+
+                        type: 'bar',
+                        data: [0,54,0,0,0],
+                        itemStyle:{
+                           color:"#eae531"
+                        },
+                        barGap:"-100%",
+                        barWidth:4,
+                        coordinateSystem: 'polar',
+                        name: 'C',
+                        stack: 'c',
+                        animationDelay:3000,
+                        z:11
+
+                },{
+                    type: "custom",
+                    coordinateSystem: 'polar',
+                    renderItem: function(params, api) {
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+
+                        if(api.value(0) == 1)
+                        return {
+                            type: 'group',
+                            children:[{
+                                type: 'circle',
+                                shape:{
+                                    r:3.5,
+                                    cx: coord[0],
+                                    cy: coord[1]
+                                },
+                                style: {
+                                    fill: "#eee",
+                                    shadowColor:"#eee",
+                                    shadowBlur:4
+                                    
+                                }
+                            },{
+                               type:"polygon",
+                               origin: [0,0],
+                               rotation: coord[3] + Math.PI / 2,
+                               position: [coord[0], coord[1]],
+                               shape:{
+                                  points:[[0,6],[-4,12.93],[4,12.93]]  
+                               },
+                               style: {
+                                    fill: "#76eeca",
+                                    shadowColor:"#76eeca",
+                                    shadowBlur:4
+                               }
+
+
+                            }]
+                        };
+                    },
+                    data: [0, 54, 0,0,0],
+                    animationDelay:3600,
+                    z:11
+                },{
+                    name:"tips",
+                    type: "custom",
+                    coordinateSystem: 'polar',
+                    renderItem: function(params, api) {
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+                       
+                        if(api.value(0) == 1)
+                        return {
+                            type: 'group',
+                            children:[{
+                                type: 'line',
+                                position: [coord[0], coord[1]],
+                                origin: [0,0],
+                                shape:{
+                                    x1:2,
+                                    y1:-2,
+                                    x2:10,
+                                    y2:-16
+                                },
+                                style: {
+                                    stroke: "#c09315",
+                                    shadowColor:"#c09315",
+                                    shadowBlur:4
+                                    
+                                }
+                            },{
+                                type: 'line',
+                                position: [coord[0], coord[1]],
+                                origin: [0,0],
+                                shape:{
+                                    x1:10,
+                                    y1:-16,
+                                    x2:80,
+                                    y2:-16
+                                },
+                                style: {
+                                    stroke: "#c09315",
+                                    shadowColor:"#c09315",
+                                    shadowBlur:4
+                                    
+                                }
+                            },{
+                                type: 'rect',
+                                position: [coord[0], coord[1]],
+                                origin: [0,0],
+                                shape:{
+                                    x:80,
+                                    y:-36,
+                                    width:100,
+                                    height:40,
+                                },
+                                style: {
+                                    stroke: "#c09315",
+                                    fill:"rgba(0,0,0,0)",
+                                    shadowColor:"#c09315",
+                                    shadowBlur:4
+                                    
+                                }
+                            },{
+                                type: 'text',
+                                position: [coord[0], coord[1]],
+                                origin: [0,0],
+                                style: {
+
+                                    text:"负责人 : 张三\n受理人 : 李四",
+                                    x:100,
+                                    y:-28,
+                                    fill: "#fff",
+                                    font: '10px "Microsoft YaHei", sans-serif',
+                                    shadowColor:"#c09315",
+                                    shadowBlur:4
+                                    
+                                }
+                            }]
+                        };
+                    },
+                    data: [0, 16,0,0,0],
+                    //animationDelay:0,
+                    z:11
+                }].concat(time.map((item,index)=>{
+
+                        return {
+                            type:"pie",
+                            radius:["10%",item.bgPieRaidus],
+                            data:[{
+                                    name:"设备1",
+                                    value:item.radiusValue,
+                                    itemStyle:{
+
+                                        color:item.circleColor,
+                                        opacity:0.2
+                                    }
+                                
+                                },
+                                {name:"bg",value:100-item.radiusValue,itemStyle:{opacity:0}}
+                                ],
+                            label:{
+                                show:false
+                            },
+                            silent:true,
+                            z:index+1,
+                            animationDelay:2000,
+                        }
+
+                })),
+
+
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>
