@@ -42,16 +42,32 @@ function HtCreateNode(item){
 
 }
 
-function HtCreateEdge(item){
+function HtCreateEdge(item,node1,node2){
 
     var source = dataModel.getDataById(item.source);
     var target = dataModel.getDataById(item.target);
     
-    var edge = new ht.Edge();
+    var edge = new ht.Edge(node1,node2);
+
+   
 
     edge.setSource(source);
     edge.setTarget(target);
+
+    edge.s({
+        
+        "flow":true ,
+        "flow.element.autorotate": true,
+        "flow.count" :1,
+        "flow.element.max":30,
+        'edge.type': 'flex',
+        'edge.corner.radius': 5 ,   
+        "flow.element.background":"rgba(255, 0, 0, 0.4)"             
+    });
     
+
+    edge.s("flow", true);
+
     dataModel.add(edge);       
 
   

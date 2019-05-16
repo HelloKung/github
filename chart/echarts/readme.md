@@ -21,10 +21,10 @@
 
 5.图表5
 <p align="center">
-  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/chart/echarts/asset/sheetshot/chart5.png">
+  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/chart/echarts/asset/img/chart5.png">
 </p>
 
 7.图表7
 <p align="center">
-  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/chart/echarts/asset/sheetshot/chart7.gif">
+  <img src="https://github.com/yitiaoxianyu0927/github/blob/master/chart/echarts/asset/img/chart7.gif">
 </p>
