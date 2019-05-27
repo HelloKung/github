@@ -1,0 +1,1 @@
+E:\development\android\AndroidSDK\emulator\emulator.exe -netdelay none -netspeed full -avd Nexus_5X_API_28

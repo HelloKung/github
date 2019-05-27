@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
+    <style>
+        .font{
+            font-family: 'Industry-Demi' !important;
+            font-style:"normal"
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="width:600px; height: 400px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+         let option = {
+
+                angleAxis: {
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    axisLabel:{show:false},
+                    splitLine:{show:false},
+                    startAngle:232
+                },
+                radiusAxis: {
+                    type: 'category',
+                    axisLine:{show:false},
+                    axisTick:{show:false},
+                    axisLabel:{show:false},
+                    data: ['周一'],
+                    z: 10
+                },
+                polar: {
+                },
+                series: [{
+                    name:"bg",
+                    type:"bar",
+                    barWidth:30,
+                    data: [100],
+                    coordinateSystem: 'polar',
+                    itemStyle:{
+                        color:"rgba(255,124,33,0)"
+                    },
+                    z:1
+                },{
+                    type: "custom",
+                    coordinateSystem: 'polar',
+                    renderItem: function(params, api) {
+                        var values = [api.value(0), api.value(1)];
+                        var coord = api.coord(values);
+                        var index = values[0];
+                        return {
+                            
+                                type: 'rect',
+                                origin: [coord[0], coord[1]],
+                                rotation: coord[3],
+                                shape:{
+                                    x: coord[0],
+                                    y: coord[1],
+                                    r:3,
+                                    width:20,
+                                    height:4
+                                },
+                                style: {
+                                    fill: "#000"
+                                }
+                            
+                        };
+                    },
+                    data: Array.from({length:40},(item,index)=>index*2),
+                    animationDelay:500,
+                    z:10
+                }]
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>

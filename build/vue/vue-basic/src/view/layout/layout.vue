@@ -34,7 +34,9 @@
         </el-aside>
         <el-main style="padding:0px; box-sizing:border-box;">
           <transition name="main" mode="out-in">
-            <router-view></router-view>
+             <!-- <keep-alive>  -->
+              <router-view></router-view>
+             <!-- </keep-alive> -->
           </transition>
         </el-main>
       </el-container>

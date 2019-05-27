@@ -16,3 +16,11 @@
     font-weight: normal;
     font-style: normal;    
 }
+
+@font-face{
+
+    font-family:'DigitalRegular';
+    src:url("./DigitalRegular.ttf") format('ttf'),
+    font-weight: normal;
+    font-style: normal;    
+}

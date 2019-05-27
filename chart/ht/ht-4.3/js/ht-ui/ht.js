@@ -1,8 +1,6 @@
 var noAlert = true;
 var htl = '{\n\
-	"corp": "北京直真科技股份有限公司",\n\
-	"project": "自start字段日期开始一年内使用",\n\
-	"start": "2014-08-26",\n\
+
 	"hashCode": "4ccff029dca8637c3b78e0bf89510f8330c79706ee7e1114bb96ee4907eee44b01eb6cf49b575c7e51a1ce4913de7e7c901ff5e47c3d4a91f41a7fbe8a8a18bdad751a46ed74e77b3c4d691ee285dd995ff764082e6813cd46f1b31863b37c6a9ce6a491a0bf65fd1a0bbf819044accc4742e039b63dbb6cebe01a0a65925278",\n\
 	"t1": "32409244794112",\n\
 	"t2": "1409097598844",\n\
