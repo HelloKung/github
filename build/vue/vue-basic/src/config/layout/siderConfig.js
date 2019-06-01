@@ -74,6 +74,18 @@ const config = [{
            icon:"icon-map"
 
         }]
+    },{
+        
+        id:"Integrate",
+        title:"集成",
+        icon:"icon-clipboard",
+        children:[{
+
+           id:"kettle",
+           title:"kettle",
+           icon:"icon-google-drive"
+
+        }]
     }]
     
 },{

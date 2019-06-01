@@ -20,7 +20,7 @@ const config = {
      },{
 
         id:"github",
-        title:"我的网站",
+        title:"Github",
         href:"https://github.com/yitiaoxianyu0927/github"
      }]
 

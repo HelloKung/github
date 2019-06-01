@@ -82,6 +82,15 @@ export default {
 
 
       },
+      beforeDestroy() {
+       
+        if (!this.map) {
+        return
+        }
+        this.map.setOption({});
+        this.map.dispose()
+        this.map = null
+      },
       mounted(){
 
           this.map = echarts.init(this.$refs["chart"]);

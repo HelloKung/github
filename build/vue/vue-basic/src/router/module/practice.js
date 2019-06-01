@@ -31,6 +31,11 @@ const router = [{
     path: '/maptalks',
     name: 'maptalks',
     component:()=>import('@/view/practice/map/maptalks')
+  },
+  {
+    path: '/kettle',
+    name: 'kettle',
+    component:()=>import('@/view/practice/Integrate/kettle')
   }]
 
   
