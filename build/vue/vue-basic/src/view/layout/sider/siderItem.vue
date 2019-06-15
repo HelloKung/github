@@ -73,7 +73,7 @@
 
 .router-link-active{
 
-   &>li{
+   li{
       
       &>i{
       

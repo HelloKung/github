@@ -9,7 +9,7 @@ process.env.MODE_ENV = process.argv[3]
 
 // 如果有传参时，对传入的参数进行检测，如果参数非法，那么停止打包操作
 const checkModule = require('./module-conf').checkModule
-if (process.env.MODULE_ENV !== 'undefined' && !checkModule()) {
+if (process.env.MODULE_ENV != 'undefined' && !checkModule()) {
   return
 }
 

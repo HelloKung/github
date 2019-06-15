@@ -1,25 +1,25 @@
 <template>
    <section class="siderbar">
-    <!-- :collapse="isCollapse" -->
-    <el-menu
-        :default-active="rootMenuId"
-        class="el-menu-vertical-demo"
-        @select="handleSelect"
-        @open="handleOpen"
-        @close="handleClose"
-        :collapse="isCollapse"
-        background-color="#545c64"
-        text-color="#fff"
-        
-       >
-       <transition-group name="el-fade-in"> 
-         <template v-if="show">
-           <sider-item v-for="item in siderMenu" :key="item.id" :option="item"></sider-item> 
-         </template>
-       </transition-group>
-    </el-menu>
-         
-   </section>
+      <div class="siderbar-scrollbar">
+        <el-menu
+            :default-active="rootMenuId"
+            class="el-menu-vertical-demo"
+            @select="handleSelect"
+            @open="handleOpen"
+            @close="handleClose"
+            :collapse="isCollapse"
+            background-color="#545c64"
+            text-color="#fff"
+            
+          >
+          <transition-group name="el-fade-in"> 
+            <template v-if="show">
+              <sider-item v-for="item in siderMenu" :key="item.id" :option="item"></sider-item> 
+            </template>
+          </transition-group>
+        </el-menu>
+      </div>       
+    </section>
 </template>
 
 
@@ -30,6 +30,8 @@
   import  siderItem from './siderItem.vue'
 
   import {getSession} from "@/utils/session";
+
+  import PerfectScrollbar from 'perfect-scrollbar'
 
   export default {
     
@@ -46,7 +48,8 @@
     },
     props:["headerMenuId"],
     components:{
-       siderItem
+       siderItem,
+       PerfectScrollbar
     },
     methods: {
      
@@ -108,10 +111,20 @@
 
   .siderbar{
 
-     height: 100%;
-     background:#545c64;
-
+    height: 100%;
+    background:#545c64;
+    position: relative;
+    overflow: hidden;
   }
+
+  .siderbar-scrollbar{
+
+    width: calc(100% + 20px);
+    height: 100%;
+    overflow: auto;
+     
+  }
+
 
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
