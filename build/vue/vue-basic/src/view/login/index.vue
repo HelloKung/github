@@ -105,12 +105,12 @@ export default {
 
                    if(valid){
 
-                        this.$store.dispatch("LoginByUserName",this.form).then(res => {
+                        //this.$store.dispatch("LoginByUserName",this.form).then(res => {
 
-                                
+                                sessionStorage.setItem("base_token",true);
                                 this.$router.push({ path: "/layout" })
                                 
-                        })
+                        //})
 
                    }     
 

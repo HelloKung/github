@@ -4,11 +4,11 @@
       <el-row class="page-table" >
             
             <el-table 
-                      :data="list_table.data"   
-                      @selection-change="List_handleSelectionChange" 
-                      ref="multipleTable" 
-                      height="100%" 
-                      :span-method="arraySpanMethod"
+                :data="list_table.data"   
+                @selection-change="List_handleSelectionChange" 
+                ref="multipleTable" 
+                height="100%" 
+                :span-method="arraySpanMethod"
             >
                     
                     <!-- 序号列 -->
@@ -120,7 +120,7 @@ export default {
          
         let data = {
 
-
+            tableheight:"100%", 
             list_table:{
                    
                    cellSpan:false,
@@ -347,4 +347,8 @@ export default {
            float: right;
 }
 
+.el-table {
+
+    height: 100% !important; 
+}
 </style>

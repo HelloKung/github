@@ -1,15 +1,17 @@
 <template>
-   <div>
-
+   <section class="siderbar">
+    <!-- :collapse="isCollapse" -->
     <el-menu
         :default-active="rootMenuId"
         class="el-menu-vertical-demo"
         @select="handleSelect"
         @open="handleOpen"
         @close="handleClose"
+        :collapse="isCollapse"
         background-color="#545c64"
         text-color="#fff"
-        active-text-color="#ffd04b">
+        
+       >
        <transition-group name="el-fade-in"> 
          <template v-if="show">
            <sider-item v-for="item in siderMenu" :key="item.id" :option="item"></sider-item> 
@@ -17,7 +19,7 @@
        </transition-group>
     </el-menu>
          
-   </div>
+   </section>
 </template>
 
 
@@ -66,8 +68,11 @@
       },
       handleSelect(key, keyPath){
 
-         this.$store.dispatch("setActiveSiderMenuId",key);
-
+        //设置当前点击菜单id
+        
+        this.$store.dispatch("addTagView",key);
+        this.$store.dispatch("setActiveSiderMenuId",key);
+         
       }
     },
     computed:{
@@ -80,6 +85,10 @@
         rootMenuId(){
 
             return this.$store.state.menu.rootMenuId;
+        },
+        isCollapse(){
+
+            return this.$store.state.menu.isCollapse;
         }
     },
     mounted(){
@@ -90,14 +99,23 @@
 </script>
 
 
-<style>
+<style scoped>
 
   .el-menu {
 
-     width: 100%;
      border: none;
   }
 
+  .siderbar{
 
+     height: 100%;
+     background:#545c64;
+
+  }
+
+  .el-menu-vertical-demo:not(.el-menu--collapse) {
+    width: 200px;
+    min-height: 400px;
+  }
 
 </style>

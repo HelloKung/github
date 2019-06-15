@@ -4,7 +4,7 @@ const config = [{
     siderMenu:[{
 
          id:"platformfirst",
-         title:"平台一",
+         title:"首页",
          icon:"icon-office"
     },{
 
@@ -94,7 +94,7 @@ const config = [{
     siderMenu:[{
 
         id:"moduleIndex",
-        title:"首页",
+        title:"模块首页",
         icon:"icon-quill",
       
     }]

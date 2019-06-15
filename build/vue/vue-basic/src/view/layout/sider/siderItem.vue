@@ -3,9 +3,9 @@
        <template v-if="!option.children" >
          <router-link  :to="option.id" tag="span">  
             <el-menu-item :index="option.id">
-                <template slot="title">
-                    <i :class="option.icon" style="color:#fff;padding-right:10px;"></i>
-                    <span>{{option.title}}</span>
+                <template>
+                    <i :class="option.icon" style="color:#fff;padding-right:10px;"/>
+                    <span slot="title">{{option.title}}</span>
                 </template>
             </el-menu-item>
          </router-link>
@@ -13,8 +13,8 @@
        <template v-else>
            <el-submenu :index="option.id">
                 <template slot="title">
-                    <i :class="option.icon" style="color:#fff;padding-right:10px;"></i>
-                    <span>{{option.title}}</span>
+                    <i :class="option.icon" style="color:#fff;padding-right:10px;"/>
+                    <span slot="title">{{option.title}}</span>
                 </template>
                 <sider-item v-for="item in option.children" :key="item.id" :option="item"></sider-item>
            </el-submenu>
@@ -30,29 +30,37 @@
 
     export default {
 
-         name:"siderItem",
-         data(){
+        name:"siderItem",
+        data(){
 
-             let data = {
-              
-                  
+            let data = {
+            
+                
 
-             }
+            }
 
-             return data;
-         },
-         props:["option"],
-         methods:{
+            return data;
+        },
+        props:["option"],
+        methods:{
 
 
-         },
-         
-         mounted(){
+        },
+        computed:{
+
+            
+            rootMenuId(){
+
+                return this.$store.state.menu.rootMenuId;
+            },
+            
+        },
+        mounted(){
 
              
              this.$router.push("/"+ getSession("activeSiderMenuId"));
 
-         }
+        }
        
 
     }
@@ -61,3 +69,37 @@
 </script>
 
 
+<style lang="less" scoped>
+
+.router-link-active{
+
+   &>li{
+      
+      &>i{
+      
+        color:#ffd04b;
+   
+      }
+      &>span{
+      
+        color:#ffd04b;
+   
+      }
+
+   }
+
+}
+
+.el-menu-item{
+
+    &>i{
+
+        color:#fff;
+    }
+    &>span{
+
+        color:#fff;
+    }
+}
+
+</style>
