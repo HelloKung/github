@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
+    <link href="../../lib/icomoon/style.css" rel="stylesheet" />
+    <style>
+        .font{
+            font-family: 'icomoon' !important;
+            font-style:"normal"
+        }
+    </style>
+</head>
+<body>
+    <div id="container" style="width:1000px; height: 400px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    
+    <span class="font">&#xe900; </span> -- 字图标右侧复制 两种写法
+  
+   
+    <script>
+    
+         let chart = echarts.init($("#container")[0]);
+         
+         let option = {
+
+                backgroundColor:"#042248",
+
+                graphic:{
+
+                     elements:[{
+
+                         type:"group",
+                         children:[{
+
+                              type:"line",
+                              shape:{
+                                  x1:553,
+                                  y1:196,
+                                  x2:716,
+                                  y2:170
+                              },
+                              style:{
+                                stroke:"#2196f3"
+                              }
+
+                         },{
+
+                            type:"text",
+                            origin:[600,170],
+                            rotation:Math.PI/20,
+                            style:{
+                                text:"父母",
+                                x:580,
+                                y:170,
+                                fill:"#fff"
+                            }
+
+                         }]
+
+                     }]
+
+                },
+                series:[{
+
+                     type:"pie",
+                     color:["#f3a114"],
+                     radius:["0%","24%"],
+                     hoverAnimation:false,
+                     data:[{name:"pie1",value:100}],
+                     label:{
+                         
+                        position:"center",
+                        color:"#fff",
+                        formatter:function(){
+
+                            return `{icon|}\n{text|李华}`;
+                        },
+                        
+                        rich:{
+
+                            icon:{
+
+                                color:"#fff",
+                                fontSize:20,
+                                fontFamily:"icomoon",
+                            },
+                            text:{
+                                color:"#fff",
+                                fontSize:16,
+                                lineHeight:24,
+                                fontFamily:"Industry-Demi"
+                            }
+
+                        }
+                    
+                     },
+
+                },{
+
+                        type:"pie",
+                        color:["#fcaf41"],
+                        radius:["26%","26.5%"],
+                        startAngle:100,
+                        hoverAnimation:false,
+                        data:[
+                            {name:"pie1",value:14,itemStyle:{borderWidth:2,color:"#fcaf41",borderColor:"#e6a433"}},
+                            {name:"pie2",value:10},
+                            {name:"pie3",value:14,itemStyle:{borderWidth:2,color:"#fcaf41",borderColor:"#e6a433"}},
+                            {name:"pie4",value:10},
+                            {name:"pie5",value:14,itemStyle:{borderWidth:2,color:"#fcaf41",borderColor:"#e6a433"}},
+                            {name:"pie6",value:10},
+                        ],
+                        label:{
+                            show:false
+                        },
+
+                },{
+
+                        type:"pie",
+                        
+                        radius:["0%","20%"],
+                        center:["76%","40%"],
+                        hoverAnimation:false,
+                        itemStyle:{
+                            color:"#2196f3"
+                        },
+                        data:[{name:"pie1",value:100}],
+                        label:{
+                            
+                        position:"center",
+                        color:"#fff",
+                        formatter:function(){
+
+                            return `{icon|}\n{text|白文}`;
+                        },
+                        
+                        rich:{
+
+                            icon:{
+
+                                color:"#fff",
+                                fontSize:20,
+                                fontFamily:"icomoon",
+                            },
+                            text:{
+                                color:"#fff",
+                                fontSize:16,
+                                lineHeight:24,
+                                fontFamily:"Industry-Demi"
+                            }
+
+                        }
+
+                        },
+
+                        },{
+
+                        type:"pie",
+                        radius:["22%","22.5%"],
+                        center:["76%","40%"],
+                        startAngle:100,
+                        hoverAnimation:false,
+                        itemStyle:{
+                            color:"#2196f3"
+                        },
+                        data:[
+                            {name:"pie1",value:14,itemStyle:{borderWidth:2,color:"#2196f3",borderColor:"#03a9f4"}},
+                            {name:"pie2",value:10},
+                            {name:"pie3",value:14,itemStyle:{borderWidth:2,color:"#2196f3",borderColor:"#03a9f4"}},
+                            {name:"pie4",value:10},
+                            {name:"pie5",value:14,itemStyle:{borderWidth:2,color:"#2196f3",borderColor:"#03a9f4"}},
+                            {name:"pie6",value:10},
+                        ],
+                        label:{
+                            show:false
+                        },
+
+                }]
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>

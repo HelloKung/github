@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-gl.min.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
+    <link href="../../lib/icomoon/style.css" rel="stylesheet" />
+    <style>
+        .font{
+            font-family: 'icomoon' !important;
+            font-style:"normal"
+        }
+    </style>
+    <script src="../lib/hebei.js"></script>
+</head>
+<body>
+    <img src="../asset/img/chart10.png" style="width:491px; height: 356px; display:inline-block;">
+    <div id="container" style="width:500px; height: 360px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    
+    
+   
+    <script>
+
+         
+         let chart = echarts.init($("#container")[0]);
+         
+
+
+         let option = {
+
+                backgroundColor:"#0d1338",
+                tooltip: {},
+                visualMap: {
+                    min: 0,
+                    max: 1500,
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['High','Low'],
+                    seriesIndex: [1],
+                    inRange: {
+                        color: ['#e0ffff', '#006edd']
+                    },
+                    calculable : true
+                },
+                geo3D: [{
+                    map: '河北',
+                    roam: true,
+                    aspectScale:0.75,
+                    regionHeight:4,
+                    itemStyle: {
+                        
+                        color:"#292f5b",
+                        borderColor:"#3d72d4",
+                        borderWidth:1
+                    },
+                    label:{
+
+                        show:true,
+                        textStyle:{
+                            
+                            color:"#6dffe9",
+                            fontSize:5,
+                            fontWeight:300,
+                            backgroundColor:"rgba(0,0,0,0)"
+                        }
+                        
+                    },
+                    emphasis:{
+
+                        itemStyle:{
+
+                            color:"#3f73d3",
+                            borderColor:"#3d72d4",
+                            borderWidth:1
+                        },
+                        label:{
+                            show:true,
+                            color:"#75eddb"
+                        }
+                    },
+                    viewControl:{
+
+                        center:[-20,0,20],
+                        minAlpha:52, 
+                        maxAlpha:52,
+                        minBeta:8,
+                        maxBeta:8,
+                        minDistance:130,
+                        maxDistance:130
+
+
+                    }
+                },{
+                    map: '河北',
+                    roam: true,
+                    aspectScale:0.75,
+                    regionHeight:0.4,
+                    itemStyle: {
+                        
+                        color:"#3d72d4",
+                        borderColor:"#3d72d4",
+                        borderWidth:1
+                    },
+                    label:{
+
+                        show:false,
+                        color:"#60c0df"
+                    },
+                    emphasis:{
+
+                        itemStyle:{
+
+                            color:"#3d72d4",
+                            borderColor:"#3d72d4",
+                            borderWidth:1
+                        },
+                        label:{
+                            show:false,
+                            color:"#60c0df"
+                        }
+                    },
+                    viewControl:{
+
+                        center:[-20,0,20],
+                        minAlpha:52, 
+                        maxAlpha:52,
+                        minBeta:8,
+                        maxBeta:8,
+                        minDistance:130,
+                        maxDistance:130
+
+
+                    }
+                }],
+                geo:[{
+
+                    map: '河北',
+                    roam: true,
+                    aspectScale:0.75,
+                    regionHeight:4,
+                    itemStyle: {
+                        
+                        areaColor:"rgba(0,0,0,0)",
+                        borderColor:"rgba(0,0,0,0)",
+                        borderWidth:0
+                    },
+                    label:{
+
+                        show:false,
+                       
+                    },
+                    emphasis:{
+
+                        itemStyle:{
+
+                            color:"rgba(0,0,0,0)",
+                            borderColor:"rgba(0,0,0,0)",
+                            borderWidth:0,
+                        },
+                        label:{
+                            show:false
+                        }
+                    },
+                    viewControl:{
+
+                        center:[-20,0,20],
+                        minAlpha:52, 
+                        maxAlpha:52,
+                        minBeta:8,
+                        maxBeta:8,
+                        minDistance:130,
+                        maxDistance:130
+
+
+                    }
+               
+                }],
+                
+                
+                series : [{
+                   
+                        type: 'effectScatter',
+                        coordinateSystem: 'geo',
+                        data: [{
+                            name:"沧州市",value:[119.0995, 39.0006,10]
+                        }],
+                        itemStyle:{
+                            color:"#6cd6f5",
+                        },
+                        rippleEffect:{
+                            scale:3,
+                            brushType:"stroke",
+                            period:6
+                        },
+                        symbolSize:10
+                    
+                    }]
+               
+
+         }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>
