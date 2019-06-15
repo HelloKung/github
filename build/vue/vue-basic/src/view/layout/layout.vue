@@ -10,6 +10,7 @@
            
         <div class="view-container" :style="{width:!isCollapse?'calc(100% - 200px)':'calc(100% - 64px)'}">
           <tag-view/>
+          <bread-crumb/>
           <app-main/>
         </div>
       </div>
@@ -22,6 +23,7 @@
 import header   from './header'
 import sider    from './sider'
 import tagview  from './tagview'
+import breadcrumb  from './breadcrumb'
 import appmain  from './appmain'
 
 
@@ -47,7 +49,17 @@ import appmain  from './appmain'
        },
        methods: {
 
-         
+            notify(){
+
+                const h = this.$createElement;
+
+                this.$notify({
+                  title: '标题名称',
+                  message: h('i', { style: 'color: teal'}, '欢迎来到yitiaoxianyu的vue-base项目'),
+                  offset: 10
+                });
+
+            }
         
 
        },
@@ -56,6 +68,7 @@ import appmain  from './appmain'
           'headerBar': header,
           'siderBar': sider,
           'tagView': tagview,
+          'breadCrumb':breadcrumb,
           'appMain': appmain
        },
        computed:{
@@ -64,6 +77,11 @@ import appmain  from './appmain'
 
             return this.$store.state.menu.isCollapse;
           }
+
+       },
+       mounted(){
+
+          this.notify(); 
 
        }
   

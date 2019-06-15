@@ -8,7 +8,13 @@ const router = [{
     path: '/icon',
     name: 'icon',
     component:()=>import('@/view/platform/icon')
-  }]
+  },
+  {
+    path: '/custom',
+    name: 'custom',
+    component:()=>import('@/view/platform/custom')
+  } 
+]
 
 
 export default router;  

@@ -35,11 +35,12 @@
 
     </div>
     <div class="header-right-menu" >
+      
       <div class="user-container">       
-        <div class="box-100" style="font-size:20px;  display:flex; align-items:center;justify-content:center; color:#fff;">
+        <div class="box-100" >
             <i class="icon-user"></i> 
                 <el-dropdown trigger="click">
-                  <span style="margin-left:10px;cursor:pointer; color:#fff;font-size:18px;">admin</span>
+                  <span class="user-name" >admin</span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item icon="el-icon-setting" >
                       <span @click="setting">设置</span>
@@ -51,6 +52,8 @@
               </el-dropdown>
           </div> 
       </div>
+      <header-tip/>  
+      <search-bar/>
     </div>
 
   </div>
@@ -62,7 +65,11 @@
 import headerConfig from "@/config/layout/headerConfig.js";
 import siderConfig from "@/config/layout/siderConfig.js";
 import {getSession} from "@/utils/session";
-  
+
+import SearchBar from "@/components/SearchBar";
+import HeaderTip from "@/components/HeaderTip";
+
+
   export default {
     
     data() {
@@ -76,7 +83,9 @@ import {getSession} from "@/utils/session";
     
     },
     components:{
-     
+        
+        HeaderTip,
+        SearchBar
     },
     methods: {
     
@@ -199,7 +208,7 @@ import {getSession} from "@/utils/session";
 
                  width: 30px;
                  height: 30px;
-                 background: #fcaf41;
+                 background: #ffd04b;
                  text-align:center; 
                  cursor:pointer;
                  box-sizing: border-box;
@@ -250,15 +259,31 @@ import {getSession} from "@/utils/session";
       
       .header-right-menu{
 
-          width:400px;
-          float: left;
-          height: 50px;
-          background: rgb(84, 92, 100);
-          .user-container{
+        width:400px;
+        float: left;
+        height: 50px;
+        background: rgb(84, 92, 100);
+        .user-container{
             width:120px;
             height: 50px;
             float: right;
-          }
+            padding: 15px 0px;
+            &>div{
+                font-size:14px;  
+                display:flex; 
+                align-items:center;
+                justify-content:center; 
+                color:#fff;
+                border:none;
+                border-left:1px solid #fff;
+                .user-name{
+                    margin-left:10px;
+                    cursor:pointer; 
+                    color:#fff;
+                    font-size:16px;
+                }
+            }
+        }
       }
 
    }

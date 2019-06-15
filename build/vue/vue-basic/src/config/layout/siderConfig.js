@@ -11,7 +11,15 @@ const config = [{
         id:"icon",
         title:"图标库",
         icon:"icon-gift"
-   }]   
+   },{
+
+        id:"custom",
+        title:"自定义配置",
+        icon:"icon-cogs"
+   }]
+   
+ 
+   
 
 },{
 

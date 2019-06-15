@@ -34,6 +34,28 @@
                 </router-link>
             </scroll-pane>
         </div>    
+        <div class="collect-list-container">
+            <el-dropdown>
+                <el-button type="primary"  size="mini">
+                    <i class="el-icon-star-on el-icon--left"></i>收藏夹
+                </el-button>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                        tag="div"
+                        v-for="(item,index) in collect_list"
+                        :key="item.id"
+                    >
+                        <router-link  
+                           :to="item.id"
+                           
+                           tag="div"
+                        >
+                           <div class="box-100" @click="selectTag(item.id)">{{item.name}}</div>
+                        </router-link>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+        </div>
         <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
             <li @click="closeTag(selectedTag)">关闭当前</li>
             <!-- $t() -->
@@ -61,7 +83,14 @@ export default {
             visible: false,
             top: 0,
             left: 0,
-            selectedTag: null
+            selectedTag: null,
+            collect_list:[{
+                name:"表格封装",
+                id:"ElementTable"
+            },{
+                name:"钻取地图",
+                id:"drillmap"
+            }]
 
         }
 
@@ -121,7 +150,7 @@ export default {
         
         },
         selectTag(id){
-
+            
             this.$store.dispatch("selectTagView",id).then(res =>{
                 
                 this.$store.dispatch("setSiderMenu",this.activefirstMenuId);
@@ -220,7 +249,7 @@ export default {
         transform: ease-in-out 2s all;
       }
       .scrollbar{
-          width: calc(100% - 40px);
+          width: calc(100% - 120px);
           height: 100%;
           float: left;
           position:relative;
@@ -268,10 +297,25 @@ export default {
                   background: #49af4d;
                   transform: ease-in-out 2s all;
               }
-          }
-      }
+            }
+        }
+        .collect-list-container{
+            width:80px; 
+            padding-right:6px;
+            float: left;
+            .el-dropdown{
+                float: right; 
+                &>button{
+                    height:24px;
+                    width:80px;
+                    line-height: 22px;
+                    padding: 0px 10px;
+                }
 
-       .contextmenu {
+            }
+        }
+
+        .contextmenu {
             margin: 0;
             background: #fff;
             z-index: 100;
@@ -283,13 +327,13 @@ export default {
             font-weight: 400;
             color: #333;
             box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
-            li {
-            margin: 0;
-            padding: 7px 16px;
-            cursor: pointer;
-            &:hover {
-                background: #eee;
-            }
+                li {
+                    margin: 0;
+                    padding: 7px 16px;
+                    cursor: pointer;
+                &:hover {
+                    background: #eee;
+                }
             }
         }
    }
