@@ -7,7 +7,7 @@
 </template>
 
 <script>
-const padding = 15 // tag's padding
+const padding = 5 // tag's padding
 
 export default {
   name: 'ScrollPane',
@@ -44,6 +44,8 @@ export default {
       const $targetLeft = $target.offsetLeft
       const $targetWidth = $target.offsetWidth
 
+      
+      console.log($targetLeft,this.left) 
       if ($targetLeft < -this.left) {
         // tag in the left
         this.left = -$targetLeft + padding
@@ -52,6 +54,7 @@ export default {
         // eslint-disable-line
       } else {
         // tag in the right
+        
         this.left = -($targetLeft - ($containerWidth - $targetWidth) + padding)
       }
     }

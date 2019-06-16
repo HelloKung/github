@@ -22,6 +22,7 @@
                 
                     v-for="item in tagViewList"
                     class="tag"
+                    ref="tag"
                     :class="{'active':activeViewId == item.id}" 
                     :key="item.id"
                     :to="item.id"
@@ -158,6 +159,18 @@ export default {
             })
 
         },
+        moveToCurrentTag() {
+            const tags = this.$refs.tag
+            this.$nextTick(() => {
+                for (const tag of tags) {
+
+                    if (tag.to === this.activeViewId) {
+                        this.$refs.scrollPane.moveToTarget(tag.$el)
+                        break
+                    }
+                }
+            })
+        },
          
 
 
@@ -195,6 +208,12 @@ export default {
     },
     watch:{
 
+       
+        $route() {
+
+            this.moveToCurrentTag()
+        
+        },
         visible(value) {
 
             if (value) {
@@ -267,7 +286,7 @@ export default {
                    font-size: 10px;
                    line-height: 24px;
                    margin-left: 6px;
-                   float:left;
+                   display: inline-block;
                    color: #fff;
                    background: #009688;
                    box-shadow:0px 0px 1px #333;
