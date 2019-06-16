@@ -5,7 +5,7 @@
             <el-menu-item :index="option.id">
                 <template>
                     <i :class="option.icon" style="color:#fff;padding-right:10px;"/>
-                    <span slot="title">{{option.title}}</span>
+                    <span slot="title">{{$t(option.title)}}</span>
                 </template>
             </el-menu-item>
          </router-link>
@@ -14,7 +14,7 @@
            <el-submenu :index="option.id">
                 <template slot="title">
                     <i :class="option.icon" style="color:#fff;padding-right:10px;"/>
-                    <span slot="title">{{option.title}}</span>
+                    <span slot="title">{{$t(option.title)}}</span>
                 </template>
                 <sider-item v-for="item in option.children" :key="item.id" :option="item"></sider-item>
            </el-submenu>
@@ -58,7 +58,7 @@
         mounted(){
 
              
-             this.$router.push("/"+ getSession("activeSiderMenuId"));
+             this.$router.push(getSession("activeSiderMenuId"));
 
         }
        
@@ -73,7 +73,7 @@
 
 .router-link-active{
 
-   li{
+    li{
       
       &>i{
       

@@ -1,0 +1,19 @@
+{
+    "我的平台":"Platform",
+    "我的练习":"Practice",
+    "模块打包":"Module",
+    "首页":"Platformfirst",
+    "图标库":"Icon",
+    "自定义配置":"Custom",
+    "表格":"Table",
+    "表格封装":"ElementTable",
+    "Word报告":"Word",
+    "图形":"Chart",
+    "时间轴地图":"Timemap",
+    "钻取地图":"Drillmap",
+    "动态图形":"Dynamicchart",
+    "地图":"Map",
+    "集成":"Integrate",
+    "模块首页":"ModuleIndex",
+    "收藏夹":"Collector"
+}

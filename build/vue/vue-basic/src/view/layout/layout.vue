@@ -51,12 +51,20 @@ import appmain  from './appmain'
 
             notify(){
 
-                const h = this.$createElement;
-
+               
                 this.$notify({
-                  title: '标题名称',
-                  message: h('i', { style: 'color: teal'}, '欢迎来到yitiaoxianyu的vue-base项目'),
-                  offset: 10
+                  title: '工程介绍',
+                  dangerouslyUseHTMLString: true,
+                  message: `
+                                    
+                                <p>欢迎来到 yitiaoxianyu 的 vue-base 项目</p><br/>
+                                功能介绍：<br/>
+                                <p style="text-indent:10px;">工程包括菜单栏，标签栏，收藏栏，模糊查询，封装表格和一些图形，
+                                  地图展示，语言切换，elementUI自定义主题。</p><br/>
+                                <span style="color:#ff0000">注意:</span>
+                                <p style="text-indent:10px;color:#ff0000">elementUI自定义主题,登录,登出需在连接外网情况下才能使用</p><br/>
+                            `,
+                  offset: 40
                 });
 
             }

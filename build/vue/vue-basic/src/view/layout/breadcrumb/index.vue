@@ -9,7 +9,7 @@
                 :key = index
                 
                 >
-                {{item.title}}  
+                {{$t(item.title)}}  
                 </el-breadcrumb-item>
             </el-breadcrumb>
         </div>
@@ -217,7 +217,7 @@ export default {
                      
         color: #fff !important;   
         font-size:12px;
-
+        cursor:default !important;
     }
 
 

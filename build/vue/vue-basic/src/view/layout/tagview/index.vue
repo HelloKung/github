@@ -28,7 +28,7 @@
                     @contextmenu.prevent.native="openMenu(item.id,$event)"
                 >   
                     <div class="tag-content" @click="selectTag(item.id)">
-                        <div class="title">{{item.name}}</div>
+                        <div class="title">{{$t(item.name)}}</div>
                         <div class="el-icon-circle-close icon" @click.prevent.stop="closeTag(item.id)"></div>
                     </div>
                 </router-link>
@@ -37,7 +37,7 @@
         <div class="collect-list-container">
             <el-dropdown>
                 <el-button type="primary"  size="mini">
-                    <i class="el-icon-star-on el-icon--left"></i>收藏夹
+                    <i class="el-icon-star-on el-icon--left"></i>{{$t("收藏夹")}}
                 </el-button>
                 <el-dropdown-menu slot="dropdown">
                     <el-dropdown-item
@@ -50,7 +50,7 @@
                            
                            tag="div"
                         >
-                           <div class="box-100" @click="selectTag(item.id)">{{item.name}}</div>
+                           <div class="box-100" @click="selectTag(item.id)">{{$t(item.name)}}</div>
                         </router-link>
                     </el-dropdown-item>
                 </el-dropdown-menu>
@@ -249,7 +249,7 @@ export default {
         transform: ease-in-out 2s all;
       }
       .scrollbar{
-          width: calc(100% - 120px);
+          width: calc(100% - 140px);
           height: 100%;
           float: left;
           position:relative;
@@ -300,14 +300,16 @@ export default {
             }
         }
         .collect-list-container{
-            width:80px; 
+            min-width:80px; 
+            max-width: 100px;
             padding-right:6px;
-            float: left;
+            float: right;
             .el-dropdown{
                 float: right; 
                 &>button{
                     height:24px;
-                    width:80px;
+                    min-width:80px; 
+                    max-width: 100px;
                     line-height: 22px;
                     padding: 0px 10px;
                 }

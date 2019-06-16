@@ -138,7 +138,7 @@ export default {
 
 .searchbar-container{
 
-    width:200px;
+    /* width:200px; */
     height:100%;
     float:right;
     margin-right: 10px;
@@ -147,7 +147,7 @@ export default {
 
 .search-input{
 
-
+    
 
 
 }       
@@ -155,7 +155,7 @@ export default {
 
 .searchbar-container .search-input .icon{
 
-    float: right;
+    float: left;
     margin-right:0;
     line-height: 30px;
     display: inline-block;
@@ -168,8 +168,17 @@ export default {
     background: #676b6f;
     border:1px solid rgba(204,204,204,.6);
     box-shadow: 0px 0px 1px #ccc;
+    transition: ease-in-out 0.4s all; 
 
 }
+
+.searchbar-container .search-input .icon::before{
+
+    margin-left: 1px;
+    margin-bottom: 1px; 
+}
+
+
 .searchbar-container .search-input  .el-input__inner{
 
     float: right;
@@ -182,7 +191,7 @@ export default {
     color:#fff;
     background: #676b6f;
     padding-left: 0;
-    
+    transition: ease-in-out 0.4s all; 
 }
 
       
@@ -193,7 +202,7 @@ export default {
     box-shadow: 0px 0px 2px #3e474e;
     float: right;
     border-radius: 5px;
-
+    transition: ease-in-out 0.4s all; 
 }            
 .searchbar-container .active .icon{
 
@@ -208,6 +217,7 @@ export default {
     border-radius: 0;
     border:none;
     box-shadow:none;
+    transition: ease-in-out 0.4s all; 
 }
 
 .searchbar-container .active .el-input__inner{

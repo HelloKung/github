@@ -112,6 +112,7 @@
   .siderbar{
 
     height: 100%;
+    max-width: 200px;
     background:#545c64;
     position: relative;
     overflow: hidden;

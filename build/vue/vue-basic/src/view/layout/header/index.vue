@@ -22,11 +22,11 @@
             <el-menu-item v-for="item in headerMenuConfig" :index="item.id" :key="item.id">
               <template v-if="!item.href">
                   <i class="icon" :class="item.icon"></i>
-                  <span slot="title">{{item.title}}</span>
+                  <span slot="title">{{$t(item.title)}}</span>
               </template>
               <template v-else="item.href">
                   <i class="icon" :class="item.icon"></i>
-                  <a :href="item.href" target="_blank">{{item.title}}</a>
+                  <a :href="item.href" target="_blank">{{$t(item.title)}}</a>
               </template>
               
             </el-menu-item>
@@ -52,7 +52,9 @@
               </el-dropdown>
           </div> 
       </div>
-      <header-tip/>  
+      <header-tip/>
+      <theme-picker v-if="onLine"/>
+      <language-change/>  
       <search-bar/>
     </div>
 
@@ -68,7 +70,8 @@ import {getSession} from "@/utils/session";
 
 import SearchBar from "@/components/SearchBar";
 import HeaderTip from "@/components/HeaderTip";
-
+import ThemePicker  from "@/components/ThemePicker";
+import LanguageChange from "@/components/LanguageChange"
 
   export default {
     
@@ -85,7 +88,9 @@ import HeaderTip from "@/components/HeaderTip";
     components:{
         
         HeaderTip,
-        SearchBar
+        SearchBar,
+        LanguageChange,
+        ThemePicker
     },
     methods: {
     
@@ -158,6 +163,10 @@ import HeaderTip from "@/components/HeaderTip";
        activefirstMenuId(){
 
            return this.$store.state.menu.activefirstMenuId;
+       },
+       onLine(){
+
+           return window.navigator.onLine;
        }
 
 
@@ -230,7 +239,7 @@ import HeaderTip from "@/components/HeaderTip";
       .header-center-menu{
 
           height: 50px;
-          width:calc(100% - 600px);
+          width:calc(100% - 700px);
           float:left;
           .el-menu{
             border-bottom:none;
@@ -259,7 +268,7 @@ import HeaderTip from "@/components/HeaderTip";
       
       .header-right-menu{
 
-        width:400px;
+        width:500px;
         float: left;
         height: 50px;
         background: rgb(84, 92, 100);
