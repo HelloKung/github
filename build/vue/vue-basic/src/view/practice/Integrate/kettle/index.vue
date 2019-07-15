@@ -6,7 +6,9 @@
             <div style="display:inline-block;">请求bat脚本数据</div>
             <el-button type="primary" @click="HandleClickRunBat" size="mini">执行</el-button>
         </el-row>
-    
+        
+
+
     </div>
 </template>
 
@@ -15,7 +17,6 @@
 <script>
 
 import queryApi from "@/api/practice/kettle";
-
 
 
 export default {
@@ -63,6 +64,7 @@ export default {
 
 
     },
+  
     mounted(){
 
 

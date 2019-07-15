@@ -1,7 +1,7 @@
 
 <template>
     <div class="box-100">
-        <el-row class="box-100">
+        <el-row >
             <div class="warpper">
                 <line-chart/>
             </div>
@@ -51,7 +51,7 @@ export default {
    height:calc(50% - 30px);
    margin-left: 20px;
    margin-top: 20px;
-   border: 1px solid #000; 
+   /* border: 1px solid #000;  */
    float: left;
 
 }

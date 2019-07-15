@@ -1,0 +1,510 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 8391,
+      "max": [
+        1.6157399415969849,
+        1.759369969367981,
+        3.2286999225616455
+      ],
+      "min": [
+        -5.8349800109863281,
+        -5.5769500732421875,
+        -1.0003199577331543
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 100692,
+      "componentType": 5126,
+      "count": 8391,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 8391,
+      "max": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 8391,
+      "max": [
+        0.97958999872207642,
+        0.65671998262405396
+      ],
+      "min": [
+        0.083520002663135529,
+        0.057950001209974289
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 19473,
+      "max": [
+        8390
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 201384,
+      "componentType": 5126,
+      "count": 360,
+      "max": [
+        1,
+        377.69485473632812,
+        1.6889799833297729
+      ],
+      "min": [
+        -5.505469799041748,
+        -647.06854248046875,
+        -1.4333100318908691
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 205704,
+      "componentType": 5126,
+      "count": 360,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 77892,
+      "componentType": 5125,
+      "count": 540,
+      "max": [
+        359
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 210024,
+      "componentType": 5126,
+      "count": 100,
+      "max": [
+        1,
+        1,
+        0
+      ],
+      "min": [
+        -1,
+        -1,
+        -0.045839998871088028
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 211224,
+      "componentType": 5126,
+      "count": 100,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 134256,
+      "componentType": 5126,
+      "count": 100,
+      "max": [
+        1,
+        0,
+        0,
+        1
+      ],
+      "min": [
+        0,
+        0,
+        0,
+        -1
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 67128,
+      "componentType": 5126,
+      "count": 100,
+      "max": [
+        0.46055999398231506,
+        0.44275000691413879
+      ],
+      "min": [
+        0.45109999179840088,
+        0.43329998850822449
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 80052,
+      "componentType": 5125,
+      "count": 318,
+      "max": [
+        99
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Rafael_182 (https://sketchfab.com/Rafael_182)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/10b2bb7a9e3f4491b5caa278eb4aae4a",
+      "title": "Modern House Low Poly"
+    },
+    "generator": "Sketchfab-3.49.1",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 81324,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 67928,
+      "byteOffset": 81324,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 212424,
+      "byteOffset": 149252,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 135856,
+      "byteOffset": 361676,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 497532,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Material_baseColor.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Material",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "baseColorTexture": {
+          "index": 0,
+          "texCoord": 0
+        },
+        "metallicFactor": 0.65415396339999998,
+        "roughnessFactor": 0.59999999999999998
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "name": "Material.001",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          0.0067251688000000004,
+          0.14758262289999999,
+          0.1043389352,
+          0.59999999999999998
+        ],
+        "metallicFactor": 0.54439786590000006,
+        "roughnessFactor": 0.59999999999999998
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Cube_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Cubo_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5
+          },
+          "indices": 7,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Plano_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 9,
+            "POSITION": 8,
+            "TANGENT": 10,
+            "TEXCOORD_0": 11
+          },
+          "indices": 12,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3,
+        5,
+        7,
+        9
+      ],
+      "name": "Root"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        1.44835,
+        0,
+        0,
+        0,
+        0,
+        1.9164999999999999,
+        0,
+        0,
+        0,
+        0,
+        1.44835,
+        0,
+        3.6215200000000003,
+        3.7488800000000002,
+        1.4494499999999999,
+        1
+      ],
+      "name": "Cube"
+    },
+    {
+      "mesh": 0,
+      "name": "Cube_0"
+    },
+    {
+      "children": [
+        6
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0,
+        4.0826700000000002,
+        9.5680599999999991,
+        8.4153900000000004,
+        1
+      ],
+      "name": "Sol"
+    },
+    {
+      "name": "Sol"
+    },
+    {
+      "children": [
+        8
+      ],
+      "matrix": [
+        1.40855,
+        0,
+        0,
+        0,
+        0,
+        0.013580000000000004,
+        0,
+        0,
+        0,
+        0,
+        0.26256000000000002,
+        0,
+        3.6349800000000001,
+        1.8772599999999999,
+        3.1589399999999999,
+        1
+      ],
+      "name": "Cubo"
+    },
+    {
+      "mesh": 1,
+      "name": "Cubo_0"
+    },
+    {
+      "children": [
+        10
+      ],
+      "matrix": [
+        7.9117500000000005,
+        0,
+        0,
+        0,
+        0,
+        7.9117500000000005,
+        0,
+        0,
+        0,
+        0,
+        7.9117500000000005,
+        0,
+        0.46889000000000003,
+        0,
+        0,
+        1
+      ],
+      "name": "Plano"
+    },
+    {
+      "mesh": 2,
+      "name": "Plano_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    }
+  ]
+}
+

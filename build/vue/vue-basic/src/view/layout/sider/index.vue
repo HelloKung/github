@@ -1,5 +1,8 @@
 <template>
-   <section class="siderbar">
+   <section 
+      class="siderbar"
+      :style="{backgroundColor:siderbgColor}"
+   >
       <div class="siderbar-scrollbar">
         <el-menu
             :default-active="rootMenuId"
@@ -8,7 +11,7 @@
             @open="handleOpen"
             @close="handleClose"
             :collapse="isCollapse"
-            background-color="#545c64"
+            :background-color="siderbgColor"
             text-color="#fff"
             
           >
@@ -32,6 +35,7 @@
   import {getSession} from "@/utils/session";
 
   import PerfectScrollbar from 'perfect-scrollbar'
+  import { mapState } from "vuex";
 
   export default {
     
@@ -80,6 +84,11 @@
     },
     computed:{
 
+        ...mapState({
+           
+            siderbgColor: state => state.config.siderbgColor
+          
+        }), 
         siderMenu(){
             
             return this.$store.state.menu.siderMenu;
@@ -112,8 +121,7 @@
   .siderbar{
 
     height: 100%;
-    max-width: 200px;
-    background:#545c64;
+    width:100%;
     position: relative;
     overflow: hidden;
   }

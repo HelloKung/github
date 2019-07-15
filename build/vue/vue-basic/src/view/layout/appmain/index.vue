@@ -21,7 +21,6 @@ export default {
     .appmain-container{
 
         width: 100%;
-        height: calc(100% - 70px);
         overflow: auto;
     }
     .main-enter,.main-leave-to {

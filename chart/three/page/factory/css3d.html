@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="../../../echarts/lib/jquery.min.js"></script>
+</head>
+<body>
+    <div class="box-border">
+        <div class="tooltip">
+            <div class="tooltip-container">物品数量：100</div> 
+            <div class="oblique-line"></div>
+            <div class="line"></div>
+            <div class="bottom-icon"></div>
+        </div>
+    </div>
+
+    <div class="box-border">
+        <div class="wave-container">
+            <div class="wave"></div> 
+        </div>
+    </div>    
+    <button id="b1">go</button>
+    
+
+    <script>
+         
+        $("#b1").click(function(){
+
+
+            $(".bottom-icon,.tooltip-container").hide();
+            $(".line").css({height:0});
+            $(".oblique-line").css({height:"0px",width:"0px"})
+
+            $(".bottom-icon").fadeIn();
+            $(".line").animate({height:"120px"},500,"swing",function(){
+
+                $(".oblique-line").animate({height:"31px",width:"50px"},500,"swing",function(){
+
+                    $(".tooltip-container").fadeIn();
+
+                })
+
+            })
+            
+
+
+
+
+        })
+
+
+
+    </script>    
+</body>
+</html>

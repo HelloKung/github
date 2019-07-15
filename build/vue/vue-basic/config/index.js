@@ -62,10 +62,13 @@ module.exports = {
     //index: path.resolve(__dirname, '../dist', MODULE, 'index.html'), 
     //htmlTemplate:htmlTemplate,
     // Paths
+    
     assetsRoot: path.resolve(__dirname, '../dist'),
     //assetsRoot: process.env.MODE_ENV === 'separate' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist'),
     //assetsRoot: MODULE == 'product' ? path.resolve(__dirname, '../dist', MODULE) : path.resolve(__dirname, '../dist'),
+    //assetsRoot: process.env.MODULE_ENV === 'app' ? path.resolve(__dirname, '../dist') : path.resolve(__dirname, '../dist', MODULE),
     
+
     assetsSubDirectory: 'static',
     assetsPublicPath: './',
 
@@ -73,7 +76,7 @@ module.exports = {
      * Source Maps
      */
 
-    productionSourceMap: true,
+    productionSourceMap: false,
     // https://webpack.js.org/configuration/devtool/#production
     devtool: '#source-map',
 

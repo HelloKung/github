@@ -6,13 +6,18 @@
       
       <div class="main-container">
         
-        <sider-bar class="siderbar-container" :class="{'close-siderbar':isCollapse}"/>
-           
-        <div class="view-container" :style="{width:!isCollapse?'calc(100% - 200px)':'calc(100% - 64px)'}">
-          <tag-view/>
-          <bread-crumb/>
-          <app-main/>
-        </div>
+          <template >
+              <sider-bar class="siderbar-container" :class="{'close-siderbar':isCollapse}"/>
+                
+              <div class="view-container" :style="{width:!isCollapse?'calc(100% - 200px)':'calc(100% - 64px)'}">
+                <tag-view/>
+                <bread-crumb/>
+                <app-main  class="appmain-container"/>
+              </div>
+          </template>
+          
+          
+
       </div>
    
   </div>    
@@ -25,7 +30,8 @@ import sider    from './sider'
 import tagview  from './tagview'
 import breadcrumb  from './breadcrumb'
 import appmain  from './appmain'
-
+import splitPane from '@/components/SplitPane'
+import { mapState } from 'vuex'
 
 
   export default {
@@ -77,10 +83,16 @@ import appmain  from './appmain'
           'siderBar': sider,
           'tagView': tagview,
           'breadCrumb':breadcrumb,
-          'appMain': appmain
+          'appMain': appmain,
+          splitPane
        },
        computed:{
 
+          ...mapState({
+           
+            siderbarDrag: state => state.config.siderbarDrag
+          
+          }), 
           isCollapse(){
 
             return this.$store.state.menu.isCollapse;
@@ -124,24 +136,35 @@ import appmain  from './appmain'
           display: flex;
           flex-direction: row;
           justify-content: flex-start;
+          overflow: hidden;
+          
           .siderbar-container{
 
             height:100%;
-            
+            width: 200px;
+            transition: ease-in-out 0.5s width;
+
+          }
+          .close-siderbar{
+           
+            width:64px !important;
 
           }
           
           .view-container{
 
             height:100%;
-            transition:  all 0.5s;
+            transition:ease-in-out 0.5s width;
+            .appmain-container{
+
+              height: calc(100% - 60px);
+            
+            }
             
           }
        }
 
     }
-
-
 
 
     

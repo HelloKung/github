@@ -1,7 +1,10 @@
 <template>
    
   <div class="header-container"> 
-    <div class="header-logo">
+    <div 
+       class="header-logo"
+       :style="{backgroundColor:headerbgColor}"
+    >
       <div class="title">vue-basic</div>
       <div class="ham-container">
         <div class="ham" @click="collapse">
@@ -15,7 +18,7 @@
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
-          background-color="#545c64"
+          :background-color="headerbgColor"
           text-color="#fff"
           active-text-color="#ffd04b">
           
@@ -34,7 +37,10 @@
         </el-menu>
 
     </div>
-    <div class="header-right-menu" >
+    <div 
+        class="header-right-menu" 
+        :style="{backgroundColor:headerbgColor}"    
+    >
       
       <div class="user-container">       
         <div class="box-100" >
@@ -71,7 +77,10 @@ import {getSession} from "@/utils/session";
 import SearchBar from "@/components/SearchBar";
 import HeaderTip from "@/components/HeaderTip";
 import ThemePicker  from "@/components/ThemePicker";
-import LanguageChange from "@/components/LanguageChange"
+import LanguageChange from "@/components/LanguageChange";
+
+import { mapState } from "vuex";
+
 
   export default {
     
@@ -152,22 +161,28 @@ import LanguageChange from "@/components/LanguageChange"
     },
     computed:{
  
-       isCollapse(){
 
-            return this.$store.state.menu.isCollapse;
-       },
-       headerMenuConfig(){
+        ...mapState({
+           
+            headerbgColor: state => state.config.headerbgColor
+          
+        }), 
+        isCollapse(){
 
-           return this.$store.state.menu.headerMenuConfig; 
-       },
-       activefirstMenuId(){
+                return this.$store.state.menu.isCollapse;
+        },
+        headerMenuConfig(){
 
-           return this.$store.state.menu.activefirstMenuId;
-       },
-       onLine(){
+            return this.$store.state.menu.headerMenuConfig; 
+        },
+        activefirstMenuId(){
 
-           return window.navigator.onLine;
-       }
+            return this.$store.state.menu.activefirstMenuId;
+        },
+        onLine(){
+
+            return window.navigator.onLine;
+        }
 
 
     },
@@ -192,7 +207,7 @@ import LanguageChange from "@/components/LanguageChange"
           height: 50px;
           width: 200px;
           float: left;
-          background: rgb(84, 92, 100);
+        //   background: rgb(84, 92, 100);
           .title{
 
               height: 50px;
@@ -271,7 +286,6 @@ import LanguageChange from "@/components/LanguageChange"
         width:500px;
         float: left;
         height: 50px;
-        background: rgb(84, 92, 100);
         .user-container{
             width:120px;
             height: 50px;
