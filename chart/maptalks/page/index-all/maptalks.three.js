@@ -2,7 +2,8 @@
 
 var threeLayer = new maptalks.ThreeLayer('t', {
     forceRenderOnMoving : true,
-    forceRenderOnRotating : true
+    forceRenderOnRotating : true,
+      animation: true
 });
 threeLayer.prepareToDraw = function (gl, scene, camera) {
     var me = this;
@@ -22,14 +23,12 @@ threeLayer.prepareToDraw = function (gl, scene, camera) {
 
     //VillaBuildings(scene);
 
-    // var v = threeLayer.coordinateToVector3(map.getCenter());
+    var v = threeLayer.coordinateToVector3(map.getCenter());
 
-    // cube.position.x = v.x;
-    // cube.position.y = v.y;
-    // cube.position.z = v.z;
+    //createHLGC(v,scene);
   
 
-    // scene.add(cube)
+    
 
 
 };
