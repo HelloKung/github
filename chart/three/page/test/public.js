@@ -26,7 +26,7 @@ var axesHelper = new THREE.AxesHelper();
 scene.add(new THREE.AmbientLight(0x444444));
 let light = new THREE.SpotLight(0xffffff);
 
-light.position.set(100,100,0);
+light.position.set(100,100,100);
 //告诉平行光需要开启阴影投射
 
 light.castShadow = true;
@@ -100,7 +100,7 @@ function createCuboid({size,position,rotate,border,materials,remove}){ ///a => x
 
     let object = new THREE.BoxGeometry(size.a, size.c , size.b);
     
-    let material = new THREE.MeshBasicMaterial(materials);
+    let material = new THREE.MeshPhongMaterial(materials);
 
     let cube = new THREE.Mesh(object, material); 
     

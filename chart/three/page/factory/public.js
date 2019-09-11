@@ -30,7 +30,7 @@ var axesHelper = new THREE.AxesHelper();
 scene.add(new THREE.AmbientLight(0x444444));
 let light = new THREE.SpotLight(0xffffff);
 
-light.position.set(100,100,0);
+light.position.set(100,100,100);
 //告诉平行光需要开启阴影投射
 
 light.castShadow = true;

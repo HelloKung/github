@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="../lib/echarts.js"></script>
+    <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/jquery.min.js"></script>
+    <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
+    <style>
+        .font{
+            font-family: 'Industry-Demi' !important;
+            font-style:"normal"
+        }
+    </style>
+</head>
+<body>
+    <img src="../asset/img/chart11.png" style="width:618px; height: 566px; display:inline-block;">
+    <span class="font">123456</span>
+    <div id="container" style="width:600px; height: 600px;display:inline-block; margin:auto; border: 1px solid #ff0000;"></div>
+    <script>
+    
+        let chart = echarts.init($("#container")[0]);
+         
+        let time = [] 
+
+        let RadialBarOption = (i) => {
+
+            return {
+
+                name:"radialbar"+i, 
+                type: "custom",
+                coordinateSystem: 'polar',
+                renderItem: function(params, api) {
+                    var values = [api.value(0), api.value(1)];
+                    var coord = api.coord(values);
+                    
+                    
+                    if(params.dataIndexInside != 4) return;
+
+                    return {
+
+                        type:"group",
+                        children:[{
+                        
+                            type:"rect",
+                            position:[coord[0],coord[1]],
+                            rotation: coord[3] + Math.PI / 2,
+                            shape:{
+                            
+                                x:1,
+                                y:8, 
+                                width:6,
+                                height:20 + Math.random() * 60,
+                                r:2
+
+                            },
+                            style:{
+
+                                fill:"#8a5cfa"
+                            }
+
+                        },{
+                            
+                            type:"rect",
+                            progressive:true,
+                            position:[coord[0],coord[1]],
+                            rotation: coord[3] + Math.PI / 2,
+                            shape:{
+                                
+                                x:-7,
+                                y:8,
+                                width:6,
+                                height:20 + Math.random() * 60,
+                                r:2
+
+                            },
+                            style:{
+
+                                fill:"#ba82ef"
+                            }
+
+                        }]
+
+                    };
+                },
+                data: [0,0,0,0,i],
+                z:10,
+                animationDelay:500,
+
+            }    
+        }
+
+
+
+        let option = {
+            
+            backgroundColor:"#0f1234",
+            tooltip:{},
+            angleAxis: [{
+                axisLine:{
+                    lineStyle:{
+                        
+                      color:"#627dc4",
+                      width:2
+
+                    }
+                },
+                polarIndex:0,
+                splitLine:{show:false},
+                axisLabel:{
+                    color:"#627dc4",
+                    fontSize:16,
+                    interval:0,
+                },
+                splitNumber:44,
+                max:44,
+                min:0,
+                axisTick: {
+                    
+                    alignWithLabel: true,
+                    show:false
+                
+                },
+                //data:Array.from({length:43},(v,i)=>i+1)
+            },{
+                
+                type: 'category',
+                axisLine:{
+                    lineStyle:{
+                      
+                      color:"#627dc4",
+                      width:2,
+                      
+
+                    }
+                },
+                data: Array.from({length:44},(v,i)=>"lx"+i),
+                polarIndex:1,
+                splitLine:{show:false},
+                axisLabel:{
+                    show:false
+                },
+                splitNumber:44,
+                axisTick: {
+                    
+                    alignWithLabel: true,
+                    show:false
+                
+                },
+                z:14
+                //data:Array.from({length:43},(v,i)=>i+1)
+            },{
+                
+                type: 'category',
+                axisLine:{
+                    lineStyle:{
+                        
+                      show:false,  
+                      color:"#627dc4",
+                      width:2,
+
+                    }
+                },
+                startAngle:98,
+                data: Array.from({length:44},(v,i)=>"lx"+i),
+                polarIndex:2,
+                splitLine:{show:false},
+                axisLabel:{
+                    show:false
+                },
+                splitNumber:44,
+                axisTick: {
+                    
+                    alignWithLabel: true,
+                    show:false
+                
+                },
+                z:14
+                //data:Array.from({length:43},(v,i)=>i+1)
+            }],
+            radiusAxis: [{
+                data: Array.from({length:10},(v,i)=>"lx"+i),
+                polarIndex:0,
+                axisLabel:{
+                    show:false,
+                    interval:0,
+                    color:"#fff",
+                    fontSize:10,
+                    fontFamily:'Arial Unicode MS'
+                },
+                splitLine:{
+                    show:true,
+                    lineStyle:{
+                        
+                        color:"#627dc4",
+                        width:1
+  
+                    }
+                },
+                axisTick:{show:false},
+                axisLine:{show:false},
+                z: 10
+            },{
+                type:"value",
+                polarIndex:1,
+                axisLabel:{
+                    show:false,
+                    interval:0,
+                    color:"#fff",
+                    fontSize:10,
+                    fontFamily:'Arial Unicode MS'
+                },
+                splitLine:{
+                    show:true,
+                    lineStyle:{
+                        
+                        color:"#627dc4",
+                        width:1
+  
+                    }
+                },
+                splitNumber:7,
+                max:100,
+                axisTick:{show:false},
+                axisLine:{show:false},
+                z: 14
+            },{
+                type:"value",
+                polarIndex:2,
+                axisLabel:{
+                    show:false,
+                    interval:0,
+                    color:"#fff",
+                    fontSize:10,
+                    fontFamily:'Arial Unicode MS'
+                },
+                splitLine:{
+                    show:true,
+                    lineStyle:{
+                        
+                        color:"#627dc4",
+                        width:1
+  
+                    }
+                },
+                max:100,
+                axisTick:{show:false},
+                axisLine:{show:false},
+                z: 14
+            }],
+            polar: [{
+                
+                radius:"80%"
+
+            },{
+                
+                radius:"36%",
+                z:14
+
+            },{
+                
+                radius:"36%",
+                z:14
+
+            }],
+            graphic:{
+
+                elements:[]
+
+            },
+            series: [{
+              
+                
+                type:"bar",
+                data:[0,44,0,0,22],
+                coordinateSystem: 'polar',
+                polarIndex:0
+
+
+            },{
+                
+                name:"centerpie", ///中间背景
+                type:"pie",
+                radius:["0%","42%"],
+                hoverAnimation:false,
+                label:{show:false},
+                silent:false,
+                animation:false,
+                data:[{
+                    value:100,
+                    itemStyle:{
+                        
+                        color:"#0e0f2d",
+
+                    }
+                }],
+                z:11,
+                animationDelay:200, 
+
+            },{
+
+                type:"pie", ///装饰层
+                radius:["42%","42.5%"],
+                hoverAnimation:false,
+                label:{show:false},
+                silent:false,
+                animation:false,
+                data:[{
+                    value:100,
+                    itemStyle:{
+                        
+                        color:"#3359af",
+
+                    },
+                    emphasis:{
+                        
+                        color:"#3359af",
+
+                    }
+                }],
+                z:13,
+                animationDelay:200, 
+
+            },{
+
+                type:"pie",
+                radius:["40.8%","42%"],
+                startAngle:"-45",
+                hoverAnimation:false,
+                label:{show:false},
+                silent:false,
+                animation:false,
+                data:Array.from({length:4},(v,i)=>{
+                    
+                    return {
+
+                        value:25,
+                        itemStyle:{
+                            
+                            color:i % 2==0?"#5974b1":"rgba(0,0,0,0)",
+
+                        }
+
+                    }
+
+                }),
+                z:13,
+                animationDelay:200, 
+
+            },
+            {
+                
+                type:"pie",
+                radius:["0%","14%"],
+                hoverAnimation:false,
+                label:{show:false},
+                silent:false,
+                animation:false,
+                data:[{
+                    value:100,
+                    itemStyle:{
+                        
+                        color:"#0e0f2d",
+                    }
+                }],
+                z:15,
+                animationDelay:200, 
+
+            },
+            {
+                
+                type:"pie",
+                radius:["14%","15%"],
+                hoverAnimation:false,
+                label:{show:false},
+                silent:false,
+                animation:false,
+                data:[{
+                    value:100,
+                    itemStyle:{
+                        
+                        color:"#82b2f7",
+                       
+                    }
+                }],
+                z:15,
+                animationDelay:200, 
+
+            },
+            {
+
+                type:"line",
+                polarIndex:1,
+                coordinateSystem: 'polar',
+                lineStyle:{
+                    color:"#d6cf9b",
+                    shadowColor:"#dcd79b",
+                    shadowBlur:10
+                },
+                symbolSize:0,
+                data:[70].concat(Array.from({length:42},(v,i)=>Math.random()*40 + 59)).concat([80]),
+                smooth:true,
+                z:16,
+
+            },
+            {
+
+                type:"line",
+                polarIndex:2,
+                coordinateSystem: 'polar',
+                lineStyle:{
+                    color:"#d6cf9b",
+                    shadowColor:"#dcd79b",
+                    shadowBlur:10
+                },
+                symbolSize:0,
+                data:[80,70],
+                smooth:true,
+                z:16,
+
+            },
+            {
+
+                type:"pie",
+                radius:["13%","11%"],
+                symbolSize:0.1,
+                data:Array.from({length:36},(v,i)=>{
+
+                   let color = ["#823231","#8e3931","#873a41","#804844","#87403f","#ad4f46","#ab5c5a","#cb594e","#ce654a","#bf6452","#d76d54","#c86d67"]
+
+                    return {
+                        
+                        name:"bt"+i,
+                        value:1,
+                        itemStyle:{
+
+                            color:color[i%12],
+                            borderWidth:1,
+                            borderColor:"#0d1c38"
+                        }
+
+                    }  
+
+                }),
+                label:{show:false},
+                smooth:true,
+                z:17,
+
+            }
+            
+        ].concat(Array.from({length:44},(v,i)=>{return RadialBarOption(i)}))
+
+
+
+        }; 
+        
+        
+    
+         chart.setOption(option);
+    
+    
+    
+    </script>
+</body>
+</html>
