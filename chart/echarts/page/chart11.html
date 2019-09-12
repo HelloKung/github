@@ -8,6 +8,7 @@
 
     <script src="../lib/echarts.js"></script>
     <script src="../lib/echarts-liquidfill.min.js"></script>
+    <script src="../lib/chongqing.js"></script>
     <script src="../lib/jquery.min.js"></script>
     <link href="../../lib/fonts/fonts.css"  rel="stylesheet"/>
     <style>
@@ -24,10 +25,14 @@
     <script>
     
         let chart = echarts.init($("#container")[0]);
+
+        let w = 600,h = 600;
          
         let time = [] 
 
         let RadialBarOption = (i) => {
+
+            if(i == 0) return;
 
             return {
 
@@ -52,7 +57,7 @@
                             shape:{
                             
                                 x:1,
-                                y:8, 
+                                y:18, 
                                 width:6,
                                 height:20 + Math.random() * 60,
                                 r:2
@@ -72,7 +77,7 @@
                             shape:{
                                 
                                 x:-7,
-                                y:8,
+                                y:18,
                                 width:6,
                                 height:20 + Math.random() * 60,
                                 r:2
@@ -88,18 +93,101 @@
                     };
                 },
                 data: [0,0,0,0,i],
-                z:10,
+                z:11,
                 animationDelay:500,
 
             }    
         }
 
 
+        let triangleOption = (i) => {
+
+            
+            return {
+
+                name:"triangle"+i, 
+                type: "custom",
+                coordinateSystem: 'polar',
+                renderItem: function(params, api) {
+          
+                    console.log(params,api)
+                    var values = [api.value(0), api.value(1)];
+                    var coord = api.coord(values);
+                    
+                    
+                    if(params.dataIndexInside != 9) return;
+                    let d =  9; 
+
+                    return {
+
+                        type:"polygon",
+                        
+                        position:[coord[0],coord[1]],
+                        rotation: coord[3] - Math.PI / 2,
+                        shape:{
+
+                            points:[[-4,0 - d],[4,0 - d],[0,4 - d]],
+
+                        },
+                        style:{
+                            
+                            stroke:"#627dc4",
+                            fill:"rgba(0,0,0,0)"
+
+                        }
+                    };
+                },
+                data: [0,0,0,0,0,0,0,0,0,i],
+                z:100,
+                animationDelay:500,
+
+            }    
+
+
+        } 
+
+
+
+
+        let labelTextList = [
+            { text:"20",x:w/2 - 16,y:h*0.385,color:"#a1aed2",fontSize:12  },
+            { text:"40",x:w/2 - 16,y:h*0.364,color:"#a1aed2",fontSize:12  },
+            { text:"60",x:w/2 - 16,y:h*0.341,color:"#a1aed2",fontSize:12  },
+            { text:"80",x:w/2 - 16,y:h*0.320,color:"#a1aed2",fontSize:12  },
+            { text:"%", x:w/2 ,y:h*0.323,color:"#a1aed2",fontSize:8  },
+            { text:"1k 200",x:w/2 - 16,y:h*0.24,color:"#a1aed2",fontSize:12  },
+            { text:"2k 400",x:w/2 - 16,y:h*0.2,color:"#a1aed2",fontSize:12  },
+            { text:"3k 600",x:w/2 - 16,y:h*0.16,color:"#a1aed2",fontSize:12  },
+            { text:"4k 800",x:w/2 - 16,y:h*0.12,color:"#a1aed2",fontSize:12  },
+            { text:"(tb) (h)",x:w/2 - 15,y:h*0.1,color:"#a1aed2",fontSize:8  },
+        ];
+
+        let labelText = labelTextList.map(item => {
+
+            return {
+
+                type:"text",
+                style:{
+
+                    text:item.text,
+                    x:item.x,
+                    y:item.y,
+                    fill:item.color,
+                    fontSize:item.fontSize
+
+                },
+                z:14
+
+            }
+
+        })
+
+
 
         let option = {
             
             backgroundColor:"#0f1234",
-            tooltip:{},
+            //tooltip:{},
             angleAxis: [{
                 axisLine:{
                     lineStyle:{
@@ -113,8 +201,15 @@
                 splitLine:{show:false},
                 axisLabel:{
                     color:"#627dc4",
-                    fontSize:16,
+                    fontSize:14,
                     interval:0,
+                    formatter:function(param){
+
+                        if(param == 0) return "";
+                        else if(param == 1) return "1支队";
+                        else return param;
+
+                    }
                 },
                 splitNumber:44,
                 max:44,
@@ -130,6 +225,8 @@
                 
                 type: 'category',
                 axisLine:{
+
+                    show:false,
                     lineStyle:{
                       
                       color:"#627dc4",
@@ -157,9 +254,10 @@
                 
                 type: 'category',
                 axisLine:{
+                    
+                    show:false,  
                     lineStyle:{
                         
-                      show:false,  
                       color:"#627dc4",
                       width:2,
 
@@ -215,7 +313,7 @@
                     fontFamily:'Arial Unicode MS'
                 },
                 splitLine:{
-                    show:true,
+                    show:false,
                     lineStyle:{
                         
                         color:"#627dc4",
@@ -239,7 +337,7 @@
                     fontFamily:'Arial Unicode MS'
                 },
                 splitLine:{
-                    show:true,
+                    show:false,
                     lineStyle:{
                         
                         color:"#627dc4",
@@ -267,9 +365,87 @@
                 z:14
 
             }],
+            radar: [{
+                    indicator: [
+                        { text: '' },
+                        
+                    ],
+                    radius: ["15%","32%"],
+                    startAngle: 90,
+                    splitNumber: 4,
+                    shape: 'circle',
+                    name: {
+                        formatter:'{value}',
+                        textStyle: {
+                            color:'#72ACD1'
+                        }
+                    },
+                    splitArea: {
+                        areaStyle: {
+                            color: ['rgba(39,83,114,0.1)'],
+                            shadowBlur: 10
+                        }
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: '#30547e'
+                        }
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            color: '#30547e'
+                        }
+                    },
+                    z:14
+              
+            }],
+            geo:{
+
+                map:"重庆市",
+                roam:true,
+                z:11,
+                zoom:0.9,
+                itemStyle:{
+
+                    areaColor:new echarts.graphic.RadialGradient(0.5, 0.5, 0.5, [{
+                        offset: 0,
+                        color: '#5596ec'
+                    },{
+                        offset: 0.3,
+                        color: '#5596ec'
+                    },{
+                        offset: 1,
+                        color: 'rgba(15,18,52,0)'
+                    }]),
+                    borderColor:"#0f1234"
+
+                },
+                silent:true
+
+
+            },
             graphic:{
 
-                elements:[]
+                elements:[{
+
+                    type:"line",
+                    shape:{
+
+                        x1:w/2,
+                        y1:h/2,
+                        x2:w/2,
+                        y2:h*0.1 - 20
+
+                    },
+                    style:{
+                        
+                        stroke:"#488de6"
+
+                    },
+                    z:14
+
+
+                }].concat(labelText)
 
             },
             series: [{
@@ -298,7 +474,7 @@
 
                     }
                 }],
-                z:11,
+                z:10,
                 animationDelay:200, 
 
             },{
@@ -427,7 +603,7 @@
 
                 type:"pie",
                 radius:["13%","11%"],
-                symbolSize:0.1,
+                hoverAnimation:false,
                 data:Array.from({length:36},(v,i)=>{
 
                    let color = ["#823231","#8e3931","#873a41","#804844","#87403f","#ad4f46","#ab5c5a","#cb594e","#ce654a","#bf6452","#d76d54","#c86d67"]
@@ -453,14 +629,27 @@
             }
             
         ].concat(Array.from({length:44},(v,i)=>{return RadialBarOption(i)}))
+         .concat(Array.from({length:44},(v,i)=>{return triangleOption(i)})) 
+
+          
 
 
 
         }; 
         
         
+
+        $.get('../lib/chongqing.json', function (chongqingJson) {
+
+ 
+            console.log(chongqingJson)
+
+            echarts.registerMap('重庆市', chongqingJson);
+ 
+            chart.setOption(option);
+        });
     
-         chart.setOption(option);
+         
     
     
     
