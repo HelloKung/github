@@ -48,7 +48,7 @@ export default class barChart extends Component{
                     })
                 },
                 bmap: {
-                    center: [123.43,41.81],
+                    center: [116.401394,39.921797],
                     zoom: 12,
                     //roam: true,
                     mapStyle: {
