@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>threejs-basic-geometry</title>
+    <style>
+        body{
+            font-family: Monospace;
+            background: #f0f0f0;
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        #chart{
+
+            width:300px;
+            height: 300px;
+
+
+        }
+        #container{
+            
+        }
+        .label{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width:100px;
+            height: 60px;
+            /* border:1px solid #ff0000; */
+            left:635px;
+            top:200px;
+            flex-direction: column;
+        }
+        .percent{
+               
+            color:#fff;   
+            font-size:20px;
+
+        }
+        .height{
+
+            color:#9abcc1;
+            font-size:12px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="./three.min.js"></script>
+<!-- <script src="./CSS3DRenderer.js"></script>
+<script src="../../js/renderers/CSS2DRenderer.js"></script>
+<script src="../../js/loaders/SVGLoader.js"></script> -->
+
+
+<div id="container">
+   <div id = "chart"></div>
+
+
+</div>
+
+<div class="label">
+    <div class="percent">20.0%</div>
+    <div class="height">1-10mm</div>
+</div>
+
+<script type="text/javascript">
+
+    //检测webgl的支持情况
+
+    var container,controls;
+    var camera, scene, renderer;
+    var CSS2DRenderer,CSS3Drenderer;
+    let curHeight = 6,curIndex = 0,curT = 1,t = 0; //t以100为周期
+    
+    let shape1 = null,shape2 = null,shape3 = null,shape4 = null,shape5 = null,shape6 = null;
+
+    let bg;
+
+    let data = [{
+        angle:60,color:"#b8e94a",startAngle:30
+    },{
+        angle:60,color:"#4380e2",startAngle:90
+    },{
+        angle:120,color:"#62c6a3",startAngle:150
+    },{
+        angle:80,color:"#84eaee",startAngle:270
+    },{
+        angle:40,color:"#efd151",startAngle:350
+    }]
+
+
+    main();
+    render();
+    //主函数
+    function main(){
+        //添加一个div元素
+        container = document.getElementById('chart')
+        // document.body.appendChild(container);
+        scene = new THREE.Scene();//创建一个新场景
+        //添加一个透视相机
+        camera = new THREE.PerspectiveCamera(30,
+                      window.innerWidth/window.innerHeight, 1, 1000);
+        camera.position.set(100, 200, 300);//设置相机位置
+        camera.lookAt(new THREE.Vector3(0,0,0));//让相机指向原点
+
+        //渲染
+        //antialias:true增加抗锯齿效果
+        renderer = new THREE.WebGLRenderer({antialias:true});
+        renderer.setClearColor(new THREE.Color(0x000000));//设置窗口背景颜色为黑
+        renderer.setSize(window.innerWidth, window.innerHeight);//设置窗口尺寸
+        //将renderer关联到container，这个过程类似于获取canvas元素
+        container.appendChild(renderer.domElement);
+        //给场景添加光源
+        //自然光
+        var ambientLight = new THREE.AmbientLight( 0x606060 );
+        scene.add( ambientLight );
+        //平行光源
+        var directionalLight = new THREE.DirectionalLight( 0xffffff );
+        directionalLight.position.set( 1, 2, 0.5 ).normalize();
+        scene.add( directionalLight );
+
+        
+
+
+      
+
+        for(let i = 0 ;i < data.length ;i++){
+
+            cylinder(data[i].color,data[i].startAngle,data[i].angle,i);
+
+
+        }
+
+
+
+        
+        shape1 = drawShape(1);
+        shape2 = drawShape(2);
+        shape3 = drawShape(3);
+        shape4 = drawShape(4);
+        shape5 = drawShape(5);
+        //shape6 = drawShape(6);
+
+        var r = 28.8;
+        var line = new THREE.Line( 
+                
+                   new THREE.BufferGeometry().setFromPoints( 
+                        Array.from({length:61},(v,i)=>
+                        new THREE.Vector2(
+                            r*Math.cos(i*6.0/180*Math.PI),
+                            r*Math.sin(i*6.0/180*Math.PI)
+                        ))
+                    ), 
+                   new THREE.LineBasicMaterial( { color: "#06fdea" } ) 
+                   
+                );
+
+        line.position.set(0, -6.5, 0);//设置圆柱坐标
+        line.rotation.set(Math.PI/2,0,0); 
+        scene.add(line)  
+
+       
+        
+
+        //var planeGeometry = new THREE.PlaneGeometry( 100, 100);
+    
+        //var texture = new THREE.ImageUtils.loadTexture("./circle.png");  
+        
+        // texture.wrapS = 1001;
+        // texture.wrapT = 1001;
+        // texture.repeat.set(1, 1); //贴图x,y平铺数量
+
+
+        //var planeMaterial = new THREE.MeshBasicMaterial( {map:texture, side: THREE.DoubleSide,generateMipmaps:false });
+        
+      
+        
+      //createSvg();
+     
+
+       
+
+        //var texture = new THREE.CanvasTexture(createCanvas()) 
+
+        // texture.wrapS = 1001;
+        // texture.wrapT = 1001;
+        // texture.repeat.set(1, 1); //贴图x,y平铺数量
+        //  var planeMaterial = new THREE.MeshBasicMaterial( {map:texture, side: THREE.DoubleSide,generateMipmaps:false });
+        
+
+
+        // bg = new THREE.Mesh( planeGeometry, planeMaterial );
+
+        // bg.position.set(0, -6, 0);//设置圆柱坐标
+        // bg.rotation.set(Math.PI/2,0,0); 
+
+        // console.log(bg)
+
+        // scene.add(bg)
+       
+            
+    }
+
+    //创建圆柱体
+    function cylinder(color,startAngle,angle,i){
+        //创建圆柱体
+        var cylinderGeo = new THREE.CylinderGeometry(20, 20 ,6 ,40 ,40,false,startAngle/180*Math.PI ,angle/180*Math.PI);
+        //var cylinderGeo = new THREE.CylinderGeometry(20, 20 ,10 ,40 ,40);
+       
+        // var cylinderMat = new THREE.MeshBasicMaterial({//创建材料
+        //     color:color,
+        //     wireframe:false
+        // });
+
+        var cylinderMat = [];
+
+        cylinderMat.push(new THREE.MeshBasicMaterial({//创建材料
+            color:color,
+            wireframe:false,
+            transparent:true,
+            opacity:0.9
+        }));
+        cylinderMat.push(new THREE.MeshBasicMaterial({//创建材料
+            color:color,
+            wireframe:false
+        }));
+        cylinderMat.push(new THREE.MeshBasicMaterial({//创建材料
+            color:color,
+            wireframe:false
+        }));
+
+
+        //创建圆柱体网格模型
+        var cylinderMesh = new THREE.Mesh(cylinderGeo, cylinderMat);
+        cylinderMesh.position.set(0, 0, 0);//设置圆柱坐标
+        
+        
+
+
+        
+
+        // var geometry = new THREE.PlaneGeometry( 20, 30);
+        // var material = new THREE.MeshBasicMaterial( {color: "#ff0000"} );
+        // var plane = new THREE.Mesh( geometry, material );
+
+        // plane.position.set(10, 0, 0);//设置圆柱坐标
+        // plane.rotation.set(0,0,0); 
+
+
+        //向场景添加圆柱体 
+        
+        var group = new THREE.Group();
+
+        var plane1 = createPlane(color,startAngle,i);
+        var plane2 = createPlane(color,startAngle + angle,i);
+
+        data[i].yzobj = cylinderMesh;
+
+        group.add(cylinderMesh);
+        group.add(plane1);
+        group.add(plane2);
+        
+        //group.rotation.set(-Math.PI/24, -Math.PI/5, Math.PI/6);
+
+ 
+        scene.add(group);
+
+        data[i].obj = group;
+
+    }
+
+    function createPlane(color,angle,i){
+
+        var planeGeometry1 = new THREE.PlaneGeometry( 20, 6);
+        var planeMaterial1 = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide,transparent:true ,opacity:0} );
+        var plane1 = new THREE.Mesh( planeGeometry1, planeMaterial1 );
+
+        plane1.position.set(10, 0, 0);//设置圆柱坐标
+        plane1.rotation.set(0,0,0); 
+
+        var planeGeometry2 = new THREE.PlaneGeometry( 20, 6);
+        var planeMaterial2 = new THREE.MeshBasicMaterial( {color: color, side: THREE.DoubleSide } );
+        var plane2 = new THREE.Mesh( planeGeometry2, planeMaterial2 );
+
+        plane2.position.set(-10, 0, 0);//设置圆柱坐标
+        plane2.rotation.set(0,0,0); 
+
+        var group = new THREE.Group();
+
+        group.add(plane1);
+        group.add(plane2);
+        
+        group.rotation.set(0,((angle + 90)/180 )*Math.PI,0); 
+
+        if(!data[i].plane) data[i].plane = [];
+
+        data[i].plane.push(plane2);
+        
+        
+        return group;
+        
+ 
+    }
+
+    function createCanvas(){
+
+        var cs = document.createElement('canvas')
+      
+		var ctx = cs.getContext('2d'); 
+        cs.style.borderRadius = "50%"
+        cs.width = 200;
+        cs.height = 200;
+        ctx.fillStyle="#000"
+        ctx.fillRect(0,0,200,200);
+
+        ctx.beginPath();
+        ctx.arc(100,100,50,0,2*Math.PI);
+        ctx.lineWidth = 10;
+        ctx.strokeStyle = "#ff0000";
+        ctx.stroke();
+
+        return cs;
+
+    }
+
+    
+
+    function drawShape(n){
+
+        
+
+        // var circleRadius = 30;
+        // var circleShape = new THREE.Shape();
+        // circleShape.moveTo( 0, 0 );
+        // circleShape.curveSegments = 100;
+        // circleShape.arc(0,0,circleRadius,0,Math.PI*2,true)
+
+        var shape = new THREE.Shape();
+        var r = 26;
+
+        if(n == 1){
+
+            shape.moveTo( r*Math.cos(0), r*Math.sin(0));
+            shape.splineThru(Array.from({length:60},(v,i)=>
+                    new THREE.Vector2(
+                        r*Math.cos(i*6.0/180*Math.PI),
+                        r*Math.sin(i*6.0/180*Math.PI)
+                    )));
+        }
+      
+        if(n == 2){
+            
+            shape.moveTo( (r - 4)*Math.cos(0), (r - 4)*Math.sin(0)); 
+            shape.lineTo( (r - 2)*Math.cos(0), (r - 2)*Math.sin(0)); 
+            
+            shape.splineThru(Array.from({length:41},(v,i)=>
+                    new THREE.Vector2(
+                        (r - 2)*Math.cos(i*6.0/180*Math.PI),
+                        (r - 2)*Math.sin(i*6.0/180*Math.PI)
+                    )));
+            
+            shape.moveTo( (r - 4)*Math.cos(240.0/180*Math.PI), (r - 4)*Math.sin(240.0/180*Math.PI)); 
+
+            shape.splineThru(Array.from({length:41},(v,i)=>
+                    new THREE.Vector2(
+                        (r - 4)*Math.cos((41 - i)*6.0/180*Math.PI),
+                        (r - 4)*Math.sin((41 - i)*6.0/180*Math.PI)
+                    )));
+
+            shape.lineTo( (r - 4)*Math.cos(0), (r - 4)*Math.sin(0));
+
+        }
+
+        if(n == 3){
+            
+            shape.moveTo( (r - 6)*Math.cos(120.0/180*Math.PI), (r - 6)*Math.sin(120.0/180*Math.PI)); 
+            shape.lineTo( (r - 5)*Math.cos(120.0/180*Math.PI), (r - 5)*Math.sin(120.0/180*Math.PI)); 
+            
+            shape.splineThru(Array.from({length:41},(v,i)=>
+                    new THREE.Vector2(
+                        (r - 5)*Math.cos((120 + i*6.0)/180*Math.PI),
+                        (r - 5)*Math.sin((120 + i*6.0)/180*Math.PI)
+                    )));
+            
+            shape.moveTo( (r - 6)*Math.cos(360.0/180*Math.PI), (r - 6)*Math.sin(360.0/180*Math.PI)); 
+
+            shape.splineThru(Array.from({length:41},(v,i)=>
+                    new THREE.Vector2(
+                        (r - 6)*Math.cos((120 + (41 - i)*6.0)/180*Math.PI),
+                        (r - 6)*Math.sin((120 + (41 - i)*6.0)/180*Math.PI)
+                    )));
+
+            shape.lineTo( (r - 6)*Math.cos(120.0/180*Math.PI), (r - 6)*Math.sin(120.0/180*Math.PI));
+
+        }
+
+
+        if(n == 4){
+            
+            shape.moveTo( (r + 2)*Math.cos(0), (r + 2)*Math.sin(0)); 
+            shape.lineTo( (r + 4)*Math.cos(0), (r + 4)*Math.sin(0)); 
+            
+            shape.splineThru(Array.from({length:11},(v,i)=>
+                    new THREE.Vector2(
+                        (r + 4)*Math.cos(i*6.0/180*Math.PI),
+                        (r + 4)*Math.sin(i*6.0/180*Math.PI)
+                    )));
+            
+            shape.moveTo( (r + 2)*Math.cos(60.0/180*Math.PI), (r + 2)*Math.sin(60.0/180*Math.PI)); 
+
+            shape.splineThru(Array.from({length:11},(v,i)=>
+                    new THREE.Vector2(
+                        (r + 2)*Math.cos((11 - i)*6.0/180*Math.PI),
+                        (r + 2)*Math.sin((11 - i)*6.0/180*Math.PI)
+                    )));
+
+            shape.lineTo( (r + 2)*Math.cos(0), (r + 2)*Math.sin(0));
+
+        }
+
+
+        if(n == 5){
+            
+            shape.moveTo( (r + 2)*Math.cos(180/180*Math.PI), (r + 2)*Math.sin(180/180*Math.PI)); 
+            shape.lineTo( (r + 4)*Math.cos(180/180*Math.PI), (r + 4)*Math.sin(180/180*Math.PI)); 
+            
+            shape.splineThru(Array.from({length:11},(v,i)=>
+                    new THREE.Vector2(
+                        (r + 4)*Math.cos((180 + i*6.0)/180*Math.PI),
+                        (r + 4)*Math.sin((180 + i*6.0)/180*Math.PI)
+                    )));
+            
+            shape.moveTo( (r + 2)*Math.cos(240.0/180*Math.PI), (r + 2)*Math.sin(240.0/180*Math.PI)); 
+
+            shape.splineThru(Array.from({length:11},(v,i)=>
+                    new THREE.Vector2(
+                        (r + 2)*Math.cos((180 + (11 - i)*6.0)/180*Math.PI),
+                        (r + 2)*Math.sin((180 + (11 - i)*6.0)/180*Math.PI)
+                    )));
+
+            shape.lineTo( (r + 2)*Math.cos(180/180*Math.PI), (r + 2)*Math.sin(180/180*Math.PI));
+
+        }
+
+
+        if(n == 6){
+
+              
+            shape.moveTo( 50, 10 );
+           
+
+				
+
+
+
+        }
+
+       
+
+
+        var shapeGeometry = new THREE.ShapeGeometry(shape);
+        var material = null;
+
+        if( n == 1){
+
+            material = new THREE.MeshPhongMaterial({
+                color:"#06fdea",
+                transparent:true,
+                opacity:0.4
+            }); 
+
+        } 
+
+        if( n == 2){
+
+            material = new THREE.MeshPhongMaterial({
+                color:"#06fdea",
+               
+            }); 
+
+        }
+
+        if( n == 3){
+
+            material = new THREE.MeshPhongMaterial({
+                color:"#06fdea",
+            
+            }); 
+
+        }
+        
+        if( n == 4 || n == 5){
+
+           
+            material = new THREE.MeshPhongMaterial({
+                color:"#f4cd06",
+            
+            }); 
+
+        }
+
+        if( n == 6){
+
+            material = new THREE.MeshPhongMaterial({
+                color:"#06fdea",
+            
+            }); 
+
+        }
+
+   
+
+        material.side = THREE.DoubleSide;//设置成两面都可见
+        var mesh = new THREE.Mesh(shapeGeometry,material);
+        mesh.position.set(0, -6, 0);//设置圆柱坐标
+        mesh.rotation.set(Math.PI/2,0,0); 
+        
+        scene.add(mesh);
+        
+        return mesh;
+    }
+
+    function createSvg(){
+
+        var loader = new THREE.SVGLoader();
+            loader.load( './circle.svg', function ( paths ) {
+                  
+                console.log(paths)
+                var group = new THREE.Group();
+                group.scale.multiplyScalar( 0.25 );
+                group.scale.y *= - 1;
+               
+               
+
+                for ( var i = 0; i < paths.length; i ++ ) {
+
+                    var path = paths[ i ];
+
+                    var material = new THREE.MeshBasicMaterial( {
+                        color: path.color,
+                        side: THREE.DoubleSide,
+                        depthWrite: false
+                    } );
+
+                    var shapes = path.toShapes( true );
+
+                    for ( var j = 0; j < shapes.length; j ++ ) {
+
+                        var shape = shapes[ j ];
+
+                        var geometry = new THREE.ShapeBufferGeometry( shape );
+                        var mesh = new THREE.Mesh( geometry, material );
+
+                        group.add( mesh );
+
+                    }
+
+                }
+
+                group.position.set(-125, -6, 100);//设置圆柱坐标
+                group.rotation.set(Math.PI/2,0,0); 
+            
+
+                scene.add( group );
+
+            } );
+
+
+    }
+
+ 
+
+    function changeHeight(){
+
+
+        let obj = data[curIndex].obj;
+        let plane1 = data[curIndex].plane[0];
+        let plane2 = data[curIndex].plane[1];
+        let yzobj = data[curIndex].yzobj;
+
+        let h = 12,maxh = 20;
+
+        h = curHeight;
+          
+        let _t = t%100;
+
+        if(_t < 50){
+           
+            h = 6 + _t/50.0 * 3;
+            
+        }else{
+
+           h = 9 - (_t - 50)/50.0 * 3 ;
+
+        }
+         
+        yzobj.geometry.dispose();
+        plane1.geometry.dispose();
+        plane2.geometry.dispose();
+
+        
+        yzobj.geometry = new THREE.CylinderGeometry(
+            yzobj.geometry.parameters.radiusTop,yzobj.geometry.parameters.radiusBottom,
+            h,yzobj.geometry.parameters.heightSegments,
+            yzobj.geometry.parameters.heightSegments,false,
+            yzobj.geometry.parameters.thetaStart,yzobj.geometry.parameters.thetaLength
+        )
+
+
+        plane1.geometry   = new THREE.PlaneGeometry( 20, h);
+        plane2.geometry   = new THREE.PlaneGeometry( 20, h);
+         
+
+        
+        
+
+        obj.position.set(0,(h - 6)/2,0) 
+
+        //new THREE.CylinderGeometry
+        //t%=100;
+        if(_t == 0){ 
+        
+            curIndex++; curIndex%=5;
+            
+        }
+    }
+    
+    var a=0
+
+    //渲染
+    function render(){
+
+        changeHeight(); 
+         
+        t++; 
+
+        shape2.rotation.set(Math.PI/2,0,-Math.PI*(t%360)/180)
+        shape3.rotation.set(Math.PI/2,0,Math.PI*(t%360)/180)
+        shape4.rotation.set(Math.PI/2,0,Math.PI*(t%360)/180)
+        shape5.rotation.set(Math.PI/2,0,Math.PI*(t%360)/180)
+
+        // a%=360;
+
+        //bg.rotation.set(Math.PI/2,0,Math.PI*a/360); 
+        renderer.setPixelRatio(window.devicePixelRatio);
+   
+        renderer.render(scene, camera);
+         
+        requestAnimationFrame(render)
+    
+    }
+
+    
+
+</script>
+</body>
+</html>
